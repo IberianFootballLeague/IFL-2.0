@@ -32,6 +32,32 @@
     list.removeAttribute("role");list.className="matches-list-card matches-list-card--populated";
     list.innerHTML=selected.map(match=>{const date=dateOf(match),home=byId(match.homeTeamId),away=byId(match.awayTeamId),done=match.status==="finished",live=match.status==="live",score=done||live?esc(match.homeScore==null?"–":match.homeScore)+" : "+esc(match.awayScore==null?"–":match.awayScore):"vs";return '<article class="fixture-row"><div class="fixture-row__date">'+(date?esc(formatDate(date)):"Fecha por confirmar")+'<small>'+esc(competitionNames[match.competition]||match.competition||"Competición")+(match.round?" · "+esc(match.round):"")+'</small></div><div class="fixture-row__teams"><span>'+(home&&home.crest?'<img src="'+esc(home.crest)+'" alt="" loading="lazy" width="28" height="28">':'')+esc(home?home.name:"Equipo pendiente")+'</span><strong class="fixture-row__score'+(live?' is-live':'')+'">'+score+'</strong><span>'+(away&&away.crest?'<img src="'+esc(away.crest)+'" alt="" loading="lazy" width="28" height="28">':'')+esc(away?away.name:"Equipo pendiente")+'</span></div><div class="fixture-row__meta"><span>'+esc(match.stadium||"Estadio por confirmar")+'</span><span class="fixture-status">'+(live?"En directo":done?"Finalizado":match.status==="postponed"?"Aplazado":"Pendiente")+'</span></div></article>';}).join("");
   }
+  function renderOverview(){
+    const statNodes=document.querySelectorAll(".calendar-stats strong");
+    const finished=matches.filter(match=>match.status==="finished"&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore)));
+    const goals=finished.reduce((sum,match)=>sum+Number(match.homeScore)+Number(match.awayScore),0);
+    const cardFields=matches.some(match=>Number.isFinite(Number(match.yellowCards))||Number.isFinite(Number(match.redCards)));
+    const cards=matches.reduce((sum,match)=>sum+(Number(match.yellowCards)||0)+(Number(match.redCards)||0),0);
+    const liveStreams=matches.filter(match=>match.status==="live"&&match.streamUrl).length;
+    if(statNodes.length>=4){statNodes[0].textContent=String(matches.length);statNodes[1].textContent=String(goals);statNodes[2].textContent=cardFields?String(cards):"—";statNodes[3].textContent=liveStreams?String(liveStreams):"—";}
+    const next=matches.filter(match=>match.status==="scheduled"&&dateOf(match)&&dateOf(match).getTime()>=Date.now()).sort((a,b)=>dateOf(a)-dateOf(b))[0];
+    const empty=document.querySelector(".upcoming-match__empty");
+    const status=document.querySelector(".upcoming-match__heading .match-status");
+    const round=document.querySelector(".round-panel__heading strong");
+    const roundValue=document.querySelector(".round-panel__controls span");
+    if(!next){
+      if(status){status.textContent="SIN PROGRAMAR";status.className="match-status match-status--empty";}
+      if(round)round.textContent="Sin jornada activa";
+      if(roundValue)roundValue.textContent="Sin datos";
+      return;
+    }
+    const home=byId(next.homeTeamId),away=byId(next.awayTeamId),date=dateOf(next);
+    if(status){status.textContent="PRÓXIMO";status.className="match-status";}
+    if(round)round.textContent=next.round||"Próxima jornada";
+    if(roundValue)roundValue.textContent=next.round||"Próximo partido";
+    if(empty)empty.innerHTML='<div class="upcoming-match__fixture"><span>'+esc(home?home.name:"Equipo pendiente")+'</span><strong>vs</strong><span>'+esc(away?away.name:"Equipo pendiente")+'</span></div><p>'+esc(formatDate(date))+(next.stadium?" · "+esc(next.stadium):"")+'</p>';
+  }
   [competitionFilter,clubFilter,stadiumFilter,statusFilter].filter(Boolean).forEach(select=>select.addEventListener("change",render));
   render();
+  renderOverview();
 })();
