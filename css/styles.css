@@ -2197,3 +2197,11 @@ body[data-authenticated="booting"] {
   .mobile-menu { display: block; }
   .main-nav { gap: .6rem; }
 }
+
+.calendar-day { position: relative; }
+.calendar-day__events {
+  display: inline-grid; place-items: center; min-width: 1.15rem; height: 1.15rem;
+  margin-top: .35rem; padding: 0 .2rem; border-radius: 999px;
+  background: var(--color-brand); color: #fff; font-size: .7rem; font-weight: 800;
+}
+.calendar-day[title] { cursor: default; }
