@@ -14,7 +14,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=34">
+  <link rel="stylesheet" href="css/styles.css?v=37">
+  <meta name="description" content="Consulta el calendario, los encuentros y los resultados oficiales de la Iberian Football League.">
+  <meta name="theme-color" content="#12161d">
   <title>Calendario · Iberian Football League</title>
   <!-- IFL calendar standalone deployment -->
 </head>
@@ -51,6 +53,9 @@
             <a class="nav-link" href="index.html#estadios">Estadios</a>
             <a class="nav-link" href="index.html#buscar">Buscar</a>
             <a class="nav-link" href="index.html#mercado">Mercado</a>
+            <a class="nav-link" href="equipos.html">Equipos</a>
+            <a class="nav-link" href="noticias.html">Noticias</a>
+            <a class="nav-link" href="copa.html">Copa IFL</a>
           </div>
         </details>
         <div class="desktop-menu">
@@ -60,6 +65,7 @@
           <a class="nav-link" href="index.html#estadios">Estadios</a>
           <a class="nav-link" href="index.html#buscar">Buscar</a>
           <a class="nav-link" href="index.html#mercado">Mercado</a>
+          <details class="site-more-menu"><summary class="nav-link">Más <span aria-hidden="true">⌄</span></summary><div class="site-more-panel"><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a></div></details>
           <details class="profile-menu">
             <summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary>
             <div class="profile-panel" aria-label="Opciones de perfil">
@@ -209,7 +215,7 @@
           <a href="calendario.html">Calendario</a>
           <a href="clasificacion.html">Clasificación</a>
           <a href="index.html#estadios">Estadios</a>
-          <a href="index.html#mercado">Mercado</a>
+          <a href="index.html#mercado">Mercado</a><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a>
         </nav>
         <div class="site-footer__status">
           <span class="status-dot" aria-hidden="true"></span>
@@ -342,5 +348,7 @@
       }
     })();
   </script>
+  <script src="js/ifl-data.js" defer></script>
+  <script src="js/calendario.js" defer></script>
 </body>
 </html>
