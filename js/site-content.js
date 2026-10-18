@@ -5,7 +5,7 @@
   const teams=data.teams||[],matches=data.matches||[],news=data.news||[];
   const teamMap=new Map(teams.map(team=>[String(team.id),team]));
   const name=id=>(teamMap.get(String(id))||{}).name||"Equipo pendiente";
-  const finished=matches.filter(match=>match.status==="finished"&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore)));
+  const finished=matches.filter(match=>match.status==="finished"&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore)));
   const goals=finished.reduce((sum,match)=>sum+Number(match.homeScore)+Number(match.awayScore),0);
   const upcoming=matches.filter(match=>match.status==="scheduled"&&Number.isFinite(new Date(match.date).getTime())).sort((a,b)=>new Date(a.date)-new Date(b.date));
   const dateLabel=value=>new Intl.DateTimeFormat("es-ES",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(value));
