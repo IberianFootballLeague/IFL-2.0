@@ -2,6 +2,7 @@
    No requiere APIs ni dependencias externas. */
 window.IFL_DATA = Object.freeze({
   teams: [],
+  players: [],
   matches: [],
   news: [],
   // Publica solo estadios oficiales confirmados. Campos sugeridos: id, name, teamId, teamName, competition, city, capacity, year, surface, dimensions, image, latitude, longitude.
