@@ -791,3 +791,16 @@ body[data-authenticated="false"] .site-shell {
     max-width: 330px;
   }
 }
+
+
+html[data-ifl-has-session="true"] .auth-screen {
+  display: none;
+}
+
+html[data-ifl-has-session="true"] .site-shell {
+  display: block;
+}
+
+body[data-authenticated="booting"] {
+  overflow: auto;
+}
