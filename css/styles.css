@@ -2205,3 +2205,5 @@ body[data-authenticated="booting"] {
   background: var(--color-brand); color: #fff; font-size: .7rem; font-weight: 800;
 }
 .calendar-day[title] { cursor: default; }
+
+.matches-list-card--populated { display: block; min-height: 0; }
