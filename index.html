@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
   <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
   <header class="site-header">
     <nav class="main-nav" aria-label="Navegación principal">
       <a class="brand" href="/" aria-label="Iberian Football League, inicio">
-        <img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="64" height="46">
-        <span class="brand-name">Iberian Football League</span>
+        <img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="84" height="58">
       </a>
 
       <details class="mobile-menu">
@@ -38,7 +37,35 @@
         <a class="nav-link" href="#estadios">Estadios</a>
         <a class="nav-link" href="#buscar">Buscar</a>
         <a class="nav-link" href="#mercado">Mercado</a>
+
+        <details class="profile-menu">
+          <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+            <span class="profile-avatar" aria-hidden="true"></span>
+          </summary>
+          <div class="profile-panel" aria-label="Opciones de perfil">
+            <button class="profile-option" type="button" disabled>Mi perfil</button>
+            <button class="profile-option" type="button" disabled>Mi club</button>
+            <button class="profile-option" type="button" disabled>Ajustes</button>
+            <button class="profile-option" type="button" disabled>Cerrar sesión</button>
+            <div class="profile-divider" role="separator"></div>
+            <button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button>
+          </div>
+        </details>
       </div>
+
+      <details class="profile-menu mobile-profile-menu">
+        <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+          <span class="profile-avatar" aria-hidden="true"></span>
+        </summary>
+        <div class="profile-panel" aria-label="Opciones de perfil">
+          <button class="profile-option" type="button" disabled>Mi perfil</button>
+          <button class="profile-option" type="button" disabled>Mi club</button>
+          <button class="profile-option" type="button" disabled>Ajustes</button>
+          <button class="profile-option" type="button" disabled>Cerrar sesión</button>
+          <div class="profile-divider" role="separator"></div>
+          <button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button>
+        </div>
+      </details>
     </nav>
   </header>
 
