@@ -47,6 +47,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: nowrap;
   gap: 1.5rem;
   width: min(100% - 2rem, var(--content-width));
   min-height: 82px;
@@ -73,9 +74,23 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex: 0 0 auto;
   gap: 0.25rem;
 }
 
+.desktop-menu > .nav-link[href="index.html"] { order: 1; }
+.desktop-menu > .nav-link[href="calendario.html"] { order: 2; }
+.desktop-menu > .nav-link[href="clasificacion.html"] { order: 3; }
+.desktop-menu > .nav-link[href="estadios.html"] { order: 4; }
+.desktop-menu > .nav-link[href="index.html#buscar"] { order: 5; }
+.desktop-menu > .nav-link[href="index.html#mercado"] { order: 6; }
+.desktop-menu > .profile-menu { order: 7; }
+.mobile-menu-panel > .nav-link[href="index.html"] { order: 1; }
+.mobile-menu-panel > .nav-link[href="calendario.html"] { order: 2; }
+.mobile-menu-panel > .nav-link[href="clasificacion.html"] { order: 3; }
+.mobile-menu-panel > .nav-link[href="estadios.html"] { order: 4; }
+.mobile-menu-panel > .nav-link[href="index.html#buscar"] { order: 5; }
+.mobile-menu-panel > .nav-link[href="index.html#mercado"] { order: 6; }
 .nav-link {
   position: relative;
   display: inline-flex;
