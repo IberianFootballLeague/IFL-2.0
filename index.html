@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=11">
 </head>
 <body>
   <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
@@ -74,14 +74,27 @@
     </nav>
   </header>
 
-  <main id="contenido"></main>
+  <main id="contenido">
+    <section class="login-gate" id="login-gate" aria-labelledby="login-gate-title">
+      <div class="login-gate__glow" aria-hidden="true"></div>
+      <div class="login-gate__card">
+        <span class="login-gate__eyebrow">IFL 2.0</span>
+        <h1 id="login-gate-title">Bienvenido a la Iberian Football League</h1>
+        <p>Inicia sesión con Discord para acceder a tu cuenta y continuar en la plataforma oficial de la IFL.</p>
+        <button class="login-gate__button" id="primary-discord-login" type="button">
+          <span class="login-gate__discord-icon" aria-hidden="true">◉</span>
+          Iniciar sesión con Discord
+        </button>
+      </div>
+    </section>
+  </main>
 
   <script>
     (() => {
       const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
       const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
       const STORAGE_KEY = "ifl-2-discord-session";
-      const loginOptions = [...document.querySelectorAll(".profile-login-option")];
+      const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
       const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
 
       function userName(user) {
@@ -90,6 +103,8 @@
 
       function setAuthState(user) {
         document.body.dataset.authenticated = user ? "true" : "false";
+        const loginGate = document.getElementById("login-gate");
+        if (loginGate) loginGate.hidden = Boolean(user);
         loginOptions.forEach((option) => {
           option.textContent = user ? "Sesión iniciada como " + userName(user) : "Iniciar sesión con Discord";
           option.disabled = Boolean(user);
