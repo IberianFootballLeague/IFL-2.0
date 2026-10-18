@@ -82,15 +82,15 @@ a {
 .desktop-menu > .nav-link[href="calendario.html"] { order: 2; }
 .desktop-menu > .nav-link[href="clasificacion.html"] { order: 3; }
 .desktop-menu > .nav-link[href="estadios.html"] { order: 4; }
-.desktop-menu > .nav-link[href="index.html#buscar"] { order: 5; }
-.desktop-menu > .nav-link[href="index.html#mercado"] { order: 6; }
+.desktop-menu > .nav-link[href="buscar.html"] { order: 5; }
+.desktop-menu > .nav-link[href="mercado.html"] { order: 6; }
 .desktop-menu > .profile-menu { order: 7; }
 .mobile-menu-panel > .nav-link[href="index.html"] { order: 1; }
 .mobile-menu-panel > .nav-link[href="calendario.html"] { order: 2; }
 .mobile-menu-panel > .nav-link[href="clasificacion.html"] { order: 3; }
 .mobile-menu-panel > .nav-link[href="estadios.html"] { order: 4; }
-.mobile-menu-panel > .nav-link[href="index.html#buscar"] { order: 5; }
-.mobile-menu-panel > .nav-link[href="index.html#mercado"] { order: 6; }
+.mobile-menu-panel > .nav-link[href="buscar.html"] { order: 5; }
+.mobile-menu-panel > .nav-link[href="mercado.html"] { order: 6; }
 .nav-link {
   position: relative;
   display: inline-flex;
