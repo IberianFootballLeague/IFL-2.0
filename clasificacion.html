@@ -14,7 +14,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=36">
+  <link rel="stylesheet" href="css/styles.css?v=37">
+  <meta name="description" content="Consulta las clasificaciones oficiales de División 1, División 2 y la Copa IFL.">
+  <meta name="theme-color" content="#12161d">
   <title>Clasificación · Iberian Football League</title>
 </head>
 <body data-authenticated="booting">
@@ -41,6 +43,9 @@
             <a class="nav-link" href="index.html#estadios">Estadios</a>
             <a class="nav-link" href="index.html#buscar">Buscar</a>
             <a class="nav-link" href="index.html#mercado">Mercado</a>
+            <a class="nav-link" href="equipos.html">Equipos</a>
+            <a class="nav-link" href="noticias.html">Noticias</a>
+            <a class="nav-link" href="copa.html">Copa IFL</a>
           </div>
         </details>
         <div class="desktop-menu">
@@ -50,6 +55,7 @@
           <a class="nav-link" href="index.html#estadios">Estadios</a>
           <a class="nav-link" href="index.html#buscar">Buscar</a>
           <a class="nav-link" href="index.html#mercado">Mercado</a>
+          <details class="site-more-menu"><summary class="nav-link">Más <span aria-hidden="true">⌄</span></summary><div class="site-more-panel"><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a></div></details>
           <details class="profile-menu">
             <summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary>
             <div class="profile-panel" aria-label="Opciones de perfil">
@@ -113,27 +119,9 @@
       <section class="teams-section" aria-labelledby="teams-title">
         <div class="section-heading-row">
           <div><span class="section-kicker">PARTICIPANTES</span><h2 id="teams-title">Equipos</h2></div>
-          <span class="section-note">16 plazas preparadas</span>
+          <span class="section-note">Participantes oficiales</span>
         </div>
-        <div class="teams-grid">
-          <div class="team-placeholder"><span>01</span><strong>Equipo 1</strong></div>
-          <div class="team-placeholder"><span>02</span><strong>Equipo 2</strong></div>
-          <div class="team-placeholder"><span>03</span><strong>Equipo 3</strong></div>
-          <div class="team-placeholder"><span>04</span><strong>Equipo 4</strong></div>
-          <div class="team-placeholder"><span>05</span><strong>Equipo 5</strong></div>
-          <div class="team-placeholder"><span>06</span><strong>Equipo 6</strong></div>
-          <div class="team-placeholder"><span>07</span><strong>Equipo 7</strong></div>
-          <div class="team-placeholder"><span>08</span><strong>Equipo 8</strong></div>
-          <div class="team-placeholder"><span>09</span><strong>Equipo 9</strong></div>
-          <div class="team-placeholder"><span>10</span><strong>Equipo 10</strong></div>
-          <div class="team-placeholder"><span>11</span><strong>Equipo 11</strong></div>
-          <div class="team-placeholder"><span>12</span><strong>Equipo 12</strong></div>
-          <div class="team-placeholder"><span>13</span><strong>Equipo 13</strong></div>
-          <div class="team-placeholder"><span>14</span><strong>Equipo 14</strong></div>
-          <div class="team-placeholder"><span>15</span><strong>Equipo 15</strong></div>
-          <div class="team-placeholder"><span>16</span><strong>Equipo 16</strong></div>
-        </div>
-        </div>
+        <div class="teams-grid" aria-live="polite"></div>
       </section>
     </main>
 
@@ -141,7 +129,7 @@
       <div class="site-footer__main">
         <a class="site-footer__brand" href="index.html" aria-label="Iberian Football League, inicio"><img src="logo" alt="Logo de Iberian Football League"><span>Iberian Football League</span></a>
         <nav class="site-footer__links" aria-label="Enlaces del pie de página">
-          <a href="index.html">Inicio</a><a href="calendario.html">Calendario</a><a href="clasificacion.html">Clasificación</a><a href="index.html#estadios">Estadios</a><a href="index.html#mercado">Mercado</a>
+          <a href="index.html">Inicio</a><a href="calendario.html">Calendario</a><a href="clasificacion.html">Clasificación</a><a href="index.html#estadios">Estadios</a><a href="index.html#mercado">Mercado</a><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a>
         </nav>
         <div class="site-footer__status"><span class="status-dot" aria-hidden="true"></span><span>Plataforma operativa</span></div>
       </div>
@@ -160,6 +148,7 @@
       if(!stored?.access_token) state(null); else state(stored.user||{});
     })();
   </script>
+  <script src="js/ifl-data.js" defer></script>
   <script src="js/clasificacion.js" defer></script>
 </body>
 </html>
