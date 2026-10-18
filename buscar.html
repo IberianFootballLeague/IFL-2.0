@@ -18,7 +18,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="css/styles.css?v=49">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -108,6 +108,34 @@
       <span class="section-kicker">EXPLORAR IFL</span>
       <h1 id="search-title">Buscar</h1>
       <p class="section-intro">Encuentra clubes, partidos y noticias oficiales de la liga.</p>
+      <section class="player-compare" aria-labelledby="player-compare-title">
+        <div class="player-compare__heading">
+          <span class="section-kicker">CARA A CARA</span>
+          <h2 id="player-compare-title">Comparador de jugadores</h2>
+          <p>Elige dos jugadores y compara sus estadísticas oficiales de la IFL.</p>
+        </div>
+        <div class="player-compare__selectors">
+          <div class="player-compare__field">
+            <label for="compare-player-a">Primer jugador</label>
+            <input id="compare-player-a" list="ifl-player-options" autocomplete="off" placeholder="Escribe el nombre del jugador">
+          </div>
+          <div class="player-compare__versus" aria-hidden="true">VS</div>
+          <div class="player-compare__field">
+            <label for="compare-player-b">Segundo jugador</label>
+            <input id="compare-player-b" list="ifl-player-options" autocomplete="off" placeholder="Escribe el nombre del jugador">
+          </div>
+          <datalist id="ifl-player-options"></datalist>
+        </div>
+        <button class="player-compare__button" id="compare-players-button" type="button">Comparar jugadores</button>
+        <div class="player-compare__results" id="player-compare-results" aria-live="polite">
+          <div class="player-compare__empty">
+            <span class="player-compare__empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M3 20c.4-3.4 2.4-5 6-5s5.6 1.6 6 5"/><circle cx="17" cy="8" r="3"/><path d="M15 15c3.2 0 5.1 1.7 5.5 5"/></svg></span>
+            <h3>Elige a tus dos jugadores</h3>
+            <p>Las comparaciones se mostrarán cuando existan estadísticas oficiales cargadas.</p>
+          </div>
+        </div>
+      </section>
+
       <form class="ifl-search" id="ifl-search-form" role="search">
         <label class="visually-hidden" for="ifl-search-input">Buscar en la IFL</label>
         <input id="ifl-search-input" type="search" placeholder="Busca un club, partido o noticia…" autocomplete="off">
@@ -118,15 +146,6 @@
       </div>
     </section>
   </main>
-
-  <section class="community-cta" aria-labelledby="community-title">
-    <div>
-      <span class="community-cta__kicker">COMUNIDAD IFL</span>
-      <h2 id="community-title">Forma parte de la liga</h2>
-      <p>Únete a la comunidad oficial y mantente al día de todas las novedades.</p>
-    </div>
-    <span class="community-cta__button community-cta__button--pending" title="Enlace de invitación oficial pendiente de configurar">Discord oficial · enlace pendiente</span>
-  </section>
 
   <footer class="site-footer">
     <div class="site-footer__main">
@@ -300,6 +319,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/home-extras.js?v=1" defer></script>
+  <script src="js/player-compare.js?v=1" defer></script>
   <script src="js/site-content.js" defer></script>
   
 </body>
