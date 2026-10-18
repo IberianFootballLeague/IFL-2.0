@@ -16,7 +16,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=25">
+  <link rel="stylesheet" href="css/styles.css?v=26">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -48,7 +48,7 @@
         </summary>
         <div class="mobile-menu-panel">
           <a class="nav-link is-active" href="/" aria-current="page">Inicio</a>
-          <a class="nav-link" href="#calendario">Calendario</a>
+          <a class="nav-link" href="calendario.html">Calendario</a>
           <a class="nav-link" href="#clasificacion">Clasificación</a>
           <a class="nav-link" href="#estadios">Estadios</a>
           <a class="nav-link" href="#buscar">Buscar</a>
@@ -58,7 +58,7 @@
 
       <div class="desktop-menu">
         <a class="nav-link is-active" href="/" aria-current="page">Inicio</a>
-        <a class="nav-link" href="#calendario">Calendario</a>
+        <a class="nav-link" href="calendario.html">Calendario</a>
         <a class="nav-link" href="#clasificacion">Clasificación</a>
         <a class="nav-link" href="#estadios">Estadios</a>
         <a class="nav-link" href="#buscar">Buscar</a>
@@ -132,36 +132,6 @@
       </div>
     </section>
 
-    <section class="calendar-section" id="calendario" aria-labelledby="calendar-title">
-      <div class="calendar-section__heading">
-        <span class="section-kicker">COMPETICIÓN</span>
-        <h2 id="calendar-title">Calendario</h2>
-        <p>Consulta los días de cada jornada y desplázate entre los meses.</p>
-      </div>
-      <div class="calendar-card">
-        <div class="calendar-toolbar">
-          <button class="calendar-nav-button" id="calendar-previous" type="button" aria-label="Mes anterior">←</button>
-          <h3 id="calendar-month" aria-live="polite"></h3>
-          <button class="calendar-nav-button" id="calendar-next" type="button" aria-label="Mes siguiente">→</button>
-        </div>
-        <div class="calendar-weekdays" aria-hidden="true">
-          <span>Lun</span>
-          <span>Mar</span>
-          <span>Mié</span>
-          <span>Jue</span>
-          <span>Vie</span>
-          <span>Sáb</span>
-          <span>Dom</span>
-        </div>
-        <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="Días del mes"></div>
-        <div class="calendar-legend" aria-label="Leyenda del calendario">
-          <span><i class="calendar-legend__swatch calendar-legend__swatch--past"></i>Días pasados</span>
-          <span><i class="calendar-legend__swatch calendar-legend__swatch--today"></i>Hoy</span>
-          <span><i class="calendar-legend__swatch calendar-legend__swatch--future"></i>Próximos días</span>
-        </div>
-      </div>
-    </section>
-
     <section class="home-section" aria-labelledby="matches-title">
       <div class="home-section__heading">
         <span class="section-kicker">COMPETICIÓN</span>
@@ -216,7 +186,7 @@
       </a>
       <nav class="site-footer__links" aria-label="Enlaces del pie de página">
         <a href="/">Inicio</a>
-        <a href="#calendario">Calendario</a>
+        <a href="calendario.html">Calendario</a>
         <a href="#clasificacion">Clasificación</a>
         <a href="#estadios">Estadios</a>
         <a href="#mercado">Mercado</a>
@@ -357,66 +327,6 @@
         }
       }
 
-      function setupCalendar() {
-        const monthLabel = document.getElementById("calendar-month");
-        const grid = document.getElementById("calendar-grid");
-        const previousButton = document.getElementById("calendar-previous");
-        const nextButton = document.getElementById("calendar-next");
-        if (!monthLabel || !grid || !previousButton || !nextButton) return;
-
-        const today = new Date();
-        const todayKey = [today.getFullYear(), today.getMonth(), today.getDate()].join("-");
-        let displayedMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-
-        function dateKey(year, month, day) {
-          return [year, month, day].join("-");
-        }
-
-        function renderCalendar() {
-          const year = displayedMonth.getFullYear();
-          const month = displayedMonth.getMonth();
-          const firstDay = new Date(year, month, 1);
-          const daysInMonth = new Date(year, month + 1, 0).getDate();
-          const mondayIndex = (firstDay.getDay() + 6) % 7;
-          const monthName = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric" }).format(displayedMonth);
-          monthLabel.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
-          grid.innerHTML = "";
-
-          for (let index = 0; index < mondayIndex; index += 1) {
-            const emptyCell = document.createElement("span");
-            emptyCell.className = "calendar-day calendar-day--empty";
-            emptyCell.setAttribute("aria-hidden", "true");
-            grid.appendChild(emptyCell);
-          }
-
-          for (let day = 1; day <= daysInMonth; day += 1) {
-            const button = document.createElement("span");
-            const key = dateKey(year, month, day);
-            button.className = "calendar-day";
-            button.setAttribute("role", "gridcell");
-            button.textContent = day;
-
-            if (key < todayKey) button.classList.add("calendar-day--past");
-            if (key === todayKey) {
-              button.classList.add("calendar-day--today");
-              button.setAttribute("aria-label", day + " de hoy");
-            }
-            if (key > todayKey) button.classList.add("calendar-day--future");
-            grid.appendChild(button);
-          }
-        }
-
-        previousButton.addEventListener("click", () => {
-          displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1);
-          renderCalendar();
-        });
-        nextButton.addEventListener("click", () => {
-          displayedMonth = new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 1);
-          renderCalendar();
-        });
-        renderCalendar();
-      }
-
       function signIn() {
         const redirectTo = "https://iberianfootballleague.github.io/IFL-2.0/";
         const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
@@ -437,7 +347,6 @@
 
       loginOptions.forEach((option) => option.addEventListener("click", signIn));
       logoutOptions.forEach((option) => option.addEventListener("click", signOut));
-      setupCalendar();
       restoreSession();
     })();
   </script>  <!-- IFL Pages deployment refresh: calendar -->
