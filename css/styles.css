@@ -2226,3 +2226,83 @@ body[data-authenticated="booting"] {
 .ifl-search-result small { color: var(--color-muted); overflow-wrap: anywhere; }
 .ifl-search-result__kind { min-width: 72px; color: var(--color-brand-dark); font-size: .78rem; font-weight: 800; text-transform: uppercase; }
 .community-cta__button--pending { cursor: default; opacity: .85; }
+
+
+/* Search and transfer market sections */
+.ifl-search {
+  display: flex;
+  gap: 0.75rem;
+  width: min(100%, 760px);
+  margin: 1.25rem 0;
+}
+.ifl-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.8rem 1rem;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  font: inherit;
+  font-size: 1rem;
+}
+.ifl-search input:focus-visible {
+  outline: 3px solid rgba(237, 74, 40, 0.24);
+  border-color: var(--color-brand);
+}
+.ifl-search button {
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  background: var(--color-brand);
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.ifl-search button:hover { background: var(--color-brand-dark); }
+.ifl-search-results__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 0.85rem;
+}
+.ifl-search-result {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.ifl-search-result:hover {
+  border-color: var(--color-brand);
+  transform: translateY(-2px);
+}
+.ifl-search-result span {
+  color: var(--color-brand);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.ifl-search-result small { color: var(--color-muted); line-height: 1.4; }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 520px) {
+  .ifl-search { flex-direction: column; }
+  .ifl-search button { width: 100%; }
+}
