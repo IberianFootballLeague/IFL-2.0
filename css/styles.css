@@ -918,3 +918,32 @@ html[data-ifl-has-session="true"] .site-shell {
 body[data-authenticated="booting"] {
   overflow: auto;
 }
+
+
+.auth-screen__mark {
+  display: block;
+  width: clamp(120px, 22vw, 230px);
+  height: clamp(70px, 12vw, 130px);
+}
+
+.auth-screen__mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.home-hero__video-topline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.home-hero__video-topline img {
+  display: block;
+  width: 46px;
+  height: 24px;
+  object-fit: contain;
+  object-position: left center;
+}
