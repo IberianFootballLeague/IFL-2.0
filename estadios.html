@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Descubre los estadios de los clubes de la Iberian Football League, su capacidad y ubicación.">
+  <meta name="description" content="Descubre los estadios de los clubes de la Iberian Football League, su capacidad y características.">
   <meta name="theme-color" content="#12161d">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=44">
+  <link rel="stylesheet" href="css/styles.css?v=45">
   <title>Estadios · Iberian Football League</title>
 </head>
 <body data-authenticated="booting">
@@ -25,15 +25,15 @@
       <a class="brand" href="index.html" aria-label="Iberian Football League, inicio"><img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="120" height="72"></a>
       <details class="mobile-menu"><summary aria-label="Abrir menú de navegación"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span>Menú</span></summary><div class="mobile-menu-panel">
         <a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link is-active" href="estadios.html" aria-current="page">Estadios</a>
             <a class="nav-link" href="index.html#buscar">Buscar</a>
             <a class="nav-link" href="index.html#mercado">Mercado</a>
-            <a class="nav-link is-active" href="estadios.html" aria-current="page">Estadios</a>
       </div></details>
       <div class="desktop-menu">
         <a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link is-active" href="estadios.html" aria-current="page">Estadios</a>
             <a class="nav-link" href="index.html#buscar">Buscar</a>
             <a class="nav-link" href="index.html#mercado">Mercado</a>
-            <a class="nav-link is-active" href="estadios.html" aria-current="page">Estadios</a>
         
         <details class="profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil"><button class="profile-option profile-login-option" type="button">Iniciar sesión con Discord</button><button class="profile-option" type="button" disabled>Mi perfil</button><button class="profile-option" type="button" disabled>Mi club</button><button class="profile-option" type="button" disabled>Ajustes</button><button class="profile-option" type="button" disabled>Cerrar sesión</button><div class="profile-divider" role="separator"></div><button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button></div></details>
       </div>
@@ -42,7 +42,7 @@
     <main class="content-page stadiums-page" id="contenido">
 <section class="content-section" aria-labelledby="stadiums-page-title">
 <span class="section-kicker">INSTALACIONES</span><h1 id="stadiums-page-title">Estadios IFL</h1>
-<p class="section-intro">Explora los campos de nuestros clubes, consulta sus datos y localízalos en el mapa.</p>
+<p class="section-intro">Explora los campos de nuestros clubes y consulta sus datos principales.</p>
 <div class="stadium-stats" aria-label="Resumen de estadios">
 <article class="stadium-stat"><span class="stadium-stat__icon" aria-hidden="true">⌂</span><strong id="stadium-count">—</strong><span>Estadios registrados</span></article>
 <article class="stadium-stat"><span class="stadium-stat__icon" aria-hidden="true">♙</span><strong id="stadium-capacity">—</strong><span>Aforo total</span></article>
@@ -52,13 +52,11 @@
 <label class="stadium-search"><span aria-hidden="true">⌕</span><span class="sr-only">Buscar estadio, club o ciudad</span><input id="stadium-search" type="search" placeholder="Buscar estadio, club o ciudad…" autocomplete="off"></label>
 <label class="stadium-filter"><span>División</span><select id="stadium-competition"><option value="all">Todas las divisiones</option><option value="d1">División 1</option><option value="d2">División 2</option></select></label>
 <label class="stadium-filter"><span>Ordenar por</span><select id="stadium-sort"><option value="name">Nombre</option><option value="capacity-desc">Mayor aforo</option><option value="capacity-asc">Menor aforo</option></select></label></div>
-<div class="stadium-layout"><section class="stadium-results" aria-labelledby="stadium-results-title"><div class="stadium-results__heading"><h2 id="stadium-results-title">Directorio de estadios</h2><span id="stadium-results-count">0 resultados</span></div><div class="stadium-grid" id="stadium-directory" aria-live="polite"></div></section>
-<section class="stadium-map-panel" aria-labelledby="stadium-map-title"><div class="stadium-map-panel__heading"><div><span class="section-kicker">LOCALIZACIÓN</span><h2 id="stadium-map-title">Mapa de estadios</h2></div><span class="stadium-map-pin" aria-hidden="true">⌖</span></div><div id="stadium-map" class="stadium-map" aria-label="Mapa interactivo de estadios de la IFL"></div><p class="stadium-map-note" id="stadium-map-note">El mapa mostrará marcadores cuando se publiquen ubicaciones oficiales.</p></section></div>
+<div class="stadium-layout"><section class="stadium-results" aria-labelledby="stadium-results-title"><div class="stadium-results__heading"><h2 id="stadium-results-title">Directorio de estadios</h2><span id="stadium-results-count">0 resultados</span></div><div class="stadium-grid" id="stadium-directory" aria-live="polite"></div></section></div>
 </section></main>
     <footer class="site-footer"><div class="site-footer__main"><a class="site-footer__brand" href="index.html"><img src="logo" alt="Logo de Iberian Football League"><span>Iberian Football League</span></a><nav class="site-footer__links" aria-label="Enlaces del pie de página"><a href="index.html">Inicio</a><a href="calendario.html">Calendario</a><a href="clasificacion.html">Clasificación</a><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a><a href="estadios.html">Estadios</a></nav><div class="site-footer__status"><span class="status-dot" aria-hidden="true"></span><span>Datos oficiales IFL</span></div></div><div class="site-footer__bottom"><span>© 2026 Iberian Football League</span><span>IFL · Roblox Football League</span></div></footer>
   </div>
   <script src="js/ifl-data.js" defer></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>
   <script src="js/stadiums.js?v=1" defer></script>
   <script>
     (() => {
