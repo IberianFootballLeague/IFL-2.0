@@ -1001,3 +1001,8 @@ body[data-authenticated="booting"] {
 .home-section--news {
   padding-top: 0;
 }
+
+
+.home-section--player {
+  padding-top: 0;
+}
