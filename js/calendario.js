@@ -76,7 +76,7 @@
       const match=label.match(/(\\d{1,2})\\s+([^\\s]+)\\s*[–-]\\s*(\\d{1,2})\\s+([^\\s]+)\\s+(\\d{4})/);
       if(match){const firstMonth=monthNumber(match[2]),lastMonth=monthNumber(match[4]),year=Number(match[5]);if(firstMonth>=0&&lastMonth>=0)firstDate=new Date(year-(firstMonth>lastMonth?1:0),firstMonth,Number(match[1]));}
     }else{
-      const match=label.match(/^(.+?)\\s+(\\d{4})$/),month=match?monthNumber(match[1]):-1;
+      const monthLabel=label.replace(/\\s+de\\s+/i," ");const match=monthLabel.match(/^(.+?)\\s+(\\d{4})$/),month=match?monthNumber(match[1]):-1;
       if(match&&month>=0)firstDate=new Date(Number(match[2]),month,1);
     }
     if(!firstDate)return;
