@@ -1340,3 +1340,8 @@ body[data-authenticated="booting"] {
     font-size: 0.74rem;
   }
 }
+
+
+.calendar-section--page {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
