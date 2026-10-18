@@ -57,6 +57,46 @@
     if(roundValue)roundValue.textContent=next.round||"Próximo partido";
     if(empty)empty.innerHTML='<div class="upcoming-match__fixture"><span>'+esc(home?home.name:"Equipo pendiente")+'</span><strong>vs</strong><span>'+esc(away?away.name:"Equipo pendiente")+'</span></div><p>'+esc(formatDate(date))+(next.stadium?" · "+esc(next.stadium):"")+'</p>';
   }
+  const calendarGrid=document.getElementById("calendar-grid"),calendarLabel=document.getElementById("calendar-month");
+  const normalizeMonth=value=>String(value||"").toLocaleLowerCase("es-ES").replace(/\\./g,"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"");
+  const monthNumber=value=>{
+    const target=normalizeMonth(value);
+    for(let i=0;i<12;i++){
+      const full=normalizeMonth(new Intl.DateTimeFormat("es-ES",{month:"long"}).format(new Date(2026,i,1)));
+      const short=normalizeMonth(new Intl.DateTimeFormat("es-ES",{month:"short"}).format(new Date(2026,i,1)));
+      if(target===full||target===short||target.startsWith(short.slice(0,3)))return i;
+    }
+    return -1;
+  };
+  function markCalendarDays(){
+    if(!calendarGrid||!calendarLabel)return;
+    const label=calendarLabel.textContent.trim(),week=calendarGrid.classList.contains("calendar-grid--week");
+    let firstDate=null;
+    if(week){
+      const match=label.match(/(\\d{1,2})\\s+([^\\s]+)\\s*[–-]\\s*(\\d{1,2})\\s+([^\\s]+)\\s+(\\d{4})/);
+      if(match){const firstMonth=monthNumber(match[2]),lastMonth=monthNumber(match[4]),year=Number(match[5]);if(firstMonth>=0&&lastMonth>=0)firstDate=new Date(year-(firstMonth>lastMonth?1:0),firstMonth,Number(match[1]));}
+    }else{
+      const match=label.match(/^(.+?)\\s+(\\d{4})$/),month=match?monthNumber(match[1]):-1;
+      if(match&&month>=0)firstDate=new Date(Number(match[2]),month,1);
+    }
+    if(!firstDate)return;
+    const cells=[...calendarGrid.children];
+    cells.forEach((cell,index)=>{
+      if(cell.classList.contains("calendar-day--empty"))return;
+      cell.querySelector(".calendar-day__events")?.remove();
+      let date;
+      if(week){date=new Date(firstDate);date.setDate(firstDate.getDate()+index);}
+      else{const day=Number.parseInt(cell.textContent,10);if(!day)return;date=new Date(firstDate.getFullYear(),firstDate.getMonth(),day);}
+      const count=matches.filter(match=>{const matchDate=dateOf(match);return matchDate&&matchDate.getFullYear()===date.getFullYear()&&matchDate.getMonth()===date.getMonth()&&matchDate.getDate()===date.getDate();}).length;
+      const dateText=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(date);
+      if(count){const marker=document.createElement("span");marker.className="calendar-day__events";marker.textContent=String(count);marker.setAttribute("aria-hidden","true");cell.appendChild(marker);cell.title=count+" partido"+(count===1?"":"s")+" · "+dateText;cell.setAttribute("aria-label",dateText+", "+count+" partido"+(count===1?"":"s"));}
+      else{cell.title=dateText;if(week)cell.setAttribute("aria-label",dateText);}
+    });
+  }
+  if(calendarGrid){
+    new MutationObserver(markCalendarDays).observe(calendarGrid,{childList:true});
+    markCalendarDays();
+  }
   [competitionFilter,clubFilter,stadiumFilter,statusFilter].filter(Boolean).forEach(select=>select.addEventListener("change",render));
   render();
   renderOverview();
