@@ -2188,3 +2188,12 @@ body[data-authenticated="booting"] {
   .directory-card { transition: none; }
   .directory-card:hover, .directory-card:focus-visible { transform: none; }
 }
+
+.upcoming-match__fixture { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin: .5rem 0; font-weight: 800; }
+.upcoming-match__fixture span { overflow-wrap: anywhere; }
+.upcoming-match__fixture strong { flex: 0 0 auto; padding: .35rem .55rem; border-radius: 8px; background: #f0f2f5; }
+@media (max-width: 760px) {
+  .desktop-menu { display: none; }
+  .mobile-menu { display: block; }
+  .main-nav { gap: .6rem; }
+}
