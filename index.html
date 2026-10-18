@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=9">
+  <link rel="stylesheet" href="css/styles.css?v=10">
 </head>
 <body>
   <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
@@ -76,61 +76,95 @@
 
   <main id="contenido"></main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.min.js"></script>
   <script>
     (() => {
       const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
       const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
-      const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-        auth: { autoRefreshToken: true, persistSession: true, storageKey: "ifl-auth-2" }
-      });
-
+      const STORAGE_KEY = "ifl-2-discord-session";
       const loginOptions = [...document.querySelectorAll(".profile-login-option")];
       const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
 
-      function setAuthState(session) {
-        const user = session?.user || null;
+      function userName(user) {
+        return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
+      }
+
+      function setAuthState(user) {
         document.body.dataset.authenticated = user ? "true" : "false";
         loginOptions.forEach((option) => {
-          option.textContent = user
-            ? (user.user_metadata?.full_name || user.user_metadata?.name || "Sesión iniciada")
-            : "Iniciar sesión con Discord";
+          option.textContent = user ? "Sesión iniciada como " + userName(user) : "Iniciar sesión con Discord";
           option.disabled = Boolean(user);
         });
-        logoutOptions.forEach((option) => {
-          option.disabled = !user;
-          option.dataset.authAction = user ? "logout" : "";
-        });
+        logoutOptions.forEach((option) => { option.disabled = !user; });
         document.querySelectorAll(".profile-trigger").forEach((trigger) => {
-          trigger.title = user
-            ? "Sesión iniciada como " + (user.user_metadata?.full_name || user.user_metadata?.name || "usuario de Discord")
-            : "Iniciar sesión con Discord";
+          trigger.title = user ? "Sesión iniciada como " + userName(user) : "Iniciar sesión con Discord";
         });
       }
 
-      async function signIn() {
-        loginOptions.forEach((option) => { option.disabled = true; option.textContent = "Conectando…"; });
-        const { error } = await supabaseClient.auth.signInWithOAuth({
-          provider: "discord",
-          options: { redirectTo: window.location.origin + window.location.pathname }
+      function saveSession(payload) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      }
+
+      function readSession() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (_) { return null; }
+      }
+
+      async function loadUser(accessToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + accessToken }
         });
-        if (error) {
-          console.error("[IFL 2.0] No se pudo iniciar sesión con Discord:", error);
+        if (!response.ok) throw new Error("Sesión no válida");
+        return response.json();
+      }
+
+      async function restoreSession() {
+        const params = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = params.get("access_token");
+        const refreshToken = params.get("refresh_token");
+        if (accessToken) {
+          try {
+            const user = await loadUser(accessToken);
+            saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+            history.replaceState({}, document.title, window.location.pathname + window.location.search);
+            setAuthState(user);
+            return;
+          } catch (error) {
+            console.warn("[IFL 2.0] No se pudo validar la sesión OAuth:", error);
+          }
+        }
+
+        const stored = readSession();
+        if (!stored?.access_token) return setAuthState(null);
+        try {
+          const user = await loadUser(stored.access_token);
+          saveSession({ ...stored, user });
+          setAuthState(user);
+        } catch (_) {
+          localStorage.removeItem(STORAGE_KEY);
           setAuthState(null);
-          alert("No se pudo iniciar sesión con Discord. Comprueba la configuración de OAuth.");
         }
       }
 
+      function signIn() {
+        const redirectTo = window.location.origin + window.location.pathname;
+        const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
+        window.location.assign(url);
+      }
+
       async function signOut() {
-        const { error } = await supabaseClient.auth.signOut();
-        if (error) console.error("[IFL 2.0] No se pudo cerrar sesión:", error);
+        const stored = readSession();
+        if (stored?.access_token) {
+          await fetch(SUPABASE_URL + "/auth/v1/logout", {
+            method: "POST",
+            headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + stored.access_token }
+          }).catch(() => {});
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        setAuthState(null);
       }
 
       loginOptions.forEach((option) => option.addEventListener("click", signIn));
       logoutOptions.forEach((option) => option.addEventListener("click", signOut));
-      supabaseClient.auth.onAuthStateChange((_event, session) => setAuthState(session));
-      supabaseClient.auth.getSession().then(({ data }) => setAuthState(data.session));
+      restoreSession();
     })();
-  </script>
-</body>
+  </script></body>
 </html>
