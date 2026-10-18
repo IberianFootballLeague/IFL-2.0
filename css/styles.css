@@ -2056,3 +2056,8 @@ body[data-authenticated="booting"] {
     transform: none;
   }
 }
+
+
+.classification-page .standings-section {
+  scroll-margin-top: 110px;
+}
