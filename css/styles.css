@@ -104,7 +104,7 @@ a {
 .nav-link:hover,
 .nav-link:focus-visible,
 .nav-link.is-active {
-  color: var(--color-brand);
+  color: var(--color-ink);
 }
 
 .nav-link.is-active::after,
