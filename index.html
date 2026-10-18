@@ -8,9 +8,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
-<body>
+<body data-authenticated="false">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__mark" aria-hidden="true">IFL</div>
+    <div class="auth-screen__card">
+      <span class="auth-screen__eyebrow">Iberian Football League · 2.0</span>
+      <h1 id="auth-screen-title">Iniciar sesión</h1>
+      <p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p>
+      <button class="auth-screen__button" id="primary-discord-login" type="button">
+        <span class="auth-screen__discord-icon" aria-hidden="true">◉</span>
+        Iniciar sesión con Discord
+      </button>
+    </div>
+  </section>
+
+  <div class="site-shell" id="site-shell">
   <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
   <header class="site-header">
     <nav class="main-nav" aria-label="Navegación principal">
@@ -75,19 +89,9 @@
   </header>
 
   <main id="contenido">
-    <section class="login-gate" id="login-gate" aria-labelledby="login-gate-title">
-      <div class="login-gate__glow" aria-hidden="true"></div>
-      <div class="login-gate__card">
-        <span class="login-gate__eyebrow">IFL 2.0</span>
-        <h1 id="login-gate-title">Bienvenido a la Iberian Football League</h1>
-        <p>Inicia sesión con Discord para acceder a tu cuenta y continuar en la plataforma oficial de la IFL.</p>
-        <button class="login-gate__button" id="primary-discord-login" type="button">
-          <span class="login-gate__discord-icon" aria-hidden="true">◉</span>
-          Iniciar sesión con Discord
-        </button>
-      </div>
-    </section>
+
   </main>
+  </div>
 
   <script>
     (() => {
@@ -103,8 +107,8 @@
 
       function setAuthState(user) {
         document.body.dataset.authenticated = user ? "true" : "false";
-        const loginGate = document.getElementById("login-gate");
-        if (loginGate) loginGate.hidden = Boolean(user);
+        const authScreen = document.getElementById("auth-screen");
+        if (authScreen) authScreen.hidden = Boolean(user);
         loginOptions.forEach((option) => {
           option.textContent = user ? "Sesión iniciada como " + userName(user) : "Iniciar sesión con Discord";
           option.disabled = Boolean(user);
