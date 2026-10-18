@@ -453,6 +453,7 @@ body[data-authenticated="false"] .site-shell {
   min-height: 100vh;
   padding: 1.5rem;
   overflow: auto;
+  --auth-stadium-image: none;
   background:
     radial-gradient(circle at 50% 22%, rgba(237, 74, 40, 0.18), transparent 32%),
     linear-gradient(145deg, #0c1016 0%, #171d26 58%, #11161e 100%);
@@ -562,4 +563,26 @@ body[data-authenticated="false"] .site-shell {
     top: 1rem;
     left: 1rem;
   }
+}
+
+
+.auth-screen__stadium {
+  position: absolute;
+  inset: 0;
+  background-image: var(--auth-stadium-image);
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.auth-screen__stadium::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(135deg, rgba(8, 12, 18, 0.82), rgba(8, 12, 18, 0.62));
+}
+
+.auth-screen.has-stadium-background .auth-screen__stadium {
+  opacity: 1;
 }
