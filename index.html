@@ -106,8 +106,9 @@
       window.IFLAuth = {
         setStadiumBackground(imageUrl) {
           const authScreen = document.getElementById("auth-screen");
-          if (!authScreen || typeof imageUrl !== "string" || !/^https?:\\/\\//i.test(imageUrl)) return;
-          authScreen.style.setProperty("--auth-stadium-image", 'url("' + imageUrl.replace(/["\\\\\\r\\n]/g, "") + '")');
+          if (!authScreen || typeof imageUrl !== "string" || !(imageUrl.startsWith("https://") || imageUrl.startsWith("http://"))) return;
+          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\\n", "").replaceAll("\\r", "");
+          authScreen.style.setProperty("--auth-stadium-image", 'url("' + safeUrl + '")');
           authScreen.classList.add("has-stadium-background");
         }
       };
