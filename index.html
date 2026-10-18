@@ -6,7 +6,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
+  <meta name="description" content="Sigue las competiciones, clubes, calendario y noticias oficiales de la Iberian Football League.">
+  <meta name="theme-color" content="#12161d">
   <title>Iberian Football League</title>
   <script>
     (() => {
@@ -16,7 +17,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=34">
+  <link rel="stylesheet" href="css/styles.css?v=37">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -53,6 +54,7 @@
           <a class="nav-link" href="#estadios">Estadios</a>
           <a class="nav-link" href="#buscar">Buscar</a>
           <a class="nav-link" href="#mercado">Mercado</a>
+          <details class="site-more-menu"><summary class="nav-link">Más <span aria-hidden="true">⌄</span></summary><div class="site-more-panel"><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a></div></details>
         </div>
       </details>
 
@@ -107,7 +109,7 @@
         <div class="home-hero__stats" aria-label="Estadísticas de la IFL">
           <div class="home-hero__stat">
             <strong>0</strong>
-            <span>Clubs</span>
+            <span>Clubes</span>
           </div>
           <div class="home-hero__stat">
             <strong>0</strong>
@@ -349,6 +351,8 @@
       logoutOptions.forEach((option) => option.addEventListener("click", signOut));
       restoreSession();
     })();
-  </script>  <!-- IFL Pages deployment refresh: standalone calendar -->
+  </script>
+  <script src="js/ifl-data.js" defer></script>
+  <script src="js/site-content.js" defer></script>
 </body>
 </html>
