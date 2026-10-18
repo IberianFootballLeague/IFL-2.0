@@ -996,3 +996,8 @@ body[data-authenticated="booting"] {
     min-height: 70px;
   }
 }
+
+
+.home-section--news {
+  padding-top: 0;
+}
