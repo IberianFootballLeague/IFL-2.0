@@ -8,9 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <script>
+    (() => {
+      try {
+        const session = JSON.parse(localStorage.getItem("ifl-2-discord-session") || "null");
+        if (session?.access_token) document.documentElement.dataset.iflHasSession = "true";
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=17">
 </head>
-<body data-authenticated="false">
+<body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
     <div class="auth-screen__stadium" aria-hidden="true"></div>
     <div class="auth-screen__mark" aria-hidden="true">IFL</div>
@@ -201,19 +209,27 @@
         const accessToken = params.get("access_token");
         const refreshToken = params.get("refresh_token");
         if (accessToken) {
+          // Mostrar la web en cuanto vuelve Discord y validar el token en segundo plano.
+          setAuthState({});
+          history.replaceState({}, document.title, window.location.pathname + window.location.search);
           try {
             const user = await loadUser(accessToken);
             saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
-            history.replaceState({}, document.title, window.location.pathname + window.location.search);
             setAuthState(user);
             return;
           } catch (error) {
             console.warn("[IFL 2.0] No se pudo validar la sesión OAuth:", error);
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+            return;
           }
         }
 
         const stored = readSession();
         if (!stored?.access_token) return setAuthState(null);
+
+        // La sesión guardada se pinta inmediatamente; la comprobación no bloquea la interfaz.
+        setAuthState(stored.user || {});
         try {
           const user = await loadUser(stored.access_token);
           saveSession({ ...stored, user });
