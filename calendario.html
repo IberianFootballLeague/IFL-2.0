@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=31">
+  <link rel="stylesheet" href="css/styles.css?v=32">
   <title>Calendario · Iberian Football League</title>
   <!-- IFL calendar standalone deployment -->
 </head>
@@ -126,17 +126,68 @@
         </div>
       </section>
 
+      <section class="calendar-overview" aria-labelledby="upcoming-match-title">
+        <div class="upcoming-match">
+          <div class="upcoming-match__heading">
+            <span class="section-kicker">PRÓXIMO PARTIDO</span>
+            <span class="match-status match-status--empty">SIN PROGRAMAR</span>
+          </div>
+          <div class="upcoming-match__empty">
+            <span class="upcoming-match__icon" aria-hidden="true">＋</span>
+            <div>
+              <h2 id="upcoming-match-title">No hay próximo partido</h2>
+              <p>Cuando se publique el calendario, el siguiente encuentro aparecerá aquí.</p>
+            </div>
+          </div>
+          <div class="upcoming-match__actions">
+            <button type="button" disabled>Añadir al calendario</button>
+            <button type="button" disabled>Ver estadio</button>
+          </div>
+        </div>
+
+        <div class="round-panel">
+          <div class="round-panel__heading">
+            <span class="section-kicker">JORNADA</span>
+            <strong>Sin jornada activa</strong>
+          </div>
+          <div class="round-panel__controls">
+            <button type="button" disabled aria-label="Jornada anterior">←</button>
+            <span>Sin datos</span>
+            <button type="button" disabled aria-label="Jornada siguiente">→</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="calendar-stats" aria-label="Resumen de la competición">
+        <div><strong>0</strong><span>Partidos</span></div>
+        <div><strong>0</strong><span>Goles</span></div>
+        <div><strong>0</strong><span>Tarjetas</span></div>
+        <div><strong>0</strong><span>Emisiones en directo</span></div>
+      </section>
+
       <section class="matches-section" aria-labelledby="matches-list-title">
         <div class="matches-section__heading">
           <div>
             <span class="section-kicker">ENCUENTROS</span>
             <h2 id="matches-list-title">Partidos</h2>
           </div>
-          <div class="matches-tags" aria-label="Organizar partidos por">
-            <button class="matches-tag is-active" type="button">Mes</button>
-            <button class="matches-tag" type="button">Semana</button>
-            <button class="matches-tag" type="button">Estadio</button>
-            <button class="matches-tag" type="button">Club</button>
+          <div class="matches-heading__tools">
+            <div class="matches-tags" aria-label="Organizar partidos por">
+              <button class="matches-tag is-active" type="button">Mes</button>
+              <button class="matches-tag" type="button">Semana</button>
+              <button class="matches-tag" type="button">Estadio</button>
+              <button class="matches-tag" type="button">Club</button>
+            </div>
+            <label class="matches-status-filter">
+              <span>Estado</span>
+              <select>
+                <option>Todos los estados</option>
+                <option>Próximos</option>
+                <option>Finalizados</option>
+                <option>En directo</option>
+                <option>Aplazados</option>
+              </select>
+            </label>
           </div>
         </div>
         <div class="matches-list-card" role="status">
