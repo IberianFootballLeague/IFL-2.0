@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iberianfootballleague.github.io/IFL-2.0/sitemap.xml
