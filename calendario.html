@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=26">
+  <link rel="stylesheet" href="css/styles.css?v=27">
   <title>Calendario · Iberian Football League</title>
   <!-- IFL calendar standalone deployment -->
 </head>
@@ -130,7 +130,7 @@
         const grid = document.getElementById("calendar-grid");
         let month = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
         const today = new Date();
-        const todayKey = [today.getFullYear(), today.getMonth(), today.getDate()].join("-");
+
         const render = () => {
           const year = month.getFullYear(), monthIndex = month.getMonth();
           const firstDay = new Date(year, monthIndex, 1);
@@ -147,12 +147,14 @@
           }
           for (let day = 1; day <= days; day++) {
             const cell = document.createElement("span");
-            const key = [year, monthIndex, day].join("-");
+            const cellDate = new Date(year, monthIndex, day);
+            const cellTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate()).getTime();
+            const todayTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
             cell.className = "calendar-day";
             cell.setAttribute("role", "gridcell");
             cell.textContent = day;
-            if (key < todayKey) cell.classList.add("calendar-day--past");
-            else if (key === todayKey) cell.classList.add("calendar-day--today");
+            if (cellTime < todayTime) cell.classList.add("calendar-day--past");
+            else if (cellTime === todayTime) cell.classList.add("calendar-day--today");
             else cell.classList.add("calendar-day--future");
             grid.appendChild(cell);
           }
