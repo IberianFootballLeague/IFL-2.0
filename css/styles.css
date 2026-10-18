@@ -2004,3 +2004,55 @@ body[data-authenticated="booting"] {
     width: 100%;
   }
 }
+
+
+/* Selector de competiciones de Clasificación IFL 2.0 */
+.competition-card {
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.competition-card:hover,
+.competition-card:focus-visible {
+  transform: translateY(-2px);
+}
+
+.competition-card.is-active {
+  border-color: var(--color-brand);
+  background: #fff4f1;
+}
+
+.competition-card.is-active .competition-card__code {
+  color: #ffffff;
+  background: var(--color-brand);
+}
+
+.competition-card:focus-visible {
+  outline: 3px solid rgba(237, 74, 40, 0.28);
+  outline-offset: 3px;
+}
+
+.standings-select {
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.standings-select:focus-visible {
+  outline: 3px solid rgba(237, 74, 40, 0.28);
+  outline-offset: 3px;
+}
+
+.standings-empty h3,
+.standings-empty p {
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .competition-card {
+    transition: none;
+  }
+
+  .competition-card:hover,
+  .competition-card:focus-visible {
+    transform: none;
+  }
+}
