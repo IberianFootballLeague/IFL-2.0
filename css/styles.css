@@ -1347,3 +1347,126 @@ body[data-authenticated="booting"] {
 .calendar-section--page {
   padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
+
+
+.calendar-controls {
+  display: grid;
+  grid-template-columns: auto auto repeat(3, minmax(145px, 1fr));
+  align-items: end;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-today-button,
+.calendar-view-button {
+  min-height: 42px;
+  padding: 0.65rem 0.9rem;
+  color: var(--color-ink);
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: 9px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.calendar-today-button:hover,
+.calendar-today-button:focus-visible,
+.calendar-view-button:hover,
+.calendar-view-button:focus-visible,
+.calendar-view-button.is-active {
+  color: #ffffff;
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+}
+
+.calendar-view-switcher {
+  display: inline-flex;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  background: #f0f1f3;
+  border-radius: 11px;
+}
+
+.calendar-view-switcher .calendar-view-button {
+  min-height: 32px;
+  padding: 0.35rem 0.7rem;
+  border: 0;
+}
+
+.calendar-filter {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.calendar-filter span {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.calendar-filter select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem 0.7rem;
+  color: var(--color-ink);
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: 9px;
+  font: inherit;
+}
+
+.calendar-grid--week .calendar-day {
+  min-height: 110px;
+}
+
+@media (max-width: 900px) {
+  .calendar-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendar-today-button,
+  .calendar-view-switcher {
+    width: 100%;
+  }
+
+  .calendar-filter:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .calendar-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-view-switcher,
+  .calendar-filter:last-child {
+    grid-column: auto;
+  }
+
+  .calendar-grid--week {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-grid--week .calendar-day {
+    min-height: 58px;
+    place-items: center start;
+    padding-left: 1rem;
+  }
+
+  .calendar-grid--week .calendar-day::after {
+    content: attr(aria-label);
+    margin-left: 0.5rem;
+    color: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .calendar-grid--week .calendar-day--empty {
+    display: none;
+  }
+}
