@@ -10,7 +10,7 @@
   const upcoming=matches.filter(match=>match.status==="scheduled"&&Number.isFinite(new Date(match.date).getTime())).sort((a,b)=>new Date(a.date)-new Date(b.date));
   const dateLabel=value=>new Intl.DateTimeFormat("es-ES",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(value));
   const stats=document.querySelectorAll(".home-hero__stat strong");
-  if(stats.length>=3){stats[0].textContent=teams.length;stats[1].textContent=goals;stats[2].textContent=finished.length;}
+  if(stats.length>=4){stats[0].textContent=teams.length?String(teams.length):"—";stats[1].textContent=finished.length?String(goals):"—";stats[2].textContent=finished.length?String(finished.length):"—";stats[3].textContent="3";}
   const matchSection=document.querySelector('[aria-labelledby="matches-title"] .empty-state');
   if(matchSection&&upcoming.length){matchSection.className="home-fixtures";matchSection.innerHTML=upcoming.slice(0,4).map(match=>'<article class="home-fixture"><small>'+esc(dateLabel(match.date))+' · '+esc(match.competition||"Competición")+'</small><div><span>'+esc(name(match.homeTeamId))+'</span><strong>vs</strong><span>'+esc(name(match.awayTeamId))+'</span></div></article>').join("")+'<a class="text-link" href="calendario.html">Ver calendario completo →</a>';}
   const newsSection=document.querySelector('[aria-labelledby="news-title"] .empty-state');
