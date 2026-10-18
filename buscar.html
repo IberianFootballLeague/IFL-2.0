@@ -108,6 +108,45 @@
       <span class="section-kicker">EXPLORAR IFL</span>
       <h1 id="search-title">Buscar</h1>
       <p class="section-intro">Encuentra clubes, partidos y noticias oficiales de la liga.</p>
+      <form class="ifl-search" id="ifl-search-form" role="search">
+        <label class="visually-hidden" for="ifl-search-input">Buscar en la IFL</label>
+        <input id="ifl-search-input" type="search" placeholder="Busca un club, partido o noticia…" autocomplete="off">
+        <button type="submit">Buscar</button>
+      </form>
+      <div id="ifl-search-results" class="ifl-search-results" aria-live="polite">
+        <p class="empty-state__description">Escribe algo para comenzar la búsqueda.</p>
+      </div>
+
+      <section class="ifl-tops" aria-labelledby="ifl-tops-title">
+        <div class="ifl-tops__heading">
+          <span class="section-kicker">ESTADÍSTICAS</span>
+          <h2 id="ifl-tops-title">TOPS de la IFL</h2>
+          <p>Consulta los líderes y récords de la competición.</p>
+        </div>
+        <div class="ifl-tops__grid">
+          <article class="ifl-tops__card">
+            <span class="ifl-tops__number" aria-hidden="true">01</span>
+            <h3>Máximos goleadores</h3>
+            <p>Clasificación pendiente de cargar con datos oficiales.</p>
+          </article>
+          <article class="ifl-tops__card">
+            <span class="ifl-tops__number" aria-hidden="true">02</span>
+            <h3>Más asistencias</h3>
+            <p>Clasificación pendiente de cargar con datos oficiales.</p>
+          </article>
+          <article class="ifl-tops__card">
+            <span class="ifl-tops__number" aria-hidden="true">03</span>
+            <h3>Más partidos jugados</h3>
+            <p>Clasificación pendiente de cargar con datos oficiales.</p>
+          </article>
+          <article class="ifl-tops__card">
+            <span class="ifl-tops__number" aria-hidden="true">04</span>
+            <h3>Récords y estadísticas</h3>
+            <p>Se mostrarán cuando estén disponibles los registros oficiales.</p>
+          </article>
+        </div>
+      </section>
+
       <section class="player-compare" aria-labelledby="player-compare-title">
         <div class="player-compare__heading">
           <span class="section-kicker">CARA A CARA</span>
@@ -135,15 +174,6 @@
           </div>
         </div>
       </section>
-
-      <form class="ifl-search" id="ifl-search-form" role="search">
-        <label class="visually-hidden" for="ifl-search-input">Buscar en la IFL</label>
-        <input id="ifl-search-input" type="search" placeholder="Busca un club, partido o noticia…" autocomplete="off">
-        <button type="submit">Buscar</button>
-      </form>
-      <div id="ifl-search-results" class="ifl-search-results" aria-live="polite">
-        <p class="empty-state__description">Escribe algo para comenzar la búsqueda.</p>
-      </div>
     </section>
   </main>
 
