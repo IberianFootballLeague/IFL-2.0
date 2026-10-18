@@ -8,13 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="stylesheet" href="css/styles.css?v=13">
 </head>
 <body data-authenticated="false">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__stadium" aria-hidden="true"></div>
     <div class="auth-screen__mark" aria-hidden="true">IFL</div>
     <div class="auth-screen__card">
-      <span class="auth-screen__eyebrow">Iberian Football League · 2.0</span>
+      <span class="auth-screen__eyebrow">Iberian Football League</span>
       <h1 id="auth-screen-title">Iniciar sesión</h1>
       <p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p>
       <button class="auth-screen__button" id="primary-discord-login" type="button">
@@ -100,6 +101,16 @@
       const STORAGE_KEY = "ifl-2-discord-session";
       const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
       const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
+
+      // Punto de conexión preparado para el futuro selector de estadios del Admin Panel.
+      window.IFLAuth = {
+        setStadiumBackground(imageUrl) {
+          const authScreen = document.getElementById("auth-screen");
+          if (!authScreen || typeof imageUrl !== "string" || !/^https?:\\/\\//i.test(imageUrl)) return;
+          authScreen.style.setProperty("--auth-stadium-image", 'url("' + imageUrl.replace(/["\\\\\\r\\n]/g, "") + '")');
+          authScreen.classList.add("has-stadium-background");
+        }
+      };
 
       function userName(user) {
         return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
