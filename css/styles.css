@@ -1244,8 +1244,9 @@ body[data-authenticated="booting"] {
 .calendar-day {
   position: relative;
   display: grid;
-  place-items: center;
-  min-height: 64px;
+  place-items: start center;
+  min-height: 112px;
+  padding: 0.75rem 0.55rem;
   color: var(--color-ink);
   background: #ffffff;
   border: 1px solid var(--color-line);
@@ -1326,7 +1327,8 @@ body[data-authenticated="booting"] {
   }
 
   .calendar-day {
-    min-height: 42px;
+    min-height: 78px;
+    padding: 0.55rem 0.35rem;
     border-radius: 9px;
     font-size: 0.9rem;
   }
