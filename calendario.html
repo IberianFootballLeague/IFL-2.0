@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (() => {
+      try {
+        const session = JSON.parse(localStorage.getItem("ifl-2-discord-session") || "null");
+        if (session?.access_token) document.documentElement.dataset.iflHasSession = "true";
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=26">
+  <title>Calendario · Iberian Football League</title>
+</head>
+<body data-authenticated="booting">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__stadium" aria-hidden="true"></div>
+    <div class="auth-screen__mark" aria-hidden="true"><img src="logo" alt=""></div>
+    <div class="auth-screen__card">
+      <span class="auth-screen__eyebrow">Iberian Football League</span>
+      <h1 id="auth-screen-title">Iniciar sesión</h1>
+      <p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p>
+      <button class="auth-screen__button" id="primary-discord-login" type="button">
+        <span class="auth-screen__discord-icon" aria-hidden="true">◉</span>
+        Iniciar sesión con Discord
+      </button>
+    </div>
+  </section>
+
+  <div class="site-shell" id="site-shell">
+    <header class="site-header">
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="brand" href="index.html" aria-label="Iberian Football League, inicio">
+          <img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="120" height="72">
+        </a>
+        <details class="mobile-menu">
+          <summary aria-label="Abrir menú de navegación">
+            <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span>Menú</span>
+          </summary>
+          <div class="mobile-menu-panel">
+            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link is-active" href="calendario.html" aria-current="page">Calendario</a>
+            <a class="nav-link" href="index.html#clasificacion">Clasificación</a>
+            <a class="nav-link" href="index.html#estadios">Estadios</a>
+            <a class="nav-link" href="index.html#buscar">Buscar</a>
+            <a class="nav-link" href="index.html#mercado">Mercado</a>
+          </div>
+        </details>
+        <div class="desktop-menu">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link is-active" href="calendario.html" aria-current="page">Calendario</a>
+          <a class="nav-link" href="index.html#clasificacion">Clasificación</a>
+          <a class="nav-link" href="index.html#estadios">Estadios</a>
+          <a class="nav-link" href="index.html#buscar">Buscar</a>
+          <a class="nav-link" href="index.html#mercado">Mercado</a>
+          <details class="profile-menu">
+            <summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary>
+            <div class="profile-panel" aria-label="Opciones de perfil">
+              <button class="profile-option profile-login-option" type="button">Iniciar sesión con Discord</button>
+              <button class="profile-option" type="button" disabled>Mi perfil</button>
+              <button class="profile-option" type="button" disabled>Mi club</button>
+              <button class="profile-option" type="button" disabled>Ajustes</button>
+              <button class="profile-option" type="button" disabled>Cerrar sesión</button>
+              <div class="profile-divider" role="separator"></div>
+              <button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button>
+            </div>
+          </details>
+        </div>
+      </nav>
+    </header>
+
+    <main class="calendar-page" id="contenido">
+      <section class="calendar-section calendar-section--page" id="calendario" aria-labelledby="calendar-title">
+        <div class="calendar-section__heading">
+          <span class="section-kicker">COMPETICIÓN</span>
+          <h1 id="calendar-title">Calendario</h1>
+          <p>Consulta los días de cada jornada y desplázate entre los meses.</p>
+        </div>
+        <div class="calendar-card">
+          <div class="calendar-toolbar">
+            <button class="calendar-nav-button" id="calendar-previous" type="button" aria-label="Mes anterior">←</button>
+            <h2 id="calendar-month" aria-live="polite"></h2>
+            <button class="calendar-nav-button" id="calendar-next" type="button" aria-label="Mes siguiente">→</button>
+          </div>
+          <div class="calendar-weekdays" aria-hidden="true">
+            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+          </div>
+          <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="Días del mes"></div>
+          <div class="calendar-legend" aria-label="Leyenda del calendario">
+            <span><i class="calendar-legend__swatch calendar-legend__swatch--past"></i>Días pasados</span>
+            <span><i class="calendar-legend__swatch calendar-legend__swatch--today"></i>Hoy</span>
+            <span><i class="calendar-legend__swatch calendar-legend__swatch--future"></i>Próximos días</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
+      const KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
+      const STORAGE_KEY = "ifl-2-discord-session";
+      const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
+      const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
+
+      const setAuthState = (user) => {
+        document.body.dataset.authenticated = user ? "true" : "false";
+        document.getElementById("auth-screen").hidden = Boolean(user);
+        loginOptions.forEach((option) => { option.hidden = Boolean(user); option.disabled = Boolean(user); });
+        logoutOptions.forEach((option) => { option.disabled = !user; });
+      };
+      const loadUser = async (token) => {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/user", { headers: { apikey: KEY, Authorization: "Bearer " + token } });
+        if (!response.ok) throw new Error("Sesión no válida");
+        return response.json();
+      };
+      const signIn = () => {
+        window.location.assign(SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent("https://iberianfootballleague.github.io/IFL-2.0/"));
+      };
+      const setupCalendar = () => {
+        const label = document.getElementById("calendar-month");
+        const grid = document.getElementById("calendar-grid");
+        let month = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+        const today = new Date();
+        const todayKey = [today.getFullYear(), today.getMonth(), today.getDate()].join("-");
+        const render = () => {
+          const year = month.getFullYear(), monthIndex = month.getMonth();
+          const firstDay = new Date(year, monthIndex, 1);
+          const days = new Date(year, monthIndex + 1, 0).getDate();
+          const offset = (firstDay.getDay() + 6) % 7;
+          const title = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric" }).format(month);
+          label.textContent = title.charAt(0).toUpperCase() + title.slice(1);
+          grid.innerHTML = "";
+          for (let i = 0; i < offset; i++) {
+            const empty = document.createElement("span");
+            empty.className = "calendar-day calendar-day--empty";
+            empty.setAttribute("aria-hidden", "true");
+            grid.appendChild(empty);
+          }
+          for (let day = 1; day <= days; day++) {
+            const cell = document.createElement("span");
+            const key = [year, monthIndex, day].join("-");
+            cell.className = "calendar-day";
+            cell.setAttribute("role", "gridcell");
+            cell.textContent = day;
+            if (key < todayKey) cell.classList.add("calendar-day--past");
+            else if (key === todayKey) cell.classList.add("calendar-day--today");
+            else cell.classList.add("calendar-day--future");
+            grid.appendChild(cell);
+          }
+        };
+        document.getElementById("calendar-previous").addEventListener("click", () => { month = new Date(month.getFullYear(), month.getMonth() - 1, 1); render(); });
+        document.getElementById("calendar-next").addEventListener("click", () => { month = new Date(month.getFullYear(), month.getMonth() + 1, 1); render(); });
+        render();
+      };
+      loginOptions.forEach((option) => option.addEventListener("click", signIn));
+      const stored = (() => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (_) { return null; } })();
+      setupCalendar();
+      if (!stored?.access_token) setAuthState(null);
+      else {
+        setAuthState(stored.user || {});
+        loadUser(stored.access_token).then((user) => { localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stored, user })); setAuthState(user); }).catch(() => setAuthState(stored.user || {}));
+      }
+    })();
+  </script>
+</body>
+</html>
