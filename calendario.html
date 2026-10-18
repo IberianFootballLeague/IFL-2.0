@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=29">
+  <link rel="stylesheet" href="css/styles.css?v=30">
   <title>Calendario · Iberian Football League</title>
   <!-- IFL calendar standalone deployment -->
 </head>
@@ -83,6 +83,31 @@
           <h1 id="calendar-title">Calendario</h1>
           <p>Consulta los días de cada jornada y desplázate entre los meses.</p>
         </div>
+        <div class="calendar-controls" aria-label="Filtros y vista del calendario">
+          <button class="calendar-today-button" id="calendar-today" type="button">Hoy</button>
+          <div class="calendar-view-switcher" role="group" aria-label="Vista del calendario">
+            <button class="calendar-view-button is-active" id="calendar-month-view" type="button" aria-pressed="true">Mes</button>
+            <button class="calendar-view-button" id="calendar-week-view" type="button" aria-pressed="false">Semana</button>
+          </div>
+          <label class="calendar-filter">
+            <span>Competición</span>
+            <select id="calendar-competition-filter">
+              <option>Todas las competiciones</option>
+            </select>
+          </label>
+          <label class="calendar-filter">
+            <span>Club</span>
+            <select id="calendar-club-filter">
+              <option>Todos los clubes</option>
+            </select>
+          </label>
+          <label class="calendar-filter">
+            <span>Estadio</span>
+            <select id="calendar-stadium-filter">
+              <option>Todos los estadios</option>
+            </select>
+          </label>
+        </div>
         <div class="calendar-card">
           <div class="calendar-toolbar">
             <button class="calendar-nav-button" id="calendar-previous" type="button" aria-label="Mes anterior">←</button>
@@ -128,39 +153,88 @@
       const setupCalendar = () => {
         const label = document.getElementById("calendar-month");
         const grid = document.getElementById("calendar-grid");
-        let month = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+        const todayButton = document.getElementById("calendar-today");
+        const monthViewButton = document.getElementById("calendar-month-view");
+        const weekViewButton = document.getElementById("calendar-week-view");
+        let cursorDate = new Date();
+        let view = "month";
         const today = new Date();
 
+        const dateOnly = (date) => new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        const startOfWeek = (date) => {
+          const result = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          result.setDate(result.getDate() - ((result.getDay() + 6) % 7));
+          return result;
+        };
+        const formatDate = (date, options) => new Intl.DateTimeFormat("es-ES", options).format(date);
+
         const render = () => {
-          const year = month.getFullYear(), monthIndex = month.getMonth();
-          const firstDay = new Date(year, monthIndex, 1);
-          const days = new Date(year, monthIndex + 1, 0).getDate();
-          const offset = (firstDay.getDay() + 6) % 7;
-          const title = new Intl.DateTimeFormat("es-ES", { month: "long", year: "numeric" }).format(month);
-          label.textContent = title.charAt(0).toUpperCase() + title.slice(1);
           grid.innerHTML = "";
-          for (let i = 0; i < offset; i++) {
-            const empty = document.createElement("span");
-            empty.className = "calendar-day calendar-day--empty";
-            empty.setAttribute("aria-hidden", "true");
-            grid.appendChild(empty);
+          grid.classList.toggle("calendar-grid--week", view === "week");
+          const todayTime = dateOnly(today);
+          let firstDate;
+          let totalDays;
+          let title;
+
+          if (view === "week") {
+            firstDate = startOfWeek(cursorDate);
+            totalDays = 7;
+            const lastDate = new Date(firstDate);
+            lastDate.setDate(firstDate.getDate() + 6);
+            title = "Semana · " + formatDate(firstDate, { day: "numeric", month: "short" }) + " – " + formatDate(lastDate, { day: "numeric", month: "short", year: "numeric" });
+          } else {
+            firstDate = new Date(cursorDate.getFullYear(), cursorDate.getMonth(), 1);
+            totalDays = new Date(firstDate.getFullYear(), firstDate.getMonth() + 1, 0).getDate();
+            const monthTitle = formatDate(firstDate, { month: "long", year: "numeric" });
+            title = monthTitle.charAt(0).toUpperCase() + monthTitle.slice(1);
+            const offset = (firstDate.getDay() + 6) % 7;
+            for (let i = 0; i < offset; i++) {
+              const empty = document.createElement("span");
+              empty.className = "calendar-day calendar-day--empty";
+              empty.setAttribute("aria-hidden", "true");
+              grid.appendChild(empty);
+            }
           }
-          for (let day = 1; day <= days; day++) {
+
+          label.textContent = title;
+          for (let index = 0; index < totalDays; index += 1) {
+            const cellDate = new Date(firstDate);
+            cellDate.setDate(firstDate.getDate() + index);
             const cell = document.createElement("span");
-            const cellDate = new Date(year, monthIndex, day);
-            const cellTime = new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate()).getTime();
-            const todayTime = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+            const cellTime = dateOnly(cellDate);
             cell.className = "calendar-day";
             cell.setAttribute("role", "gridcell");
-            cell.textContent = day;
+            cell.textContent = cellDate.getDate();
+            if (view === "week") cell.setAttribute("aria-label", formatDate(cellDate, { weekday: "long", day: "numeric", month: "long" }));
             if (cellTime < todayTime) cell.classList.add("calendar-day--past");
             else if (cellTime === todayTime) cell.classList.add("calendar-day--today");
             else cell.classList.add("calendar-day--future");
             grid.appendChild(cell);
           }
         };
-        document.getElementById("calendar-previous").addEventListener("click", () => { month = new Date(month.getFullYear(), month.getMonth() - 1, 1); render(); });
-        document.getElementById("calendar-next").addEventListener("click", () => { month = new Date(month.getFullYear(), month.getMonth() + 1, 1); render(); });
+
+        const setView = (nextView) => {
+          view = nextView;
+          monthViewButton.classList.toggle("is-active", view === "month");
+          weekViewButton.classList.toggle("is-active", view === "week");
+          monthViewButton.setAttribute("aria-pressed", view === "month");
+          weekViewButton.setAttribute("aria-pressed", view === "week");
+          render();
+        };
+
+        document.getElementById("calendar-previous").addEventListener("click", () => {
+          if (view === "week") cursorDate.setDate(cursorDate.getDate() - 7);
+          else cursorDate = new Date(cursorDate.getFullYear(), cursorDate.getMonth() - 1, 1);
+          render();
+        });
+        document.getElementById("calendar-next").addEventListener("click", () => {
+          if (view === "week") cursorDate.setDate(cursorDate.getDate() + 7);
+          else cursorDate = new Date(cursorDate.getFullYear(), cursorDate.getMonth() + 1, 1);
+          render();
+        });
+        todayButton.addEventListener("click", () => { cursorDate = new Date(); render(); });
+        monthViewButton.addEventListener("click", () => setView("month"));
+        weekViewButton.addEventListener("click", () => setView("week"));
         render();
       };
       loginOptions.forEach((option) => option.addEventListener("click", signIn));
