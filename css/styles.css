@@ -597,3 +597,14 @@ body[data-authenticated="false"] .site-shell {
 .profile-avatar.has-discord-avatar::after {
   display: none;
 }
+
+
+.profile-trigger {
+  overflow: hidden;
+}
+
+.profile-avatar.has-discord-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
