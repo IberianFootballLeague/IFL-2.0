@@ -4,7 +4,7 @@
   if(!cards.length||!selector||!section||!title||!description||!empty)return;
   const labels={d1:"División 1",d2:"División 2",copa:"Copa IFL"},teams=data.teams||[],matches=data.matches||[],teamMap=new Map(teams.map(team=>[String(team.id),team]));
   const esc=value=>String(value==null?"":value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  const finished=match=>match.status==="finished"&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore));
+  const finished=match=>match.status==="finished"&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore));
   const teamName=id=>(teamMap.get(String(id))||{}).name||"Equipo pendiente";
   function standings(competition){
     const selected=teams.filter(team=>team.competition===competition);if(!selected.length)return null;
