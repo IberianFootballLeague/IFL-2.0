@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Consulta el cuadro eliminatorio, los cruces y los resultados oficiales de la Copa IFL.">
+  <meta name="theme-color" content="#12161d">
+  <script>
+    (() => { try { const session=JSON.parse(localStorage.getItem("ifl-2-discord-session")||"null"); if(session?.access_token)document.documentElement.dataset.iflHasSession="true"; } catch (_) {} })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=37">
+  <title>Copa IFL · Iberian Football League</title>
+</head>
+<body data-authenticated="booting">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__stadium" aria-hidden="true"></div><div class="auth-screen__mark" aria-hidden="true"><img src="logo" alt=""></div>
+    <div class="auth-screen__card"><span class="auth-screen__eyebrow">Iberian Football League</span><h1 id="auth-screen-title">Iniciar sesión</h1><p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p><button class="auth-screen__button" id="primary-discord-login" type="button"><span class="auth-screen__discord-icon" aria-hidden="true">◉</span>Iniciar sesión con Discord</button></div>
+  </section>
+  <div class="site-shell" id="site-shell">
+    <header class="site-header"><nav class="main-nav" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Iberian Football League, inicio"><img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="120" height="72"></a>
+      <details class="mobile-menu"><summary aria-label="Abrir menú de navegación"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span>Menú</span></summary><div class="mobile-menu-panel">
+        <a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a><a class="nav-link" href="equipos.html">Equipos</a><a class="nav-link" href="noticias.html">Noticias</a><a class="nav-link" href="copa.html">Copa IFL</a>
+      </div></details>
+      <div class="desktop-menu">
+        <a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a>
+        <details class="site-more-menu"><summary class="nav-link">Más <span aria-hidden="true">⌄</span></summary><div class="site-more-panel"><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a></div></details>
+        <details class="profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil"><button class="profile-option profile-login-option" type="button">Iniciar sesión con Discord</button><button class="profile-option" type="button" disabled>Mi perfil</button><button class="profile-option" type="button" disabled>Mi club</button><button class="profile-option" type="button" disabled>Ajustes</button><button class="profile-option" type="button" disabled>Cerrar sesión</button><div class="profile-divider" role="separator"></div><button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button></div></details>
+      </div>
+      <details class="profile-menu mobile-profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil"><button class="profile-option profile-login-option" type="button">Iniciar sesión con Discord</button><button class="profile-option" type="button" disabled>Mi perfil</button><button class="profile-option" type="button" disabled>Mi club</button><button class="profile-option" type="button" disabled>Ajustes</button><button class="profile-option" type="button" disabled>Cerrar sesión</button><div class="profile-divider" role="separator"></div><button class="profile-option profile-option-admin" type="button" disabled>Admin Panel</button></div></details>
+    </nav></header>
+    <main class="content-page" id="contenido"><section class="content-section" aria-labelledby="cup-page-title"><span class="section-kicker">COMPETICIÓN</span><h1 id="cup-page-title">Copa IFL</h1><p class="section-intro">Cuadro eliminatorio, rondas y resultados oficiales.</p><div id="cup-bracket" class="ifl-cup-bracket" aria-live="polite"></div></section></main>
+    <footer class="site-footer"><div class="site-footer__main"><a class="site-footer__brand" href="index.html"><img src="logo" alt="Logo de Iberian Football League"><span>Iberian Football League</span></a><nav class="site-footer__links" aria-label="Enlaces del pie de página"><a href="index.html">Inicio</a><a href="calendario.html">Calendario</a><a href="clasificacion.html">Clasificación</a><a href="equipos.html">Equipos</a><a href="noticias.html">Noticias</a><a href="copa.html">Copa IFL</a></nav><div class="site-footer__status"><span class="status-dot" aria-hidden="true"></span><span>Datos oficiales IFL</span></div></div><div class="site-footer__bottom"><span>© 2026 Iberian Football League</span><span>IFL · Roblox Football League</span></div></footer>
+  </div>
+  <script src="js/ifl-data.js" defer></script>
+  <script src="js/copa.js" defer></script>
+  <script>
+    (() => {
+      const url="https://boazhychmpxeuplyxzsi.supabase.co", storage="ifl-2-discord-session";
+      const login=[...document.querySelectorAll(".profile-login-option,#primary-discord-login")];
+      const logout=[...document.querySelectorAll(".profile-option")].filter(x=>x.textContent.trim()==="Cerrar sesión");
+      const state=user=>{document.body.dataset.authenticated=user?"true":"false";const screen=document.getElementById("auth-screen");if(screen)screen.hidden=Boolean(user);login.forEach(x=>{x.hidden=Boolean(user);x.disabled=Boolean(user);});logout.forEach(x=>x.disabled=!user);};
+      const signIn=()=>window.location.assign(url+"/auth/v1/authorize?provider=discord&redirect_to="+encodeURIComponent("https://iberianfootballleague.github.io/IFL-2.0/"));
+      login.forEach(x=>x.addEventListener("click",signIn));
+      const stored=(()=>{try{return JSON.parse(localStorage.getItem(storage)||"null")}catch(_){return null}})();
+      if(!stored?.access_token)state(null);else state(stored.user||{});
+    })();
+  </script>
+</body>
+</html>
