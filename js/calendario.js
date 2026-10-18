@@ -92,7 +92,7 @@
       if(count){
         const marker=existingMarker||document.createElement("span");
         if(!existingMarker){marker.className="calendar-day__events";marker.setAttribute("aria-hidden","true");cell.appendChild(marker);}
-        marker.textContent=String(count);
+        if(marker.textContent!==String(count))marker.textContent=String(count);
         cell.title=count+" partido"+(count===1?"":"s")+" · "+dateText;
         cell.setAttribute("aria-label",dateText+", "+count+" partido"+(count===1?"":"s"));
       }else{
