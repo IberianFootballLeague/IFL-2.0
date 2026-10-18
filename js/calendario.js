@@ -34,12 +34,12 @@
   }
   function renderOverview(){
     const statNodes=document.querySelectorAll(".calendar-stats strong");
-    const finished=matches.filter(match=>match.status==="finished"&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore)));
+    const finished=matches.filter(match=>match.status==="finished"&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&match.homeScore!==null&&match.homeScore!==undefined&&match.homeScore!==""&&match.awayScore!==null&&match.awayScore!==undefined&&match.awayScore!==""&&Number.isFinite(Number(match.homeScore))&&Number.isFinite(Number(match.awayScore)));
     const goals=finished.reduce((sum,match)=>sum+Number(match.homeScore)+Number(match.awayScore),0);
-    const cardFields=matches.some(match=>Number.isFinite(Number(match.yellowCards))||Number.isFinite(Number(match.redCards)));
+    const cardFields=matches.some(match=>(match.yellowCards!==null&&match.yellowCards!==undefined&&match.yellowCards!=="")||(match.redCards!==null&&match.redCards!==undefined&&match.redCards!==""));
     const cards=matches.reduce((sum,match)=>sum+(Number(match.yellowCards)||0)+(Number(match.redCards)||0),0);
     const liveStreams=matches.filter(match=>match.status==="live"&&match.streamUrl).length;
-    if(statNodes.length>=4){statNodes[0].textContent=String(matches.length);statNodes[1].textContent=String(goals);statNodes[2].textContent=cardFields?String(cards):"—";statNodes[3].textContent=liveStreams?String(liveStreams):"—";}
+    if(statNodes.length>=4){statNodes[0].textContent=matches.length?String(matches.length):"—";statNodes[1].textContent=finished.length?String(goals):"—";statNodes[2].textContent=cardFields?String(cards):"—";statNodes[3].textContent=liveStreams?String(liveStreams):"—";}
     const next=matches.filter(match=>match.status==="scheduled"&&dateOf(match)&&dateOf(match).getTime()>=Date.now()).sort((a,b)=>dateOf(a)-dateOf(b))[0];
     const empty=document.querySelector(".upcoming-match__empty");
     const status=document.querySelector(".upcoming-match__heading .match-status");
