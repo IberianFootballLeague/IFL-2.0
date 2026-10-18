@@ -164,7 +164,7 @@
       }
 
       function signIn() {
-        const redirectTo = window.location.origin + window.location.pathname;
+        const redirectTo = "https://iberianfootballleague.github.io/IFL-2.0/";
         const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
         window.location.assign(url);
       }
