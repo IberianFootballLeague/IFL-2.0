@@ -83,14 +83,23 @@
     const cells=[...calendarGrid.children];
     cells.forEach((cell,index)=>{
       if(cell.classList.contains("calendar-day--empty"))return;
-      cell.querySelector(".calendar-day__events")?.remove();
+      const existingMarker=cell.querySelector(".calendar-day__events");
       let date;
       if(week){date=new Date(firstDate);date.setDate(firstDate.getDate()+index);}
       else{const day=Number.parseInt(cell.textContent,10);if(!day)return;date=new Date(firstDate.getFullYear(),firstDate.getMonth(),day);}
       const count=matches.filter(match=>{const matchDate=dateOf(match);return matchDate&&matchDate.getFullYear()===date.getFullYear()&&matchDate.getMonth()===date.getMonth()&&matchDate.getDate()===date.getDate();}).length;
       const dateText=new Intl.DateTimeFormat("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(date);
-      if(count){const marker=document.createElement("span");marker.className="calendar-day__events";marker.textContent=String(count);marker.setAttribute("aria-hidden","true");cell.appendChild(marker);cell.title=count+" partido"+(count===1?"":"s")+" · "+dateText;cell.setAttribute("aria-label",dateText+", "+count+" partido"+(count===1?"":"s"));}
-      else{cell.title=dateText;if(week)cell.setAttribute("aria-label",dateText);}
+      if(count){
+        const marker=existingMarker||document.createElement("span");
+        if(!existingMarker){marker.className="calendar-day__events";marker.setAttribute("aria-hidden","true");cell.appendChild(marker);}
+        marker.textContent=String(count);
+        cell.title=count+" partido"+(count===1?"":"s")+" · "+dateText;
+        cell.setAttribute("aria-label",dateText+", "+count+" partido"+(count===1?"":"s"));
+      }else{
+        if(existingMarker)existingMarker.remove();
+        cell.title=dateText;
+        if(week)cell.setAttribute("aria-label",dateText);
+      }
     });
   }
   if(calendarGrid){
