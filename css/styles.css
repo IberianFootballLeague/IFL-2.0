@@ -586,3 +586,14 @@ body[data-authenticated="false"] .site-shell {
 .auth-screen.has-stadium-background .auth-screen__stadium {
   opacity: 1;
 }
+
+.profile-avatar.has-discord-avatar {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.profile-avatar.has-discord-avatar::before,
+.profile-avatar.has-discord-avatar::after {
+  display: none;
+}
