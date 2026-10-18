@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
   <meta name="description" content="Iberian Football League, la liga de fútbol de Roblox.">
   <title>Iberian Football League</title>
-  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="stylesheet" href="css/styles.css?v=16">
 </head>
 <body data-authenticated="false">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -90,7 +90,27 @@
   </header>
 
   <main id="contenido">
+    <section class="home-hero" aria-labelledby="home-hero-title">
+      <div class="home-hero__lines" aria-hidden="true"></div>
+      <div class="home-hero__content">
+        <span class="home-hero__eyebrow">IBERIAN FOOTBALL LEAGUE</span>
+        <h1 id="home-hero-title">Bienvenido a la IFL</h1>
+        <p>El punto de encuentro de la competición, los clubes y toda la comunidad de la Iberian Football League.</p>
+      </div>
+      <img class="home-hero__logo" src="logo" alt="Logo de Iberian Football League">
+    </section>
 
+    <section class="home-section" aria-labelledby="matches-title">
+      <div class="home-section__heading">
+        <span class="section-kicker">COMPETICIÓN</span>
+        <h2 id="matches-title">Próximos partidos</h2>
+      </div>
+      <div class="empty-state" role="status">
+        <span class="empty-state__icon" aria-hidden="true">＋</span>
+        <h3>No hay partidos configurados</h3>
+        <p>Cuando se publique el calendario, aquí aparecerán los próximos encuentros.</p>
+      </div>
+    </section>
   </main>
   </div>
 
