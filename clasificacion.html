@@ -74,20 +74,20 @@
           <p>Selecciona una competición para consultar sus equipos y clasificaciones.</p>
         </div>
 
-        <div class="competition-grid">
-          <a class="competition-card" href="#d1">
+        <div class="competition-grid" aria-label="Seleccionar competición">
+          <a class="competition-card" href="#d1" data-competition="d1">
             <span class="competition-card__code">D1</span>
-            <span class="competition-card__content"><strong>División 1</strong><small>Competición pendiente de configurar</small></span>
+            <span class="competition-card__content"><strong>División 1</strong><small>Ver clasificación</small></span>
             <span class="competition-card__arrow" aria-hidden="true">→</span>
           </a>
-          <a class="competition-card" href="#d2">
+          <a class="competition-card" href="#d2" data-competition="d2">
             <span class="competition-card__code">D2</span>
-            <span class="competition-card__content"><strong>División 2</strong><small>Competición pendiente de configurar</small></span>
+            <span class="competition-card__content"><strong>División 2</strong><small>Ver clasificación</small></span>
             <span class="competition-card__arrow" aria-hidden="true">→</span>
           </a>
-          <a class="competition-card" href="#copa">
+          <a class="competition-card" href="#copa" data-competition="copa">
             <span class="competition-card__code">COPA</span>
-            <span class="competition-card__content"><strong>Copa IFL</strong><small>Competición pendiente de configurar</small></span>
+            <span class="competition-card__content"><strong>Copa IFL</strong><small>Ver clasificación</small></span>
             <span class="competition-card__arrow" aria-hidden="true">→</span>
           </a>
         </div>
@@ -95,13 +95,18 @@
 
       <section class="standings-section" aria-labelledby="standings-title">
         <div class="section-heading-row">
-          <div><span class="section-kicker">TABLA</span><h2 id="standings-title">Clasificaciones</h2></div>
-          <select class="standings-select" aria-label="Seleccionar competición"><option>Selecciona una competición</option></select>
+          <div><span class="section-kicker">TABLA</span><h2 id="standings-title">Clasificación</h2></div>
+          <select class="standings-select" id="standings-select" aria-label="Seleccionar competición">
+            <option value="">Selecciona una competición</option>
+            <option value="d1">División 1</option>
+            <option value="d2">División 2</option>
+            <option value="copa">Copa IFL</option>
+          </select>
         </div>
-        <div class="standings-empty" role="status">
+        <div class="standings-empty" id="standings-empty" role="status" aria-live="polite" aria-atomic="true">
           <span class="standings-empty__icon" aria-hidden="true">＋</span>
-          <h3>No hay clasificación configurada</h3>
-          <p>Cuando se configure una competición, aquí aparecerá su tabla de posiciones.</p>
+          <h3 id="standings-empty-title">Selecciona una competición</h3>
+          <p id="standings-empty-description">Elige D1, D2 o Copa IFL para consultar su clasificación.</p>
         </div>
       </section>
 
@@ -155,5 +160,6 @@
       if(!stored?.access_token) state(null); else state(stored.user||{});
     })();
   </script>
+  <script src="js/clasificacion.js" defer></script>
 </body>
 </html>
