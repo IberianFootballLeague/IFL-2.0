@@ -39,14 +39,149 @@
   <script src="js/copa.js" defer></script>
   <script>
     (() => {
-      const url="https://boazhychmpxeuplyxzsi.supabase.co", storage="ifl-2-discord-session";
-      const login=[...document.querySelectorAll(".profile-login-option,#primary-discord-login")];
-      const logout=[...document.querySelectorAll(".profile-option")].filter(x=>x.textContent.trim()==="Cerrar sesión");
-      const state=user=>{document.body.dataset.authenticated=user?"true":"false";const screen=document.getElementById("auth-screen");if(screen)screen.hidden=Boolean(user);login.forEach(x=>{x.hidden=Boolean(user);x.disabled=Boolean(user);});logout.forEach(x=>x.disabled=!user);};
-      const signIn=()=>window.location.assign(url+"/auth/v1/authorize?provider=discord&redirect_to="+encodeURIComponent("https://iberianfootballleague.github.io/IFL-2.0/"));
-      login.forEach(x=>x.addEventListener("click",signIn));
-      const stored=(()=>{try{return JSON.parse(localStorage.getItem(storage)||"null")}catch(_){return null}})();
-      if(!stored?.access_token)state(null);else state(stored.user||{});
+      const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
+      const STORAGE_KEY = "ifl-2-discord-session";
+      const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
+      const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
+
+      // Punto de conexión preparado para el futuro selector de estadios del Admin Panel.
+      window.IFLAuth = {
+        setStadiumBackground(imageUrl) {
+          const authScreen = document.getElementById("auth-screen");
+          if (!authScreen || typeof imageUrl !== "string" || !(imageUrl.startsWith("https://") || imageUrl.startsWith("http://"))) return;
+          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\\n", "").replaceAll("\\r", "");
+          authScreen.style.setProperty("--auth-stadium-image", 'url("' + safeUrl + '")');
+          authScreen.classList.add("has-stadium-background");
+        }
+      };
+
+      function userName(user) {
+        return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
+      }
+
+      function setAuthState(user) {
+        document.body.dataset.authenticated = user ? "true" : "false";
+        const authScreen = document.getElementById("auth-screen");
+        if (authScreen) authScreen.hidden = Boolean(user);
+        loginOptions.forEach((option) => {
+          option.textContent = "Iniciar sesión con Discord";
+          option.hidden = Boolean(user);
+          option.disabled = Boolean(user);
+        });
+        logoutOptions.forEach((option) => { option.disabled = !user; });
+
+        const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture || "";
+        document.querySelectorAll(".profile-avatar").forEach((avatar) => {
+          avatar.classList.remove("has-discord-avatar");
+          avatar.style.backgroundImage = "";
+          if (avatarUrl) {
+            try {
+              const parsed = new URL(avatarUrl);
+              if (parsed.protocol === "https:") {
+                avatar.style.backgroundImage = "url(" + JSON.stringify(parsed.href) + ")";
+                avatar.classList.add("has-discord-avatar");
+              }
+            } catch (_) {}
+          }
+        });
+        document.querySelectorAll(".profile-trigger").forEach((trigger) => {
+          trigger.title = user ? "Perfil de Discord" : "Iniciar sesión con Discord";
+        });
+      }
+
+      function saveSession(payload) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      }
+
+      function readSession() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (_) { return null; }
+      }
+
+      async function loadUser(accessToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + accessToken }
+        });
+        if (!response.ok) throw new Error("Sesión no válida");
+        return response.json();
+      }
+
+      async function refreshSession(refreshToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+          method: "POST",
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh_token: refreshToken })
+        });
+        if (!response.ok) throw new Error("No se pudo renovar la sesión");
+        const payload = await response.json();
+        const user = await loadUser(payload.access_token);
+        saveSession({ ...payload, user });
+        return user;
+      }
+
+      async function restoreSession() {
+        const params = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = params.get("access_token");
+        const refreshToken = params.get("refresh_token");
+        if (accessToken) {
+          // Mostrar la web en cuanto vuelve Discord y validar el token en segundo plano.
+          setAuthState({});
+          history.replaceState({}, document.title, window.location.pathname + window.location.search);
+          try {
+            const user = await loadUser(accessToken);
+            saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+            setAuthState(user);
+            return;
+          } catch (error) {
+            console.warn("[IFL 2.0] No se pudo validar la sesión OAuth:", error);
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+            return;
+          }
+        }
+
+        const stored = readSession();
+        if (!stored?.access_token) return setAuthState(null);
+
+        // La sesión guardada se pinta inmediatamente; la comprobación no bloquea la interfaz.
+        setAuthState(stored.user || {});
+        try {
+          const user = await loadUser(stored.access_token);
+          saveSession({ ...stored, user });
+          setAuthState(user);
+        } catch (_) {
+          try {
+            const user = stored.refresh_token ? await refreshSession(stored.refresh_token) : null;
+            if (!user) throw new Error("No hay token de renovación");
+            setAuthState(user);
+          } catch (__) {
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+          }
+        }
+      }
+
+      function signIn() {
+        const redirectTo = "https://iberianfootballleague.github.io/IFL-2.0/";
+        const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
+        window.location.assign(url);
+      }
+
+      async function signOut() {
+        const stored = readSession();
+        if (stored?.access_token) {
+          await fetch(SUPABASE_URL + "/auth/v1/logout", {
+            method: "POST",
+            headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + stored.access_token }
+          }).catch(() => {});
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        setAuthState(null);
+      }
+
+      loginOptions.forEach((option) => option.addEventListener("click", signIn));
+      logoutOptions.forEach((option) => option.addEventListener("click", signOut));
+      restoreSession();
     })();
   </script>
 </body>
