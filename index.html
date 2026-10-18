@@ -18,7 +18,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=46">
+  <link rel="stylesheet" href="css/styles.css?v=47">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -53,8 +53,8 @@
           <a class="nav-link" href="calendario.html">Calendario</a>
           <a class="nav-link" href="clasificacion.html">Clasificación</a>
             <a class="nav-link" href="estadios.html">Estadios</a>
-            <a class="nav-link" href="index.html#buscar">Buscar</a>
-            <a class="nav-link" href="index.html#mercado">Mercado</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link" href="mercado.html">Mercado</a>
           
         </div>
       </details>
@@ -64,8 +64,8 @@
         <a class="nav-link" href="calendario.html">Calendario</a>
         <a class="nav-link" href="clasificacion.html">Clasificación</a>
             <a class="nav-link" href="estadios.html">Estadios</a>
-            <a class="nav-link" href="index.html#buscar">Buscar</a>
-            <a class="nav-link" href="index.html#mercado">Mercado</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link" href="mercado.html">Mercado</a>
         
         
         
@@ -171,35 +171,6 @@
         <span class="empty-state__icon" aria-hidden="true">＋</span>
         <h3>No hay jugador de la jornada</h3>
         <p>Cuando se seleccione un jugador, aparecerá aquí.</p>
-      </div>
-    </section>
-
-    <section class="home-section" id="buscar" aria-labelledby="search-title">
-      <div class="home-section__heading">
-        <span class="section-kicker">EXPLORAR IFL</span>
-        <h2 id="search-title">Buscar</h2>
-        <p>Encuentra clubes, partidos y noticias de la liga.</p>
-      </div>
-      <form class="ifl-search" id="ifl-search-form" role="search">
-        <label class="visually-hidden" for="ifl-search-input">Buscar en la IFL</label>
-        <input id="ifl-search-input" type="search" placeholder="Busca un club, partido o noticia…" autocomplete="off">
-        <button type="submit">Buscar</button>
-      </form>
-      <div id="ifl-search-results" class="ifl-search-results" aria-live="polite">
-        <p class="empty-state__description">Escribe algo para comenzar la búsqueda.</p>
-      </div>
-    </section>
-
-    <section class="home-section" id="mercado" aria-labelledby="market-title">
-      <div class="home-section__heading">
-        <span class="section-kicker">MOVIMIENTOS DE CLUBES</span>
-        <h2 id="market-title">Mercado</h2>
-        <p>Altas, bajas y movimientos oficiales de los clubes de la IFL.</p>
-      </div>
-      <div class="empty-state" id="ifl-market-state" role="status">
-        <span class="empty-state__icon" aria-hidden="true">↔</span>
-        <h3>Mercado pendiente de actualizar</h3>
-        <p>Cuando haya movimientos oficiales publicados, aparecerán aquí. No se muestran fichajes sin confirmar.</p>
       </div>
     </section>
   </main>
