@@ -275,3 +275,43 @@ body.fantasy-mode .fantasy-footer-note{border-radius:12px}
 @media(prefers-reduced-motion:reduce){
  body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
 }
+
+
+/* IFL Fantasy: overrides finales para evitar conflictos con los estilos globales. */
+body.fantasy-mode .fantasy-intro__word,
+body.fantasy-mode .fantasy-intro__word span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  visibility:visible!important;
+  color:#ff795a!important;
+  font-family:"Barlow Semi Condensed",sans-serif!important;
+  font-size:clamp(3rem,12vw,8.6rem)!important;
+  font-weight:800!important;
+  line-height:1.05!important;
+  opacity:1!important;
+}
+body.fantasy-mode .fantasy-intro__word{width:100%;white-space:nowrap;overflow:visible}
+body.fantasy-mode .fantasy-market-section,
+body.fantasy-mode .fantasy-market-results{min-width:0;max-width:100%}
+body.fantasy-mode .fantasy-market-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+body.fantasy-mode .fantasy-market-tabs{display:flex;gap:.45rem;flex-wrap:wrap}
+body.fantasy-mode .fantasy-market-tab{min-height:42px;padding:.7rem 1rem;border:1px solid #dce2e8;border-radius:10px;background:#fff;color:#354052;font-size:.9rem;font-weight:750;cursor:pointer}
+body.fantasy-mode .fantasy-market-tab.is-active{background:#183d2e;color:#fff;border-color:#183d2e}
+body.fantasy-mode .fantasy-market-search{display:flex;align-items:center;gap:.6rem;min-height:44px;min-width:min(100%,280px);padding:0 .9rem;border:1px solid #dce2e8;border-radius:10px;background:#fff}
+body.fantasy-mode .fantasy-market-search svg{display:block!important;width:19px!important;height:19px!important;max-width:19px!important;max-height:19px!important;flex:0 0 19px!important}
+body.fantasy-mode .fantasy-market-search input{min-width:0;width:100%;border:0;outline:0;background:transparent;font:inherit;font-size:.92rem}
+body.fantasy-mode .fantasy-market-empty{display:flex!important;align-items:center!important;text-align:center!important;gap:.35rem!important}
+body.fantasy-mode .fantasy-market-empty__icon{width:56px!important;height:56px!important;min-width:56px!important;min-height:56px!important;flex:0 0 56px!important;padding:14px!important}
+body.fantasy-mode .fantasy-market-empty__icon svg{width:28px!important;height:28px!important;min-width:28px!important;min-height:28px!important;max-width:28px!important;max-height:28px!important;flex:0 0 28px!important}
+body.fantasy-mode .fantasy-market-empty h3{margin:.45rem 0 .6rem;font-size:clamp(1.5rem,3vw,2.1rem)!important;font-weight:800}
+body.fantasy-mode .fantasy-market-empty p{max-width:720px;font-size:1rem!important;line-height:1.7}
+body.fantasy-mode .fantasy-market-features{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap;margin-top:1rem}
+body.fantasy-mode .fantasy-market-features svg{width:18px!important;height:18px!important;min-width:18px!important;min-height:18px!important;max-width:18px!important;max-height:18px!important;flex:0 0 18px!important}
+@media(max-width:620px){
+ body.fantasy-mode .fantasy-intro__word,
+ body.fantasy-mode .fantasy-intro__word span{font-size:clamp(2.5rem,11vw,3.2rem)!important}
+ body.fantasy-mode .fantasy-market-search{width:100%;min-width:0}
+ body.fantasy-mode .fantasy-market-tabs{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr))}
+ body.fantasy-mode .fantasy-market-tab{padding:.65rem .25rem;font-size:.78rem}
+}
