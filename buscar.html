@@ -18,7 +18,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=49">
+  <link rel="stylesheet" href="css/styles.css?v=50">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -110,12 +110,35 @@
       <p class="section-intro">Encuentra clubes, partidos y noticias oficiales de la liga.</p>
       <form class="ifl-search" id="ifl-search-form" role="search">
         <label class="visually-hidden" for="ifl-search-input">Buscar en la IFL</label>
-        <input id="ifl-search-input" type="search" placeholder="Busca un club, partido o noticia…" autocomplete="off">
+        <input id="ifl-search-input" type="search" placeholder="Busca jugadores, clubes, partidos o noticias…" autocomplete="off">
         <button type="submit">Buscar</button>
       </form>
+      <details class="ifl-search-filters">
+        <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4"/></svg> Filtros avanzados</summary>
+        <div class="ifl-search-filters__fields">
+          <label>Tipo de resultado
+            <select id="ifl-search-type">
+              <option value="all">Todo</option><option value="Jugador">Jugadores</option><option value="Club">Clubes</option><option value="Partido">Partidos</option><option value="Estadio">Estadios</option><option value="Noticia">Noticias</option>
+            </select>
+          </label>
+          <label>Competición
+            <select id="ifl-search-competition"><option value="all">Todas las competiciones</option></select>
+          </label>
+          <button type="button" id="ifl-search-clear-filters">Limpiar filtros</button>
+        </div>
+      </details>
       <div id="ifl-search-results" class="ifl-search-results" aria-live="polite">
         <p class="empty-state__description">Escribe algo para comenzar la búsqueda.</p>
       </div>
+      <section class="ifl-discovery-section ifl-recent-searches" aria-labelledby="ifl-recent-title">
+        <div class="ifl-discovery-heading"><div><span class="section-kicker">ACCESO RÁPIDO</span><h2 id="ifl-recent-title">Búsquedas recientes</h2></div><button type="button" class="ifl-text-button" id="ifl-clear-recent" hidden>Borrar historial</button></div>
+        <div id="ifl-recent-list" class="ifl-recent-list"><p class="ifl-discovery-empty">Tus últimas búsquedas aparecerán aquí.</p></div>
+      </section>
+
+      <section class="ifl-discovery-section ifl-featured-players" id="jugadores-destacados" aria-labelledby="ifl-featured-title">
+        <div class="ifl-discovery-heading"><div><span class="section-kicker">TALENTO IFL</span><h2 id="ifl-featured-title">Jugadores destacados</h2><p>Perfiles seleccionados a partir de los datos oficiales disponibles.</p></div></div>
+        <div id="ifl-featured-list" class="ifl-featured-list"><div class="ifl-discovery-empty"><strong>Jugadores pendientes de publicar</strong><span>Esta sección se completará cuando se carguen las fichas oficiales de los jugadores.</span></div></div>
+      </section>
 
       <section class="ifl-tops" aria-labelledby="ifl-tops-title">
         <div class="ifl-tops__heading">
@@ -170,6 +193,16 @@
             <div class="ifl-top-panel" id="ifl-top-panel-mercado" hidden aria-live="polite"></div>
           </div>
         </div>
+      </section>
+
+      <section class="ifl-discovery-section ifl-honours" aria-labelledby="ifl-honours-title">
+        <div class="ifl-discovery-heading"><div><span class="section-kicker">HISTORIA</span><h2 id="ifl-honours-title">Buscador de palmarés</h2><p>Consulta títulos oficiales por club, competición o temporada.</p></div></div>
+        <form class="ifl-honours__form" id="ifl-honours-form" role="search">
+          <label class="visually-hidden" for="ifl-honours-query">Buscar en el palmarés</label>
+          <input id="ifl-honours-query" type="search" placeholder="Ej. nombre de club, Copa IFL, temporada…" autocomplete="off">
+          <button type="submit">Buscar palmarés</button>
+        </form>
+        <div id="ifl-honours-results" class="ifl-honours__results" aria-live="polite"><p class="ifl-discovery-empty">Introduce un club, título o temporada para buscar en el palmarés oficial.</p></div>
       </section>
 
       <section class="player-compare" aria-labelledby="player-compare-title">
@@ -373,8 +406,9 @@
     })();
   </script>
   <script src="js/ifl-data.js" defer></script>
-  <script src="js/home-extras.js?v=1" defer></script>
-  <script src="js/player-compare.js?v=1" defer></script>\n  <script src="js/search-tops.js?v=1" defer></script>
+  <script src="js/home-extras.js?v=2" defer></script>
+  <script src="js/player-compare.js?v=1" defer></script>
+  <script src="js/search-tops.js?v=1" defer></script>
   <script src="js/site-content.js" defer></script>
   
 </body>
