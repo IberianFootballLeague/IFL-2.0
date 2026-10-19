@@ -5,6 +5,7 @@ window.IFL_DATA = Object.freeze({
   players: [],
   matches: [],
   news: [],
+  // Movimientos oficiales confirmados. Campos sugeridos: id, playerName, fromTeam, toTeam, fromTeamLogo, toTeamLogo, type, fee, date, status.\n  transfers: [],
   // Registros oficiales de palmarés. Campos sugeridos: team, teamName, club, title, competition, season, year, date.
   honours: [],
   // Publica solo estadios oficiales confirmados. Campos sugeridos: id, name, teamId, teamName, competition, city, capacity, year, surface, dimensions, image, latitude, longitude.
