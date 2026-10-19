@@ -405,3 +405,185 @@ body.fantasy-mode .fantasy-market-features span{display:inline-flex!important;fl
 
 /* Safety net: completed intro must never cover the Fantasy page. */
 body.fantasy-mode.fantasy-intro-done #fantasy-intro{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:none!important}
+
+
+/* Fantasy market polish: compact crests, clearer hierarchy, premium transfer-room styling. */
+body.fantasy-mode #fantasy-market{
+  position:relative;
+  isolation:isolate;
+  margin-top:clamp(2.5rem,5vw,4.5rem);
+  padding:clamp(1rem,2.8vw,2rem);
+  overflow:hidden;
+  border:1px solid #e0e5eb;
+  border-radius:24px;
+  background:
+    radial-gradient(ellipse at 100% 0%,rgba(237,74,40,.07),transparent 32%),
+    linear-gradient(180deg,#fff 0%,#f7f8fa 100%);
+  box-shadow:0 18px 50px rgba(16,24,40,.06);
+}
+body.fantasy-mode #fantasy-market:before{
+  content:"";
+  position:absolute;inset:0 0 auto;height:4px;
+  background:linear-gradient(90deg,#ed4a28 0%,#ff9a7f 42%,#202a37 100%);
+  pointer-events:none;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-hero{
+  min-height:190px;
+  padding:clamp(1.4rem,3vw,2.5rem);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  background:
+    radial-gradient(ellipse at 82% 20%,rgba(237,74,40,.2),transparent 28%),
+    linear-gradient(120deg,#101720 0%,#202b38 62%,#252a32 100%);
+  box-shadow:0 14px 34px rgba(10,15,22,.13);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-hero h2{
+  font-size:clamp(2rem,3.8vw,3rem);
+  line-height:1.02;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-hero p{max-width:600px;font-size:1rem}
+body.fantasy-mode #fantasy-market .fantasy-market-wallet{
+  flex:0 1 245px;
+  min-width:190px;
+  background:rgba(255,255,255,.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-toolbar{
+  gap:1rem;
+  margin:1.25rem 0;
+  padding:.85rem;
+  background:#eef1f5;
+  border:1px solid #e1e5eb;
+  border-radius:15px;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-tabs{
+  gap:.3rem;
+  padding:.28rem;
+  background:#e1e5eb;
+  border-radius:11px;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-tab{
+  min-height:42px;
+  padding:.7rem 1rem;
+  border-radius:8px;
+  transition:background .18s ease,color .18s ease,transform .18s ease;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-tab:hover{transform:translateY(-1px)}
+body.fantasy-mode #fantasy-market .fantasy-market-tab.is-active{
+  background:#17212d;
+  color:#fff;
+  box-shadow:0 5px 12px rgba(23,33,45,.18);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-search{
+  min-height:44px;
+  background:#fff;
+  border-color:#dce2e9;
+  box-shadow:0 2px 5px rgba(16,24,40,.025);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-results{
+  position:relative;
+  padding:0;
+  border-radius:18px;
+}
+/* Never allow club crests/player portraits to expand to their source image dimensions. */
+body.fantasy-mode #fantasy-market .fantasy-market-results img,
+body.fantasy-mode #fantasy-market .fantasy-market-player img,
+body.fantasy-mode #fantasy-market .fantasy-market-card img,
+body.fantasy-mode #fantasy-market [class*="crest"] img,
+body.fantasy-mode #fantasy-market [class*="logo"] img{
+  display:block;
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  max-width:48px!important;
+  max-height:48px!important;
+  flex:0 0 48px!important;
+  object-fit:contain!important;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty{
+  position:relative;
+  min-height:300px!important;
+  padding:clamp(1.75rem,5vw,3.5rem)!important;
+  overflow:hidden;
+  border:1px solid #e0e5eb;
+  border-radius:18px;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(237,74,40,.055),transparent 45%),
+    linear-gradient(180deg,#fff,#f9fafb);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty:before{
+  content:"";
+  position:absolute;inset:14px;
+  border:1px dashed #e0e5eb;
+  border-radius:12px;
+  pointer-events:none;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty__icon{
+  position:relative;
+  width:64px!important;height:64px!important;
+  min-width:64px!important;min-height:64px!important;
+  border-radius:19px;
+  color:#fff;
+  background:linear-gradient(145deg,#f36b4b,#cf3f22);
+  border:0;
+  box-shadow:0 10px 24px rgba(237,74,40,.22);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty__icon svg{
+  width:29px!important;height:29px!important;
+  max-width:29px!important;max-height:29px!important;
+  stroke:#fff!important;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty .section-kicker,
+body.fantasy-mode #fantasy-market .fantasy-market-empty h3,
+body.fantasy-mode #fantasy-market .fantasy-market-empty p,
+body.fantasy-mode #fantasy-market .fantasy-market-features{position:relative;z-index:1}
+body.fantasy-mode #fantasy-market .fantasy-market-empty h3{
+  max-width:620px!important;
+  margin:.35rem 0 .25rem!important;
+  color:#17202a;
+  font-size:clamp(1.55rem,3vw,2.15rem)!important;
+  letter-spacing:-.035em;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty p{
+  max-width:680px!important;
+  color:#657080;
+  font-size:.98rem!important;
+  line-height:1.75!important;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features{
+  gap:.6rem!important;
+  margin-top:1.35rem!important;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features span{
+  padding:.65rem .85rem;
+  color:#364252;
+  background:#fff;
+  border:1px solid #e1e6ec;
+  border-radius:10px;
+  box-shadow:0 3px 8px rgba(16,24,40,.035);
+  font-size:.82rem;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features svg{
+  width:17px!important;height:17px!important;
+  max-width:17px!important;max-height:17px!important;
+  color:#ed4a28;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-footnote{
+  margin:.9rem auto 0;
+  padding:0 .5rem;
+  color:#7b8490;
+  font-size:.82rem;
+  line-height:1.6;
+}
+@media(max-width:700px){
+  body.fantasy-mode #fantasy-market{padding:.8rem;border-radius:18px}
+  body.fantasy-mode #fantasy-market .fantasy-market-hero{gap:1rem;padding:1.25rem}
+  body.fantasy-mode #fantasy-market .fantasy-market-wallet{min-width:0}
+  body.fantasy-mode #fantasy-market .fantasy-market-toolbar{padding:.65rem}
+  body.fantasy-mode #fantasy-market .fantasy-market-tabs{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.fantasy-mode #fantasy-market .fantasy-market-tab{padding:.65rem .2rem;font-size:.74rem}
+  body.fantasy-mode #fantasy-market .fantasy-market-empty{padding:2rem 1rem!important}
+  body.fantasy-mode #fantasy-market .fantasy-market-features{display:grid!important;grid-template-columns:1fr;width:100%}
+  body.fantasy-mode #fantasy-market .fantasy-market-features span{width:100%;box-sizing:border-box}
+}
