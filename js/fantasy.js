@@ -106,78 +106,52 @@
   const marketResults = document.getElementById("fantasy-market-results");
   let marketType = "all";
 
-  console.info("[IFL Fantasy] versión 1.2 — corrección de la pelota negra cargada");
+  console.info("[IFL Fantasy] versión 1.3 — ajuste estricto de la pelota superior");
   function fixFantasyHeroBall() {
     const ball = document.querySelector(".fantasy-hero-ball");
     const svg = ball?.querySelector("svg");
     if (!ball || !svg) {
-      console.warn("[IFL Fantasy 1.2] No se encontró la pelota de la cabecera");
+      console.warn("[IFL Fantasy 1.3] No se encontró la pelota de la cabecera");
       return;
     }
-    ball.style.setProperty("width", "min(220px, 80%)", "important");
-    ball.style.setProperty("height", "auto", "important");
+    ball.style.setProperty("display", "grid", "important");
+    ball.style.setProperty("place-items", "center", "important");
+    ball.style.setProperty("box-sizing", "border-box", "important");
+    ball.style.setProperty("width", "220px", "important");
+    ball.style.setProperty("min-width", "0", "important");
+    ball.style.setProperty("max-width", "80%", "important");
+    ball.style.setProperty("height", "220px", "important");
+    ball.style.setProperty("min-height", "0", "important");
+    ball.style.setProperty("max-height", "220px", "important");
     ball.style.setProperty("aspect-ratio", "1 / 1", "important");
-    ball.style.setProperty("background", "linear-gradient(135deg, #f06445, #c83a1e)", "important");
+    ball.style.setProperty("flex", "0 1 220px", "important");
+    ball.style.setProperty("background", "linear-gradient(135deg, #f06445 0%, #c83a1e 100%)", "important");
     ball.style.setProperty("border-radius", "50%", "important");
+    ball.style.setProperty("box-shadow", "0 25px 70px rgba(237,74,40,.24)", "important");
     ball.style.setProperty("overflow", "hidden", "important");
     svg.style.setProperty("display", "block", "important");
+    svg.style.setProperty("box-sizing", "border-box", "important");
     svg.style.setProperty("width", "66%", "important");
     svg.style.setProperty("height", "66%", "important");
+    svg.style.setProperty("min-width", "0", "important");
     svg.style.setProperty("max-width", "66%", "important");
+    svg.style.setProperty("min-height", "0", "important");
     svg.style.setProperty("max-height", "66%", "important");
     svg.style.setProperty("fill", "none", "important");
     svg.style.setProperty("stroke", "#fff", "important");
     svg.style.setProperty("stroke-width", "2.2", "important");
-    svg.querySelectorAll("circle, path").forEach((shape) => {
+    svg.querySelectorAll("*").forEach((shape) => {
       shape.style.setProperty("fill", "none", "important");
       shape.style.setProperty("stroke", "#fff", "important");
     });
-    console.info("[IFL Fantasy 1.2] Pelota corregida:", {
+    console.info("[IFL Fantasy 1.3] Pelota superior:", {
       caja: Math.round(ball.getBoundingClientRect().width) + "×" + Math.round(ball.getBoundingClientRect().height),
-      svg: Math.round(svg.getBoundingClientRect().width) + "×" + Math.round(svg.getBoundingClientRect().height)
+      fondo: getComputedStyle(ball).backgroundImage,
+      svg: Math.round(svg.getBoundingClientRect().width) + "×" + Math.round(svg.getBoundingClientRect().height),
+      rellenoCirculo: svg.querySelector("circle") ? getComputedStyle(svg.querySelector("circle")).fill : "sin círculo"
     });
   }
   fixFantasyHeroBall();
-  function fixFantasyMarketEmptyIcon() {
-    if (!marketResults) return;
-    const empty = marketResults.querySelector(".fantasy-market-empty");
-    const icon = empty?.querySelector(".fantasy-market-empty__icon");
-    const svg = icon?.querySelector("svg");
-    if (!icon || !svg) {
-      console.warn("[IFL Fantasy 1.1] No se encontró el icono SVG del mercado");
-      return;
-    }
-    // Estilos inline para evitar que reglas globales conviertan el SVG en un bloque gigante.
-    empty.style.setProperty("display", "flex", "important");
-    empty.style.setProperty("flex-direction", "column", "important");
-    empty.style.setProperty("align-items", "center", "important");
-    icon.style.setProperty("display", "flex", "important");
-    icon.style.setProperty("align-items", "center", "important");
-    icon.style.setProperty("justify-content", "center", "important");
-    icon.style.setProperty("box-sizing", "border-box", "important");
-    icon.style.setProperty("flex", "0 0 56px", "important");
-    icon.style.setProperty("width", "56px", "important");
-    icon.style.setProperty("min-width", "56px", "important");
-    icon.style.setProperty("max-width", "56px", "important");
-    icon.style.setProperty("height", "56px", "important");
-    icon.style.setProperty("min-height", "56px", "important");
-    icon.style.setProperty("max-height", "56px", "important");
-    icon.style.setProperty("margin", "0 auto 12px", "important");
-    icon.style.setProperty("overflow", "hidden", "important");
-    svg.style.setProperty("display", "block", "important");
-    svg.style.setProperty("box-sizing", "border-box", "important");
-    svg.style.setProperty("flex", "0 0 24px", "important");
-    svg.style.setProperty("width", "24px", "important");
-    svg.style.setProperty("min-width", "24px", "important");
-    svg.style.setProperty("max-width", "24px", "important");
-    svg.style.setProperty("height", "24px", "important");
-    svg.style.setProperty("min-height", "24px", "important");
-    svg.style.setProperty("max-height", "24px", "important");
-    console.info("[IFL Fantasy 1.1] Tamaños aplicados:", {
-      icono: Math.round(icon.getBoundingClientRect().width) + "×" + Math.round(icon.getBoundingClientRect().height),
-      svg: Math.round(svg.getBoundingClientRect().width) + "×" + Math.round(svg.getBoundingClientRect().height)
-    });
-  }
   function printFantasyMarketDiagnostics() {
     if (!marketResults) return;
     console.group('[IFL Fantasy] Diagnóstico visual del mercado');
