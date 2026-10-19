@@ -19,7 +19,7 @@
     })();
   </script>
   <link rel="stylesheet" href="css/styles.css?v=52">
-  <link rel="stylesheet" href="css/fantasy.css?v=1">
+  <link rel="stylesheet" href="css/fantasy.css?v=2">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -34,6 +34,18 @@
         Iniciar sesión con Discord
       </button>
     </div>
+  </section>
+
+
+  <section class="fantasy-intro" id="fantasy-intro" aria-label="Entrada a IFL Fantasy" aria-hidden="true">
+    <div class="fantasy-intro__glow"></div>
+    <div class="fantasy-intro__stadium-lines"></div>
+    <div class="fantasy-intro__content">
+      <div class="fantasy-intro__logo"><img src="logo" alt="Logo de Iberian Football League"></div>
+      <div class="fantasy-intro__word" aria-label="Fantasy"><span>F</span><span>A</span><span>N</span><span>T</span><span>A</span><span>S</span><span>Y</span></div>
+      <p class="fantasy-intro__tagline">TU LIGA. TU EQUIPO. TU LEYENDA.</p>
+    </div>
+    <span class="fantasy-intro__edition">IFL · FANTASY</span>
   </section>
 
   <div class="site-shell" id="site-shell">
@@ -82,6 +94,7 @@
             <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></button>
             <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
             <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
+            <a class="profile-option fantasy-menu-option" href="fantasy.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10l2 5a7 7 0 0 1-14 0l2-5Z"/><path d="M5 9H3a3 3 0 0 0 3 4M19 9h2a3 3 0 0 1-3 4M9 8h6"/></svg><span>IFL Fantasy</span></span></a>
             <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
             <div class="profile-divider" role="separator"></div>
             <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
@@ -98,13 +111,24 @@
           <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></button>
           <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
           <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
-          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
+          <a class="profile-option fantasy-menu-option" href="fantasy.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10l2 5a7 7 0 0 1-14 0l2-5Z"/><path d="M5 9H3a3 3 0 0 0 3 4M19 9h2a3 3 0 0 1-3 4M9 8h6"/></svg><span>IFL Fantasy</span></span></a>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
           <div class="profile-divider" role="separator"></div>
           <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
         </div>
       </details>
     </nav>
   </header>
+
+  <nav class="fantasy-nav" aria-label="Navegación Fantasy">
+    <a class="fantasy-nav__brand" href="fantasy.html" aria-label="Inicio de IFL Fantasy"><img src="logo" alt=""><span>IFL <strong>FANTASY</strong></span></a>
+    <div class="fantasy-nav__links">
+      <a href="#fantasy-roster-title">Mi equipo</a>
+      <a href="#fantasy-formations">Formaciones</a>
+      <a href="#fantasy-rules">Reglas</a>
+    </div>
+    <a class="fantasy-nav__exit" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Salir</span></a>
+  </nav>
 
   <main class="content-page fantasy-page" id="contenido">
   <section class="fantasy-hero">
@@ -155,7 +179,7 @@
         </div>
         <p class="fantasy-pitch-caption" id="fantasy-formation-description">Dos delanteros obligatorios y dos jugadores que deben ser defensas o centrocampistas. No se permite portero en esta formación.</p>
       </div>
-      <aside class="fantasy-rules-panel">
+      <aside class="fantasy-rules-panel" id="fantasy-rules">
         <span class="section-kicker">REGLAS DE ALINEACIÓN</span>
         <h3>Antes de cada jornada</h3>
         <ul class="fantasy-rules-list">
@@ -353,7 +377,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
-  <script src="js/fantasy.js?v=1" defer></script>
+  <script src="js/fantasy.js?v=2" defer></script>
   
 </body>
 </html>
