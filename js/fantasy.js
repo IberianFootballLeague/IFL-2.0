@@ -110,7 +110,7 @@
       return (!query || text.includes(query)) && (marketType === "all" || type === marketType);
     });
     if (!available.length) {
-      const heading = query ? "No hay coincidencias" : marketType === "auction" ? "No hay subastas disponibles" : marketType === "fixed" ? "No hay jugadores a precio fijo" : "Próximamente, fichajes Fantasy";
+      const heading = query ? "No hay coincidencias" : marketType === "auction" ? "Subastas próximamente" : marketType === "fixed" ? "Precio fijo próximamente" : "Próximamente, fichajes Fantasy";
       const paragraph = query ? "Prueba con otro nombre de jugador o club." : "El mercado visual está preparado, pero no publicamos jugadores sin datos oficiales ni permitimos transacciones sin el backend seguro.";
       marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="fantasy-market-empty__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/></svg></span><span class="section-kicker">MERCADO FANTASY</span><h3>' + heading + '</h3><p>' + paragraph + '</p><div class="fantasy-market-features"><span>Subastas de 24 horas</span><span>Precio fijo</span><span>Operaciones verificadas</span></div></div>';
       return;
