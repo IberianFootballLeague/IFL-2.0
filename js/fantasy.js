@@ -61,7 +61,9 @@
       if (intro) {
         intro.setAttribute("aria-hidden", "true");
         intro.style.pointerEvents = "none";
-        intro.style.display = "none";
+        intro.style.setProperty("display", "none", "important");
+        intro.style.setProperty("opacity", "0", "important");
+        intro.style.setProperty("visibility", "hidden", "important");
       }
       const shell = document.getElementById("site-shell");
       if (shell) shell.style.display = "block";
