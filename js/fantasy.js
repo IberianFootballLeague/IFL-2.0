@@ -49,8 +49,26 @@
     const intro = document.getElementById("fantasy-intro");
     document.body.classList.add("fantasy-mode", "fantasy-intro-active");
     document.body.classList.remove("fantasy-intro-done");
+    if (fantasyIntroTimer) window.clearTimeout(fantasyIntroTimer);
+    // Programa primero la salida de la intro: si una animación falla, la página no queda negra.
+    let reducedMotion = false;
+    try {
+      reducedMotion = Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    } catch (_) {}
+    fantasyIntroTimer = window.setTimeout(() => {
+      document.body.classList.add("fantasy-intro-done");
+      document.body.classList.remove("fantasy-intro-active");
+      if (intro) {
+        intro.setAttribute("aria-hidden", "true");
+        intro.style.pointerEvents = "none";
+        intro.style.display = "none";
+      }
+      const shell = document.getElementById("site-shell");
+      if (shell) shell.style.display = "block";
+    }, reducedMotion ? 180 : 2600);
     if (intro) {
       intro.setAttribute("aria-hidden", "false");
+      intro.style.display = "grid";
       intro.style.opacity = "1";
       intro.style.visibility = "visible";
       intro.style.pointerEvents = "auto";
@@ -67,16 +85,6 @@
       });
       void intro.offsetWidth;
     }
-    if (fantasyIntroTimer) window.clearTimeout(fantasyIntroTimer);
-    const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    fantasyIntroTimer = window.setTimeout(() => {
-      document.body.classList.add("fantasy-intro-done");
-      document.body.classList.remove("fantasy-intro-active");
-      if (intro) {
-        intro.setAttribute("aria-hidden", "true");
-        intro.style.pointerEvents = "none";
-      }
-    }, reducedMotion ? 180 : 3150);
   }
   function leaveFantasyExperience() {
     document.body.classList.remove("fantasy-mode", "fantasy-intro-active", "fantasy-intro-done");
