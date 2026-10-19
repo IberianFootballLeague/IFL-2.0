@@ -18,7 +18,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=51">
+  <link rel="stylesheet" href="css/styles.css?v=52">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -118,6 +118,17 @@
       </div>
     </section>
 
+    <section class="market-window-section" aria-labelledby="market-window-title">
+      <div class="market-window-copy"><span class="market-window-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></span><div><span class="section-kicker">VENTANA DE FICHAJES</span><h2 id="market-window-title">Estado del mercado</h2><p id="ifl-market-window-note">Las fechas oficiales de apertura y cierre se anunciarán cuando estén confirmadas.</p></div></div>
+      <span class="market-window-status is-unknown" id="ifl-market-window-status">Fechas por confirmar</span>
+      <div class="market-window-dates" id="ifl-market-window-dates" hidden></div>
+    </section>
+
+    <section class="market-featured-section" id="market-featured-section" aria-labelledby="market-featured-title" hidden>
+      <div class="market-section-heading"><div><span class="section-kicker">PROTAGONISTA</span><h2 id="market-featured-title">Fichaje destacado</h2></div></div>
+      <div class="market-featured-card" id="ifl-market-featured"></div>
+    </section>
+
     <section class="market-hub-section" aria-labelledby="market-hub-title">
       <span class="section-kicker">EXPLORA EL MERCADO</span>
       <h2 id="market-hub-title">Mercado IFL</h2>
@@ -144,7 +155,21 @@
 
     <section class="market-list-section" id="market-transfers" aria-labelledby="market-transfers-title">
       <div class="market-section-heading"><div><span class="section-kicker">MOVIMIENTOS DE CLUBES</span><h2 id="market-transfers-title">Últimos movimientos</h2><p class="section-intro">Fichajes y operaciones publicados oficialmente por la IFL.</p></div><span class="market-live-label"><span></span> OFICIAL</span></div>
+      <div class="market-filters" aria-label="Filtrar movimientos del mercado">
+        <label class="market-filter-search"><span>Buscar jugador o club</span><input id="ifl-market-filter-query" type="search" placeholder="Nombre del jugador o club"></label>
+        <label><span>Tipo de operación</span><select id="ifl-market-filter-type"><option value="all">Todos los tipos</option><option value="transfer">Fichaje</option><option value="loan">Cesión</option><option value="free">Libre</option><option value="sale">Salida</option><option value="rumour">Rumor</option></select></label>
+        <label><span>Estado</span><select id="ifl-market-filter-status"><option value="all">Todos los estados</option><option value="confirmed">Confirmado</option><option value="negotiation">En negociación</option><option value="rumour">Rumor</option></select></label>
+        <label><span>Club</span><select id="ifl-market-filter-club"><option value="all">Todos los clubes</option></select></label>
+        <label><span>Temporada</span><select id="ifl-market-filter-season"><option value="all">Todas las temporadas</option></select></label>
+        <button class="market-filter-clear" id="ifl-market-filter-clear" type="button">Limpiar filtros</button>
+      </div>
+      <p class="market-filter-count" id="ifl-market-filter-count" aria-live="polite"></p>
       <div class="market-movements-list" id="ifl-market-movements"><div class="market-empty-state"><span class="market-empty-state__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h13l-3-3M20 7l-3 3M17 17H4l3 3M4 17l3-3"/></svg></span><div><h3>Sin movimientos publicados</h3><p>Cuando se confirmen fichajes o cesiones, aparecerán aquí. No mostramos operaciones inventadas.</p></div></div></div>
+    </section>
+
+    <section class="market-history-section" aria-labelledby="market-history-title">
+      <div class="market-section-heading"><div><span class="section-kicker">ARCHIVO IFL</span><h2 id="market-history-title">Historial de fichajes</h2><p class="section-intro">Consulta movimientos de temporadas anteriores.</p></div></div>
+      <div class="market-history-list" id="ifl-market-history"><div class="market-detail-empty">El historial aparecerá cuando se registren operaciones de temporadas anteriores.</div></div>
     </section>
 
     <section class="market-detail-grid" aria-label="Más información del mercado">
@@ -326,7 +351,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
-  <script src="js/market.js?v=1" defer></script>
+  <script src="js/market.js?v=2" defer></script>
   
 </body>
 </html>
