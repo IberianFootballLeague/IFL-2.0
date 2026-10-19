@@ -43,4 +43,27 @@
   }
   buttons.forEach((button) => button.addEventListener("click", () => chooseFormation(button.dataset.formation)));
   chooseFormation("2-2");
+  function startFantasyExperience() {
+    if (document.body.dataset.authenticated !== "true") return;
+    if (document.body.classList.contains("fantasy-mode")) return;
+    const intro = document.getElementById("fantasy-intro");
+    document.body.classList.add("fantasy-mode", "fantasy-intro-active");
+    if (intro) intro.setAttribute("aria-hidden", "false");
+    const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(() => {
+      document.body.classList.add("fantasy-intro-done");
+      document.body.classList.remove("fantasy-intro-active");
+      if (intro) intro.setAttribute("aria-hidden", "true");
+    }, reducedMotion ? 180 : 3150);
+  }
+  function leaveFantasyExperience() {
+    document.body.classList.remove("fantasy-mode", "fantasy-intro-active", "fantasy-intro-done");
+  }
+  if (document.body.dataset.authenticated === "true") startFantasyExperience();
+  const authObserver = new MutationObserver(() => {
+    if (document.body.dataset.authenticated === "true") startFantasyExperience();
+    else leaveFantasyExperience();
+  });
+  authObserver.observe(document.body, { attributes: true, attributeFilter: ["data-authenticated"] });
+  chooseFormation("2-2");
 })();
