@@ -106,7 +106,38 @@
   const marketResults = document.getElementById("fantasy-market-results");
   let marketType = "all";
 
-  console.info("[IFL Fantasy] versión 1.1 — corrección del icono del mercado cargada");
+  console.info("[IFL Fantasy] versión 1.2 — corrección de la pelota negra cargada");
+  function fixFantasyHeroBall() {
+    const ball = document.querySelector(".fantasy-hero-ball");
+    const svg = ball?.querySelector("svg");
+    if (!ball || !svg) {
+      console.warn("[IFL Fantasy 1.2] No se encontró la pelota de la cabecera");
+      return;
+    }
+    ball.style.setProperty("width", "min(220px, 80%)", "important");
+    ball.style.setProperty("height", "auto", "important");
+    ball.style.setProperty("aspect-ratio", "1 / 1", "important");
+    ball.style.setProperty("background", "linear-gradient(135deg, #f06445, #c83a1e)", "important");
+    ball.style.setProperty("border-radius", "50%", "important");
+    ball.style.setProperty("overflow", "hidden", "important");
+    svg.style.setProperty("display", "block", "important");
+    svg.style.setProperty("width", "66%", "important");
+    svg.style.setProperty("height", "66%", "important");
+    svg.style.setProperty("max-width", "66%", "important");
+    svg.style.setProperty("max-height", "66%", "important");
+    svg.style.setProperty("fill", "none", "important");
+    svg.style.setProperty("stroke", "#fff", "important");
+    svg.style.setProperty("stroke-width", "2.2", "important");
+    svg.querySelectorAll("circle, path").forEach((shape) => {
+      shape.style.setProperty("fill", "none", "important");
+      shape.style.setProperty("stroke", "#fff", "important");
+    });
+    console.info("[IFL Fantasy 1.2] Pelota corregida:", {
+      caja: Math.round(ball.getBoundingClientRect().width) + "×" + Math.round(ball.getBoundingClientRect().height),
+      svg: Math.round(svg.getBoundingClientRect().width) + "×" + Math.round(svg.getBoundingClientRect().height)
+    });
+  }
+  fixFantasyHeroBall();
   function fixFantasyMarketEmptyIcon() {
     if (!marketResults) return;
     const empty = marketResults.querySelector(".fantasy-market-empty");
