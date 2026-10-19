@@ -48,7 +48,7 @@
     if (document.body.classList.contains("fantasy-mode")) return;
     const intro = document.getElementById("fantasy-intro");
     document.body.classList.add("fantasy-mode", "fantasy-intro-active");
-    if (intro) intro.setAttribute("aria-hidden", "false");
+    if (intro) { intro.setAttribute("aria-hidden", "false"); intro.querySelectorAll(".fantasy-intro__word span").forEach((letter) => { letter.style.opacity = "1"; letter.style.visibility = "visible"; }); void intro.offsetWidth; }
     const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.setTimeout(() => {
       document.body.classList.add("fantasy-intro-done");
