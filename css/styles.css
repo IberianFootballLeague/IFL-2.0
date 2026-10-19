@@ -2781,3 +2781,8 @@ body[data-authenticated="booting"] {
  .market-featured-card { padding:15px; }
  .market-history-row { padding:13px; }
 }
+
+
+/* Profile menu shortcut to Fantasy */
+.fantasy-menu-option { display:block; cursor:pointer!important; text-decoration:none!important; }
+.fantasy-menu-option:hover { background:rgba(237,74,40,.08); color:var(--color-brand-dark); }
