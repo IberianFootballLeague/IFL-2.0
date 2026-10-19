@@ -829,3 +829,43 @@ body.fantasy-mode #fantasy-market .fantasy-market-footnote{
   body.fantasy-mode #fantasy-market .fantasy-market-features{display:grid!important;grid-template-columns:1fr!important;width:100%!important;max-width:300px!important}
   body.fantasy-mode #fantasy-market .fantasy-market-features span{width:100%!important;box-sizing:border-box!important}
 }
+
+
+/* HARD OVERRIDE: keep every market crest/logo wrapper and image small, even if earlier styles or inline dimensions enlarge it. */
+body.fantasy-mode #fantasy-market #fantasy-market-results img,
+body.fantasy-mode #fantasy-market #fantasy-market-results picture,
+body.fantasy-mode #fantasy-market #fantasy-market-results picture img,
+body.fantasy-mode #fantasy-market #fantasy-market-results [class*="logo"],
+body.fantasy-mode #fantasy-market #fantasy-market-results [class*="crest"],
+body.fantasy-mode #fantasy-market #fantasy-market-results [class*="badge"],
+body.fantasy-mode #fantasy-market #fantasy-market-results [class*="emblem"]{
+  box-sizing:border-box!important;
+  width:40px!important;
+  height:40px!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:40px!important;
+  max-height:40px!important;
+  flex:0 0 40px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background-size:contain!important;
+}
+body.fantasy-mode #fantasy-market #fantasy-market-results img{
+  display:block!important;
+}
+body.fantasy-mode #fantasy-market #fantasy-market-results svg{
+  max-width:20px!important;
+  max-height:20px!important;
+}
+@media(max-width:680px){
+  body.fantasy-mode #fantasy-market #fantasy-market-results img,
+  body.fantasy-mode #fantasy-market #fantasy-market-results picture,
+  body.fantasy-mode #fantasy-market #fantasy-market-results picture img,
+  body.fantasy-mode #fantasy-market #fantasy-market-results [class*="logo"],
+  body.fantasy-mode #fantasy-market #fantasy-market-results [class*="crest"],
+  body.fantasy-mode #fantasy-market #fantasy-market-results [class*="badge"],
+  body.fantasy-mode #fantasy-market #fantasy-market-results [class*="emblem"]{
+    width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important;flex-basis:34px!important;
+  }
+}
