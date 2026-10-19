@@ -43,17 +43,39 @@
   }
   buttons.forEach((button) => button.addEventListener("click", () => chooseFormation(button.dataset.formation)));
   chooseFormation("2-2");
+  let fantasyIntroTimer = null;
   function startFantasyExperience() {
     if (document.body.dataset.authenticated !== "true") return;
-    if (document.body.classList.contains("fantasy-mode")) return;
     const intro = document.getElementById("fantasy-intro");
     document.body.classList.add("fantasy-mode", "fantasy-intro-active");
-    if (intro) { intro.setAttribute("aria-hidden", "false"); intro.querySelectorAll(".fantasy-intro__word span").forEach((letter) => { letter.style.opacity = "1"; letter.style.visibility = "visible"; }); void intro.offsetWidth; }
+    document.body.classList.remove("fantasy-intro-done");
+    if (intro) {
+      intro.setAttribute("aria-hidden", "false");
+      intro.style.opacity = "1";
+      intro.style.visibility = "visible";
+      intro.style.pointerEvents = "auto";
+      const word = intro.querySelector(".fantasy-intro__word");
+      if (word) {
+        word.style.opacity = "1";
+        word.style.visibility = "visible";
+      }
+      intro.querySelectorAll(".fantasy-intro__word span").forEach((letter) => {
+        letter.style.display = "inline-block";
+        letter.style.opacity = "1";
+        letter.style.visibility = "visible";
+        letter.style.color = "#ff795a";
+      });
+      void intro.offsetWidth;
+    }
+    if (fantasyIntroTimer) window.clearTimeout(fantasyIntroTimer);
     const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => {
+    fantasyIntroTimer = window.setTimeout(() => {
       document.body.classList.add("fantasy-intro-done");
       document.body.classList.remove("fantasy-intro-active");
-      if (intro) intro.setAttribute("aria-hidden", "true");
+      if (intro) {
+        intro.setAttribute("aria-hidden", "true");
+        intro.style.pointerEvents = "none";
+      }
     }, reducedMotion ? 180 : 3150);
   }
   function leaveFantasyExperience() {
