@@ -111,3 +111,25 @@
 @media (prefers-reduced-motion: reduce) {
   .home-shortcut, .market-hub-card { transition: none; }
 }
+
+/* Shared finish for the rest of the IFL 2.0 public pages */
+.content-page, .calendar-page, .classification-page { scroll-margin-top: 100px; }
+.content-page > section, .calendar-page > section, .classification-page > section { scroll-margin-top: 100px; }
+.content-page .directory-card, .content-page .news-card, .content-page .news-directory > article,
+.calendar-page .match-card, .calendar-page .calendar-match, .classification-page .competition-card {
+  border-radius: 16px;
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.content-page .directory-card:hover, .content-page .news-card:hover, .content-page .news-directory > article:hover,
+.classification-page .competition-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(237,74,40,.4);
+  box-shadow: 0 12px 28px rgba(18,25,35,.07);
+}
+.content-page h1, .calendar-page h1, .classification-page h1 { text-wrap: balance; }
+.content-page button, .calendar-page button, .classification-page button,
+.content-page input, .content-page select, .calendar-page select, .classification-page select { border-radius: 11px; }
+@media (prefers-reduced-motion: reduce) {
+  .content-page .directory-card, .content-page .news-card, .content-page .news-directory > article,
+  .calendar-page .match-card, .calendar-page .calendar-match, .classification-page .competition-card { transition: none; }
+}
