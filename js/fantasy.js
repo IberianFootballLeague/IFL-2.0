@@ -106,7 +106,7 @@
   const marketResults = document.getElementById("fantasy-market-results");
   let marketType = "all";
 
-  console.info("[IFL Fantasy] versión 1.5 — rediseño Fantasy y logo oficial IFL");
+  console.info("[IFL Fantasy] versión 1.6 — panel Fantasy con botones propios");
   function printFantasyMarketDiagnostics() {
     if (!marketResults) return;
     console.group('[IFL Fantasy] Diagnóstico visual del mercado');
@@ -136,12 +136,12 @@
       const heading = query ? "No hay coincidencias" : marketType === "auction" ? "Subastas próximamente" : marketType === "fixed" ? "Precio fijo próximamente" : "Próximamente, fichajes Fantasy";
       const paragraph = query ? "Prueba con otro nombre de jugador o club." : "El mercado visual está preparado, pero no publicamos jugadores sin datos oficiales ni permitimos transacciones sin el backend seguro.";
       marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="fantasy-market-empty__mark" aria-hidden="true"><img src="logo" alt=""></span><span class="section-kicker">MERCADO FANTASY</span><h3>' + heading + '</h3><p>' + paragraph + '</p><div class="fantasy-market-features"><span>Subastas de 24 horas</span><span>Precio fijo</span><span>Operaciones verificadas</span></div></div>';
-      printFantasyMarketDiagnostics();
+
       return;
     }
     // Aún no se renderizan anuncios sin un esquema de mercado oficial validado.
     marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="section-kicker">CATÁLOGO DETECTADO</span><h3>Publicación de ofertas pendiente</h3><p>Hay datos de jugadores, pero las ofertas deben provenir del servicio de mercado Fantasy y no de los datos generales de la competición.</p></div>';
-    printFantasyMarketDiagnostics();
+
   }
   marketTabs.forEach((tab) => tab.addEventListener("click", () => { marketType = tab.dataset.marketType; updateFantasyMarket(); }));
   marketSearch?.addEventListener("input", updateFantasyMarket);
