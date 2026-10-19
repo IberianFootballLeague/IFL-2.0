@@ -18,7 +18,7 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=49">
+  <link rel="stylesheet" href="css/styles.css?v=51">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -103,16 +103,54 @@
     </nav>
   </header>
 
-  <main class="content-page" id="contenido">
-    <section class="content-section" aria-labelledby="market-title">
-      <span class="section-kicker">MOVIMIENTOS DE CLUBES</span>
-      <h1 id="market-title">Mercado</h1>
-      <p class="section-intro">Altas, bajas y movimientos oficiales de los clubes de la IFL.</p>
-      <div class="empty-state" id="ifl-market-state" role="status">
-        <span class="empty-state__icon" aria-hidden="true">↔</span>
-        <h2>Mercado pendiente de actualizar</h2>
-        <p>Cuando haya movimientos oficiales publicados, aparecerán aquí. No se muestran fichajes sin confirmar.</p>
+  <main class="content-page market-page" id="contenido">
+    <section class="market-news-section" aria-labelledby="market-news-title">
+      <div class="market-section-heading">
+        <div>
+          <span class="section-kicker">AL DÍA EN LA IFL</span>
+          <h1 id="market-news-title">Últimas noticias</h1>
+          <p class="section-intro">Las últimas novedades y comunicados oficiales de la Iberian Football League.</p>
+        </div>
+        <a class="market-news-more" href="noticias.html">Todas las noticias <span aria-hidden="true">↗</span></a>
       </div>
+      <div class="market-news-grid" id="ifl-market-news">
+        <article class="market-news-empty"><span class="market-news-empty__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16M8 7h8M8 11h8"/></svg></span><h2>Próximamente</h2><p>Las noticias oficiales aparecerán aquí cuando se publiquen.</p></article>
+      </div>
+    </section>
+
+    <section class="market-hub-section" aria-labelledby="market-hub-title">
+      <span class="section-kicker">EXPLORA EL MERCADO</span>
+      <h2 id="market-hub-title">Mercado IFL</h2>
+      <p class="section-intro">Accede rápidamente a jugadores, fichajes, clubes y rumores del mercado.</p>
+      <nav class="market-hub-grid" aria-label="Secciones del mercado">
+        <a class="market-hub-card" href="#market-players">
+          <span class="market-hub-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="7" r="3.2"/><path d="M3 20v-1.3A5.7 5.7 0 0 1 8.7 13h.6a5.7 5.7 0 0 1 5.7 5.7V20z"/><path d="M16 4.2a3.2 3.2 0 0 1 0 6.1M17 14a5.5 5.5 0 0 1 4 5.3V20"/></svg></span>
+          <span class="market-hub-card__copy"><strong>Jugadores</strong><small>Descubre perfiles y disponibilidad</small></span><span class="market-hub-card__arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="market-hub-card" href="#market-transfers">
+          <span class="market-hub-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h13l-3-3M20 7l-3 3M17 17H4l3 3M4 17l3-3"/></svg></span>
+          <span class="market-hub-card__copy"><strong>Fichajes</strong><small>Altas, bajas y operaciones confirmadas</small></span><span class="market-hub-card__arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="market-hub-card" href="#market-clubs">
+          <span class="market-hub-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 21s8-4 8-11V5l-8-3-8 3v5c0 7 8 11 8 11Z"/><path d="M8 9h8v6H8zM12 9v6"/></svg></span>
+          <span class="market-hub-card__copy"><strong>Clubes</strong><small>Consulta los equipos de la liga</small></span><span class="market-hub-card__arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="market-hub-card" href="#market-rumours">
+          <span class="market-hub-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.8 1.3-1.8 3M12 17.5v.1"/></svg></span>
+          <span class="market-hub-card__copy"><strong>Rumores</strong><small>Información pendiente de confirmación</small></span><span class="market-hub-card__arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </section>
+
+    <section class="market-list-section" id="market-transfers" aria-labelledby="market-transfers-title">
+      <div class="market-section-heading"><div><span class="section-kicker">MOVIMIENTOS DE CLUBES</span><h2 id="market-transfers-title">Últimos movimientos</h2><p class="section-intro">Fichajes y operaciones publicados oficialmente por la IFL.</p></div><span class="market-live-label"><span></span> OFICIAL</span></div>
+      <div class="market-movements-list" id="ifl-market-movements"><div class="market-empty-state"><span class="market-empty-state__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 7h13l-3-3M20 7l-3 3M17 17H4l3 3M4 17l3-3"/></svg></span><div><h3>Sin movimientos publicados</h3><p>Cuando se confirmen fichajes o cesiones, aparecerán aquí. No mostramos operaciones inventadas.</p></div></div></div>
+    </section>
+
+    <section class="market-detail-grid" aria-label="Más información del mercado">
+      <article class="market-detail-panel" id="market-players"><span class="section-kicker">SCOUTING</span><h2>Jugadores</h2><p>Perfiles de jugadores y su situación en el mercado.</p><div id="ifl-market-players" class="market-detail-empty">Todavía no hay jugadores registrados en el mercado.</div><a class="market-detail-link" href="buscar.html">Buscar jugadores <span aria-hidden="true">→</span></a></article>
+      <article class="market-detail-panel" id="market-clubs"><span class="section-kicker">EQUIPOS IFL</span><h2>Clubes</h2><p>Explora los clubes participantes y sus plantillas.</p><div id="ifl-market-clubs" class="market-detail-empty">Los clubes oficiales aparecerán aquí cuando estén registrados.</div><a class="market-detail-link" href="clasificacion.html">Ver competición <span aria-hidden="true">→</span></a></article>
+      <article class="market-detail-panel" id="market-rumours"><span class="section-kicker">NO OFICIAL</span><h2>Rumores</h2><p>Este espacio solo mostrará rumores si la IFL decide publicarlos y etiquetarlos claramente.</p><div class="market-detail-empty">No hay rumores publicados.</div></article>
     </section>
   </main>
 
@@ -288,6 +326,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
+  <script src="js/market.js?v=1" defer></script>
   
 </body>
 </html>
