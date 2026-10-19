@@ -1092,3 +1092,33 @@ body.ifl-fantasy-page #fantasy-market svg {
     flex-basis: 28px !important;
   }
 }
+
+
+/* Fix: prevent global SVG rules from stretching the empty-market icon */
+#fantasy-market-results .fantasy-market-empty__icon {
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 62px !important;
+  width: 62px !important;
+  min-width: 62px !important;
+  max-width: 62px !important;
+  height: 62px !important;
+  min-height: 62px !important;
+  max-height: 62px !important;
+  margin: 0 0 1.2rem !important;
+  overflow: hidden !important;
+}
+#fantasy-market-results .fantasy-market-empty__icon svg {
+  display: block !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  flex: 0 0 28px !important;
+  overflow: hidden !important;
+}
+#fantasy-market-results .fantasy-market-empty__icon svg path {
+  vector-effect: none;
+}
