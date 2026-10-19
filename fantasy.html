@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Sigue las competiciones, clubes, calendario y noticias oficiales de la Iberian Football League.">
+  <meta name="theme-color" content="#12161d">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Fantasy IFL · Iberian Football League</title>
+  <script>
+    (() => {
+      try {
+        const session = JSON.parse(localStorage.getItem("ifl-2-discord-session") || "null");
+        if (session?.access_token) document.documentElement.dataset.iflHasSession = "true";
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=52">
+  <link rel="stylesheet" href="css/fantasy.css?v=1">
+</head>
+<body data-authenticated="booting">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__stadium" aria-hidden="true"></div>
+    <div class="auth-screen__mark" aria-hidden="true"><img src="logo" alt=""></div>
+    <div class="auth-screen__card">
+      <span class="auth-screen__eyebrow">Iberian Football League</span>
+      <h1 id="auth-screen-title">Iniciar sesión</h1>
+      <p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p>
+      <button class="auth-screen__button" id="primary-discord-login" type="button">
+        <span class="auth-screen__discord-icon" aria-hidden="true">◉</span>
+        Iniciar sesión con Discord
+      </button>
+    </div>
+  </section>
+
+  <div class="site-shell" id="site-shell">
+  <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
+  <header class="site-header">
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Iberian Football League, inicio">
+        <img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="120" height="72">
+      </a>
+
+      <details class="mobile-menu">
+        <summary aria-label="Abrir menú de navegación">
+          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>Menú</span>
+        </summary>
+        <div class="mobile-menu-panel">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link" href="calendario.html">Calendario</a>
+          <a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link" href="estadios.html">Estadios</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link is-active" href="mercado.html">Mercado</a>
+            <a class="nav-link is-active" href="fantasy.html" aria-current="page">Fantasy</a>
+          
+        </div>
+      </details>
+
+      <div class="desktop-menu">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="calendario.html">Calendario</a>
+        <a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link" href="estadios.html">Estadios</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link is-active" href="mercado.html" aria-current="page">Mercado</a>
+        
+        
+        
+
+        <details class="profile-menu">
+          <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+            <span class="profile-avatar" aria-hidden="true"></span>
+          </summary>
+          <div class="profile-panel" aria-label="Opciones de perfil">
+            <button class="profile-option profile-login-option" type="button"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Iniciar sesión con Discord</span></span></button>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></button>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
+            <div class="profile-divider" role="separator"></div>
+            <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
+          </div>
+        </details>
+      </div>
+
+      <details class="profile-menu mobile-profile-menu">
+        <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+          <span class="profile-avatar" aria-hidden="true"></span>
+        </summary>
+        <div class="profile-panel" aria-label="Opciones de perfil">
+          <button class="profile-option profile-login-option" type="button"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Iniciar sesión con Discord</span></span></button>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></button>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
+          <div class="profile-divider" role="separator"></div>
+          <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main class="content-page fantasy-page" id="contenido">
+  <section class="fantasy-hero">
+    <div class="fantasy-hero__copy">
+      <span class="section-kicker">IBERIAN FOOTBALL LEAGUE</span>
+      <p class="fantasy-eyebrow">FANTASY IFL</p>
+      <h1>Tu estrategia.<br><span>Tu alineación.</span></h1>
+      <p class="section-intro">Construye tu equipo de cuatro jugadores, elige una formación y prepara cada jornada.</p>
+      <a class="fantasy-primary-link" href="#fantasy-formations">Elegir formación <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="fantasy-hero__visual" aria-hidden="true">
+      <div class="fantasy-hero-ball"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45"/><path d="m50 29 17 12-6 20H39l-6-20zM50 5v24M95 50H67M78 83 61 61M22 83l17-22M5 50h28M22 17l11 24M78 17 67 41"/></svg></div>
+      <span class="fantasy-hero-tag">4 JUGADORES</span>
+      <span class="fantasy-hero-line"></span>
+    </div>
+  </section>
+
+  <section class="fantasy-summary-grid" aria-label="Resumen Fantasy">
+    <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-1.5a7 7 0 0 1 14 0V21"/></svg></span><span class="fantasy-summary-label">Mi equipo</span><strong>4 jugadores</strong><small>Plantilla Fantasy</small></article>
+    <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/></svg></span><span class="fantasy-summary-label">Presupuesto</span><strong>Por definir</strong><small>Reglas económicas en planificación</small></article>
+    <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="fantasy-summary-label">Puntuación</span><strong>Estadísticas reales</strong><small>Según los partidos oficiales IFL</small></article>
+  </section>
+
+  <section class="fantasy-section" id="fantasy-formations" aria-labelledby="fantasy-formations-title">
+    <div class="fantasy-section-heading">
+      <div><span class="section-kicker">TU TÁCTICA</span><h2 id="fantasy-formations-title">Elige tu formación</h2><p>Selecciona una de las formaciones permitidas para tu equipo de cuatro jugadores.</p></div>
+      <span class="fantasy-count"><strong id="fantasy-player-count">4</strong><span>puestos</span></span>
+    </div>
+    <div class="fantasy-formation-options" role="group" aria-label="Formaciones disponibles">
+      <button class="fantasy-formation-option is-selected" type="button" data-formation="2-2" aria-pressed="true"><span class="fantasy-formation-number">2–2</span><strong>Equilibrada</strong><small>2 delanteros + 2 defensas/medios</small><span class="fantasy-option-check" aria-hidden="true">✓</span></button>
+      <button class="fantasy-formation-option" type="button" data-formation="3-1" aria-pressed="false"><span class="fantasy-formation-number">3–1</span><strong>Ofensiva</strong><small>3 delanteros + 1 defensa</small><span class="fantasy-option-check" aria-hidden="true">✓</span></button>
+      <button class="fantasy-formation-option" type="button" data-formation="1-1-1-1" aria-pressed="false"><span class="fantasy-formation-number">1–1–1–1</span><strong>Completa</strong><small>Portero, defensa, medio y delantero</small><span class="fantasy-option-check" aria-hidden="true">✓</span></button>
+    </div>
+
+    <div class="fantasy-tactics-layout">
+      <div class="fantasy-pitch-panel">
+        <div class="fantasy-pitch-heading"><div><span class="section-kicker">VISTA TÁCTICA</span><h3 id="fantasy-active-formation">Formación 2–2</h3></div><span class="fantasy-pitch-badge">4 puestos</span></div>
+        <div class="fantasy-pitch" id="fantasy-pitch" data-formation="2-2" aria-label="Vista táctica de la formación elegida">
+          <div class="fantasy-pitch__markings" aria-hidden="true"><span class="pitch-halfway"></span><span class="pitch-circle"></span><span class="pitch-box pitch-box--top"></span><span class="pitch-box pitch-box--bottom"></span></div>
+          <div class="fantasy-pitch__line fantasy-pitch__line--attack" id="fantasy-line-attack">
+            <span class="fantasy-position-token"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2z"/></svg><b>DEL</b><small>Delantero</small></span>
+            <span class="fantasy-position-token"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2z"/></svg><b>DEL</b><small>Delantero</small></span>
+          </div>
+          <div class="fantasy-pitch__line fantasy-pitch__line--base" id="fantasy-line-base">
+            <span class="fantasy-position-token"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2z"/></svg><b>DEF / MED</b><small>Defensa o medio</small></span>
+            <span class="fantasy-position-token"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2z"/></svg><b>DEF / MED</b><small>Defensa o medio</small></span>
+          </div>
+        </div>
+        <p class="fantasy-pitch-caption" id="fantasy-formation-description">Dos delanteros obligatorios y dos jugadores que deben ser defensas o centrocampistas. No se permite portero en esta formación.</p>
+      </div>
+      <aside class="fantasy-rules-panel">
+        <span class="section-kicker">REGLAS DE ALINEACIÓN</span>
+        <h3>Antes de cada jornada</h3>
+        <ul class="fantasy-rules-list">
+          <li><span class="fantasy-rule-check">✓</span><span><strong>4 jugadores</strong><small>La alineación siempre utiliza cuatro puestos.</small></span></li>
+          <li><span class="fantasy-rule-check">✓</span><span><strong>Cambios permitidos</strong><small>Puedes cambiar jugadores y formación antes del cierre.</small></span></li>
+          <li><span class="fantasy-rule-check">✓</span><span><strong>Cierre de jornada</strong><small>La alineación se bloquea al inicio del primer partido de la jornada.</small></span></li>
+          <li><span class="fantasy-rule-check">✓</span><span><strong>Posiciones por temporada</strong><small>La posición del jugador se gestiona desde Mi perfil y solo cambia una vez por temporada.</small></span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="fantasy-section fantasy-roster-section" aria-labelledby="fantasy-roster-title">
+    <div class="fantasy-section-heading"><div><span class="section-kicker">PLANTILLA</span><h2 id="fantasy-roster-title">Mi equipo</h2><p>Los puestos y las reglas tácticas ya están definidos. La selección de futbolistas se activará cuando estén conectados los datos oficiales y el sistema Fantasy.</p></div></div>
+    <div class="fantasy-empty-roster">
+      <span class="fantasy-empty-roster__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4 21v-1.5a8 8 0 0 1 16 0V21"/></svg></span>
+      <h3>Tu plantilla aparecerá aquí</h3>
+      <p>El catálogo oficial de jugadores todavía no está conectado a Fantasy. No mostramos futbolistas inventados ni permitimos fichajes simulados.</p>
+      <span class="fantasy-status-note"><span></span> Estructura visual en preparación</span>
+    </div>
+  </section>
+
+  <section class="fantasy-footer-note"><span class="fantasy-footer-note__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M12 8v4M12 16h.01"/></svg></span><p><strong>Estado del proyecto</strong><br>Esta primera entrega incorpora la página y el selector de formaciones. El mercado Fantasy, los puntos oficiales y el guardado seguro de equipos requieren todavía datos y backend.</p></section>
+</main>
+
+  <footer class="site-footer">
+    <div class="site-footer__main">
+      <a class="site-footer__brand" href="index.html" aria-label="Iberian Football League, inicio">
+        <img src="logo" alt="Logo de Iberian Football League">
+        <span>Iberian Football League</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Enlaces del pie de página">
+        <a href="index.html">Inicio</a>
+        <a href="calendario.html">Calendario</a>
+        <a href="clasificacion.html">Clasificación</a>
+      </nav>
+      <div class="site-footer__status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Información oficial IFL</span>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 Iberian Football League</span>
+      <span>IFL · Roblox Football League</span>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    (() => {
+      const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
+      const STORAGE_KEY = "ifl-2-discord-session";
+      const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
+      const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
+
+      // Punto de conexión preparado para el futuro selector de estadios del Admin Panel.
+      window.IFLAuth = {
+        setStadiumBackground(imageUrl) {
+          const authScreen = document.getElementById("auth-screen");
+          if (!authScreen || typeof imageUrl !== "string" || !(imageUrl.startsWith("https://") || imageUrl.startsWith("http://"))) return;
+          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\\n", "").replaceAll("\\r", "");
+          authScreen.style.setProperty("--auth-stadium-image", 'url("' + safeUrl + '")');
+          authScreen.classList.add("has-stadium-background");
+        }
+      };
+
+      function userName(user) {
+        return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
+      }
+
+      function setAuthState(user) {
+        document.body.dataset.authenticated = user ? "true" : "false";
+        const authScreen = document.getElementById("auth-screen");
+        if (authScreen) authScreen.hidden = Boolean(user);
+        loginOptions.forEach((option) => {
+          option.textContent = "Iniciar sesión con Discord";
+          option.hidden = Boolean(user);
+          option.disabled = Boolean(user);
+        });
+        logoutOptions.forEach((option) => { option.disabled = !user; });
+
+        const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture || "";
+        document.querySelectorAll(".profile-avatar").forEach((avatar) => {
+          avatar.classList.remove("has-discord-avatar");
+          avatar.style.backgroundImage = "";
+          if (avatarUrl) {
+            try {
+              const parsed = new URL(avatarUrl);
+              if (parsed.protocol === "https:") {
+                avatar.style.backgroundImage = "url(" + JSON.stringify(parsed.href) + ")";
+                avatar.classList.add("has-discord-avatar");
+              }
+            } catch (_) {}
+          }
+        });
+        document.querySelectorAll(".profile-trigger").forEach((trigger) => {
+          trigger.title = user ? "Perfil de Discord" : "Iniciar sesión con Discord";
+        });
+      }
+
+      function saveSession(payload) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      }
+
+      function readSession() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (_) { return null; }
+      }
+
+      async function loadUser(accessToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + accessToken }
+        });
+        if (!response.ok) throw new Error("Sesión no válida");
+        return response.json();
+      }
+
+      async function refreshSession(refreshToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+          method: "POST",
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh_token: refreshToken })
+        });
+        if (!response.ok) throw new Error("No se pudo renovar la sesión");
+        const payload = await response.json();
+        const user = await loadUser(payload.access_token);
+        saveSession({ ...payload, user });
+        return user;
+      }
+
+      async function restoreSession() {
+        const params = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = params.get("access_token");
+        const refreshToken = params.get("refresh_token");
+        if (accessToken) {
+          // Mostrar la web en cuanto vuelve Discord y validar el token en segundo plano.
+          setAuthState({});
+          history.replaceState({}, document.title, window.location.pathname + window.location.search);
+          try {
+            const user = await loadUser(accessToken);
+            saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+            setAuthState(user);
+            return;
+          } catch (error) {
+            console.warn("[IFL 2.0] No se pudo validar la sesión OAuth:", error);
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+            return;
+          }
+        }
+
+        const stored = readSession();
+        if (!stored?.access_token) return setAuthState(null);
+
+        // La sesión guardada se pinta inmediatamente; la comprobación no bloquea la interfaz.
+        setAuthState(stored.user || {});
+        try {
+          const user = await loadUser(stored.access_token);
+          saveSession({ ...stored, user });
+          setAuthState(user);
+        } catch (_) {
+          try {
+            const user = stored.refresh_token ? await refreshSession(stored.refresh_token) : null;
+            if (!user) throw new Error("No hay token de renovación");
+            setAuthState(user);
+          } catch (__) {
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+          }
+        }
+      }
+
+      function signIn() {
+        const redirectTo = "https://iberianfootballleague.github.io/IFL-2.0/";
+        const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
+        window.location.assign(url);
+      }
+
+      async function signOut() {
+        const stored = readSession();
+        if (stored?.access_token) {
+          await fetch(SUPABASE_URL + "/auth/v1/logout", {
+            method: "POST",
+            headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + stored.access_token }
+          }).catch(() => {});
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        setAuthState(null);
+      }
+
+      loginOptions.forEach((option) => option.addEventListener("click", signIn));
+      logoutOptions.forEach((option) => option.addEventListener("click", signOut));
+      restoreSession();
+    })();
+  </script>
+  <script src="js/ifl-data.js" defer></script>
+  <script src="js/site-content.js" defer></script>
+  <script src="js/fantasy.js?v=1" defer></script>
+  
+</body>
+</html>
