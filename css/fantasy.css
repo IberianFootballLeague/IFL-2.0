@@ -1032,3 +1032,63 @@ body.fantasy-mode #fantasy-market img { display: block !important; }
   #fantasy-market .fantasy-market-tab { padding: .55rem .12rem !important; font-size: .7rem !important; }
   #fantasy-market .fantasy-market-empty { padding: 1.4rem .8rem !important; }
 }
+
+
+/* IFL Fantasy page-level logo guard: the sticky site header sits outside
+   #fantasy-market, so market-only image rules cannot constrain that logo. */
+body.ifl-fantasy-page .site-header .brand-logo {
+  width: 76px !important;
+  height: 48px !important;
+  max-width: 76px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+}
+body.ifl-fantasy-page .fantasy-nav__brand img {
+  display: block !important;
+  width: 30px !important;
+  height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
+  object-fit: contain !important;
+}
+body.ifl-fantasy-page .site-footer__brand img {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  object-fit: contain !important;
+}
+body.ifl-fantasy-page #fantasy-market img,
+body.ifl-fantasy-page #fantasy-market picture,
+body.ifl-fantasy-page #fantasy-market picture img {
+  box-sizing: border-box !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  flex: 0 0 32px !important;
+  object-fit: contain !important;
+}
+body.ifl-fantasy-page #fantasy-market svg {
+  max-width: 28px !important;
+  max-height: 28px !important;
+}
+@media (max-width: 680px) {
+  body.ifl-fantasy-page .site-header .brand-logo {
+    width: 58px !important;
+    height: 40px !important;
+    max-width: 58px !important;
+    max-height: 40px !important;
+  }
+  body.ifl-fantasy-page #fantasy-market img,
+  body.ifl-fantasy-page #fantasy-market picture,
+  body.ifl-fantasy-page #fantasy-market picture img {
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    flex-basis: 28px !important;
+  }
+}
