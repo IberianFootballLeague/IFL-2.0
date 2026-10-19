@@ -1,0 +1,42 @@
+/* Correcciones de escala y jerarquía visual del mercado oficial IFL */
+body .market-page{overflow-x:hidden}
+.market-page .market-window-icon,
+.market-page .market-news-empty__icon,
+.market-page .market-hub-card__icon,
+.market-page .market-empty-state__icon{
+  display:grid!important;place-items:center!important;flex:0 0 52px!important;
+  width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;
+  max-width:52px!important;max-height:52px!important;padding:13px!important;overflow:hidden!important;
+  border-radius:14px!important;
+}
+.market-page .market-window-icon svg,
+.market-page .market-news-empty__icon svg,
+.market-page .market-hub-card__icon svg,
+.market-page .market-empty-state__icon svg{
+  display:block!important;width:26px!important;height:26px!important;min-width:26px!important;min-height:26px!important;
+  max-width:26px!important;max-height:26px!important;flex:0 0 26px!important;
+}
+.market-page .market-featured-photo--empty{display:grid!important;place-items:center!important;width:100%!important;min-width:0!important;min-height:150px!important;max-height:190px!important;overflow:hidden!important;padding:20px!important}
+.market-page .market-featured-photo--empty svg{display:block!important;width:72px!important;height:72px!important;max-width:72px!important;max-height:72px!important}
+.market-page .market-featured-club{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;font-size:clamp(.95rem,1.2vw,1.08rem)!important;line-height:1.3!important}
+.market-page .market-featured-club img,
+.market-page .market-featured-club .market-crest-placeholder{display:block!important;flex:0 0 44px!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;object-fit:contain!important;overflow:hidden!important}
+.market-page .market-movement__club img,
+.market-page .market-mini-team img{display:block!important;flex:0 0 32px!important;width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;max-width:32px!important;max-height:32px!important;object-fit:contain!important}
+.market-page .market-featured-card h2,
+.market-page .market-featured-card h3,
+.market-page .market-window-copy h2,
+.market-page .market-hub-card__copy strong{font-size:clamp(1.1rem,1.6vw,1.55rem)!important;line-height:1.2!important;font-weight:800!important}
+.market-page .market-featured-card p,
+.market-page .market-window-copy p,
+.market-page .market-hub-card__copy{font-size:.95rem!important;line-height:1.6!important}
+.market-page .market-hub-card{min-width:0;overflow:hidden}
+.market-page .market-hub-card__copy{overflow-wrap:anywhere}
+@media(max-width:650px){
+ .market-page .market-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:14px!important}
+ .market-page .market-featured-photo--empty{min-height:100px!important;max-height:130px!important}
+ .market-page .market-featured-photo--empty svg{width:52px!important;height:52px!important;max-width:52px!important;max-height:52px!important}
+ .market-page .market-featured-club{align-items:center!important;font-size:.88rem!important}
+ .market-page .market-featured-club img,
+ .market-page .market-featured-club .market-crest-placeholder{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;max-width:36px!important;max-height:36px!important;flex-basis:36px!important}
+}
