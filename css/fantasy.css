@@ -78,3 +78,62 @@
 @media(max-width:620px){.fantasy-page{padding-top:1rem}.fantasy-hero{grid-template-columns:1fr;min-height:auto;padding:1.5rem;border-radius:16px}.fantasy-hero__visual{position:absolute;right:-3rem;bottom:-2rem;width:170px;min-height:170px;opacity:.38}.fantasy-hero-ball{width:130px}.fantasy-hero-tag,.fantasy-hero-line{display:none}.fantasy-hero__copy{position:relative;z-index:1}.fantasy-hero h1{font-size:2.8rem}.fantasy-summary-grid{grid-template-columns:1fr;gap:.65rem;margin-bottom:2.25rem}.fantasy-summary-card{padding:1rem}.fantasy-section-heading{align-items:flex-start}.fantasy-formation-options{grid-template-columns:1fr;gap:.65rem}.fantasy-formation-option{min-height:0;padding:.9rem 1rem;display:grid;grid-template-columns:75px 1fr;column-gap:.8rem;align-items:center}.fantasy-formation-number{grid-row:span 2;font-size:1.8rem}.fantasy-formation-option strong{align-self:end}.fantasy-formation-option small{align-self:start}.fantasy-option-check{top:50%;transform:translateY(-50%)}.fantasy-pitch-panel,.fantasy-rules-panel{padding:1rem}.fantasy-pitch{min-height:320px;padding:1.5rem .6rem}.fantasy-position-token svg{width:37px;height:37px}.fantasy-position-token b{font-size:.65rem}.fantasy-position-token small{font-size:.62rem}.fantasy-count{padding:.4rem .6rem}.fantasy-count span{display:none}}
 
 .desktop-menu > .nav-link[href="fantasy.html"]{order:7}.desktop-menu > .profile-menu{order:8}.mobile-menu-panel > .nav-link[href="fantasy.html"]{order:7}
+
+
+/* Fantasy immersive entry and dedicated navigation */
+.fantasy-nav{display:none;position:sticky;top:0;z-index:30;align-items:center;justify-content:space-between;gap:1.25rem;width:100%;min-height:78px;padding:12px clamp(16px,4vw,54px);color:#fff;background:rgba(13,17,24,.97);border-bottom:1px solid rgba(255,255,255,.1);box-shadow:0 12px 30px rgba(8,12,18,.18)}
+.fantasy-nav__brand{display:flex;align-items:center;gap:10px;min-width:max-content;color:#fff;text-decoration:none;font-size:.86rem;font-weight:700;letter-spacing:.08em}
+.fantasy-nav__brand img{width:53px;height:48px;object-fit:contain}
+.fantasy-nav__brand strong{display:block;color:#ff7455;font-size:1rem;letter-spacing:.15em}
+.fantasy-nav__links{display:flex;align-items:center;justify-content:center;gap:clamp(10px,2.4vw,32px)}
+.fantasy-nav__links a{padding:10px 3px;color:#c9ced6;text-decoration:none;font-size:.9rem;font-weight:700;transition:color .18s}
+.fantasy-nav__links a:hover,.fantasy-nav__links a:focus-visible{color:#fff}
+.fantasy-nav__exit{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:104px;padding:11px 17px;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);border-radius:999px;text-decoration:none;font-weight:800;transition:background .18s,border-color .18s,transform .18s}
+.fantasy-nav__exit svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fantasy-nav__exit:hover{background:#ed4a28;border-color:#ed4a28;transform:translateY(-1px)}
+body.fantasy-mode .site-header,body.fantasy-mode .site-footer{display:none!important}
+body.fantasy-mode .fantasy-nav{display:flex}
+body.fantasy-mode{background:#f4f5f7}
+body.fantasy-mode .site-shell{min-height:100vh}
+.fantasy-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;color:#fff;background:#0b0e14;opacity:0;visibility:hidden;pointer-events:none}
+.fantasy-intro__glow{position:absolute;inset:-20%;background:radial-gradient(ellipse at 50% 46%,rgba(237,74,40,.3),transparent 27%),radial-gradient(ellipse at 50% 50%,rgba(29,65,88,.36),transparent 55%);opacity:0}
+.fantasy-intro__stadium-lines{position:absolute;inset:-25%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 7deg,rgba(255,255,255,.035) 7.15deg,transparent 7.5deg);mask-image:radial-gradient(ellipse at center,#000 0%,transparent 67%);opacity:0}
+.fantasy-intro__content{position:relative;display:flex;flex-direction:column;align-items:center;width:min(92vw,900px);text-align:center}
+.fantasy-intro__logo{display:grid;place-items:center;width:clamp(105px,17vw,175px);height:clamp(105px,17vw,175px);margin-bottom:clamp(16px,3vh,30px);opacity:0;transform:scale(.1) rotate(-18deg);filter:drop-shadow(0 0 35px rgba(237,74,40,.38))}
+.fantasy-intro__logo img{display:block;width:100%;height:100%;object-fit:contain}
+.fantasy-intro__word{display:flex;justify-content:center;gap:clamp(1px,.7vw,9px);font-family:"Barlow Semi Condensed",sans-serif;font-size:clamp(2.7rem,10vw,7.8rem);font-weight:800;line-height:.95;letter-spacing:.04em}
+.fantasy-intro__word span{display:inline-block;opacity:0;transform:translate3d(var(--fly-x,0),var(--fly-y,0),0) rotate(var(--fly-rotate,0deg)) scale(1.7);filter:blur(9px);color:#fff;text-shadow:0 0 30px rgba(237,74,40,.18)}
+.fantasy-intro__word span:nth-child(1){--fly-x:-110vw;--fly-y:-50vh;--fly-rotate:-65deg}
+.fantasy-intro__word span:nth-child(2){--fly-x:-90vw;--fly-y:45vh;--fly-rotate:42deg}
+.fantasy-intro__word span:nth-child(3){--fly-x:-55vw;--fly-y:-70vh;--fly-rotate:-28deg}
+.fantasy-intro__word span:nth-child(4){--fly-x:0;--fly-y:90vh;--fly-rotate:75deg}
+.fantasy-intro__word span:nth-child(5){--fly-x:60vw;--fly-y:-65vh;--fly-rotate:-44deg}
+.fantasy-intro__word span:nth-child(6){--fly-x:100vw;--fly-y:38vh;--fly-rotate:35deg}
+.fantasy-intro__word span:nth-child(7){--fly-x:115vw;--fly-y:-45vh;--fly-rotate:60deg}
+.fantasy-intro__tagline{margin:22px 0 0;color:#c6cbd3;font-size:clamp(.65rem,1.6vw,.85rem);font-weight:800;letter-spacing:.3em;opacity:0;transform:translateY(12px)}
+.fantasy-intro__edition{position:absolute;right:clamp(18px,4vw,48px);bottom:clamp(18px,4vh,40px);color:rgba(255,255,255,.42);font-size:.72rem;font-weight:800;letter-spacing:.2em;opacity:0}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro{opacity:1;visibility:visible;pointer-events:auto}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__glow{animation:fantasy-glow-in 3.1s ease both}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__stadium-lines{animation:fantasy-stadium-in 3.1s ease both}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__logo{animation:fantasy-logo-arrive .95s cubic-bezier(.15,.82,.24,1.2) .25s both}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span{animation:fantasy-letter-arrive .8s cubic-bezier(.16,.9,.2,1.1) both}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(1){animation-delay:.68s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(2){animation-delay:.77s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(3){animation-delay:.86s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(4){animation-delay:.95s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(5){animation-delay:1.04s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(6){animation-delay:1.13s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span:nth-child(7){animation-delay:1.22s}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__tagline{animation:fantasy-tagline-in .55s ease 1.8s both}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__edition{animation:fantasy-tagline-in .5s ease 1.6s both}
+body.fantasy-mode.fantasy-intro-done .fantasy-intro{opacity:0;visibility:hidden;transition:opacity .55s ease,visibility .55s}
+@keyframes fantasy-glow-in{0%{opacity:0;transform:scale(.75)}35%{opacity:1;transform:scale(1.1)}100%{opacity:.55;transform:scale(1)}}
+@keyframes fantasy-stadium-in{0%{opacity:0;transform:scale(1.7) rotate(-12deg)}40%{opacity:.9}100%{opacity:.45;transform:scale(1) rotate(0)}}
+@keyframes fantasy-logo-arrive{0%{opacity:0;transform:scale(.1) rotate(-18deg);filter:blur(15px) drop-shadow(0 0 0 rgba(237,74,40,0))}75%{opacity:1;transform:scale(1.08) rotate(2deg);filter:blur(0) drop-shadow(0 0 45px rgba(237,74,40,.65))}100%{opacity:1;transform:scale(1) rotate(0);filter:blur(0) drop-shadow(0 0 28px rgba(237,74,40,.35)}}
+@keyframes fantasy-letter-arrive{0%{opacity:0;transform:translate3d(var(--fly-x),var(--fly-y),0) rotate(var(--fly-rotate)) scale(1.8);filter:blur(12px)}70%{opacity:1;transform:translate3d(0,0,0) rotate(3deg) scale(1.08);filter:blur(0)}100%{opacity:1;transform:translate3d(0,0,0) rotate(0) scale(1);filter:blur(0);color:#ff7455;text-shadow:0 0 35px rgba(237,74,40,.25)}}
+@keyframes fantasy-tagline-in{to{opacity:1;transform:translateY(0)}}
+.fantasy-menu-option{cursor:pointer!important;text-decoration:none;display:block}
+.fantasy-menu-option:hover{background:rgba(237,74,40,.08);color:#c83a1e}
+@media(max-width:700px){.fantasy-nav{min-height:70px;gap:10px;padding:10px 13px}.fantasy-nav__brand{gap:5px;font-size:.72rem}.fantasy-nav__brand img{width:38px;height:39px}.fantasy-nav__brand strong{font-size:.78rem}.fantasy-nav__links{gap:10px}.fantasy-nav__links a{font-size:.76rem}.fantasy-nav__exit{min-width:0;padding:10px 12px}.fantasy-nav__exit svg{width:16px;height:16px}.fantasy-nav__exit span{font-size:.8rem}}
+@media(max-width:430px){.fantasy-nav{flex-wrap:wrap;justify-content:space-between}.fantasy-nav__links{order:3;width:100%;justify-content:center;padding-top:6px;border-top:1px solid rgba(255,255,255,.09)}.fantasy-nav__links a{padding:5px 2px}.fantasy-intro__word{gap:0;font-size:clamp(2.35rem,11vw,3.4rem)}.fantasy-intro__tagline{letter-spacing:.16em}}
+@media(prefers-reduced-motion:reduce){body.fantasy-mode.fantasy-intro-active .fantasy-intro__glow,body.fantasy-mode.fantasy-intro-active .fantasy-intro__stadium-lines,body.fantasy-mode.fantasy-intro-active .fantasy-intro__logo,body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span,body.fantasy-mode.fantasy-intro-active .fantasy-intro__tagline,body.fantasy-mode.fantasy-intro-active .fantasy-intro__edition{animation-duration:.01ms!important;animation-delay:0ms!important}}
