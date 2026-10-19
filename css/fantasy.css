@@ -315,3 +315,31 @@ body.fantasy-mode .fantasy-market-features svg{width:18px!important;height:18px!
  body.fantasy-mode .fantasy-market-tabs{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr))}
  body.fantasy-mode .fantasy-market-tab{padding:.65rem .25rem;font-size:.78rem}
 }
+
+
+/* Fixes específicos tras comprobar la estructura real de Fantasy */
+body.fantasy-mode.fantasy-intro-active .fantasy-intro{
+  display:grid!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:100%!important;min-height:1.1em!important;visibility:visible!important;overflow:visible!important;
+}
+body.fantasy-mode.fantasy-intro-active .fantasy-intro__word span{
+  display:inline-block!important;visibility:visible!important;opacity:1!important;
+  color:#ff795a!important;-webkit-text-fill-color:#ff795a!important;
+}
+body.fantasy-mode.fantasy-intro-active .fantasy-market-empty{
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;width:100%!important;box-sizing:border-box!important;
+  text-align:center!important;gap:.35rem!important;
+}
+body.fantasy-mode .fantasy-market-empty>*{max-width:100%;box-sizing:border-box}
+body.fantasy-mode .fantasy-market-empty h3{display:block!important;width:100%;text-align:center!important}
+body.fantasy-mode .fantasy-market-empty p{display:block!important;width:min(100%,720px)!important;text-align:center!important}
+body.fantasy-mode .fantasy-market-features{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;width:100%!important}
+body.fantasy-mode .fantasy-market-features span{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:.5rem!important}
+@media(max-width:620px){
+ body.fantasy-mode .fantasy-market-features{flex-direction:column!important;align-items:stretch!important}
+ body.fantasy-mode .fantasy-market-features span{width:100%!important}
+}
