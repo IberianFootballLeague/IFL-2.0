@@ -7,6 +7,8 @@ window.IFL_DATA = Object.freeze({
   news: [],
   // Movimientos oficiales confirmados. Campos sugeridos: id, playerName, fromTeam, toTeam, fromTeamLogo, toTeamLogo, type, fee, date, status.
   transfers: [],
+  // Configuración opcional de la ventana de fichajes: status (open/closed), startDate, endDate, note. Solo rellenar con fechas oficiales.
+  marketWindow: null,
   // Registros oficiales de palmarés. Campos sugeridos: team, teamName, club, title, competition, season, year, date.
   honours: [],
   // Publica solo estadios oficiales confirmados. Campos sugeridos: id, name, teamId, teamName, competition, city, capacity, year, surface, dimensions, image, latitude, longitude.
