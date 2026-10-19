@@ -587,3 +587,146 @@ body.fantasy-mode #fantasy-market .fantasy-market-footnote{
   body.fantasy-mode #fantasy-market .fantasy-market-features{display:grid!important;grid-template-columns:1fr;width:100%}
   body.fantasy-mode #fantasy-market .fantasy-market-features span{width:100%;box-sizing:border-box}
 }
+
+
+/* Fantasy market: target the actual results container (it has an ID, not a class). */
+body.fantasy-mode #fantasy-market{
+  scroll-margin-top:100px;
+  min-width:0;
+}
+body.fantasy-mode #fantasy-market-results{
+  display:block;
+  width:100%;
+  min-width:0;
+  margin:0;
+  overflow:hidden;
+  border-radius:18px;
+}
+body.fantasy-mode #fantasy-market-results img,
+body.fantasy-mode #fantasy-market-results img[class*="logo"],
+body.fantasy-mode #fantasy-market-results img[class*="crest"],
+body.fantasy-mode #fantasy-market-results img[class*="club"],
+body.fantasy-mode #fantasy-market-results img[class*="team"]{
+  display:block!important;
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  max-width:48px!important;
+  max-height:48px!important;
+  flex:0 0 48px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0!important;
+}
+body.fantasy-mode #fantasy-market-results [class*="logo"],
+body.fantasy-mode #fantasy-market-results [class*="crest"]{
+  max-width:100%;
+  min-width:0;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty{
+  box-sizing:border-box;
+  position:relative;
+  gap:.7rem;
+  min-height:310px;
+  justify-content:center;
+  padding:clamp(2rem,5vw,3.5rem) clamp(1rem,3vw,2rem);
+  border:1px solid #e1e6ed;
+  border-radius:18px;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(237,74,40,.07),transparent 48%),
+    linear-gradient(180deg,#fff 0%,#f8fafc 100%);
+  box-shadow:0 12px 34px rgba(18,29,43,.045);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty__icon{
+  display:grid!important;
+  place-items:center!important;
+  box-sizing:border-box;
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  min-height:58px!important;
+  max-width:58px!important;
+  max-height:58px!important;
+  flex:0 0 58px!important;
+  margin:0 0 .55rem!important;
+  padding:14px!important;
+  color:#fff!important;
+  background:linear-gradient(145deg,#f36a4a,#d64023)!important;
+  border:0!important;
+  border-radius:17px!important;
+  box-shadow:0 10px 24px rgba(237,74,40,.2);
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty__icon svg{
+  display:block!important;
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  min-height:28px!important;
+  max-width:28px!important;
+  max-height:28px!important;
+  fill:none!important;
+  stroke:#fff!important;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty h3{
+  max-width:680px;
+  margin:.15rem 0 .25rem;
+  color:#17202a;
+  font-size:clamp(1.45rem,2.8vw,2rem);
+  line-height:1.15;
+  letter-spacing:-.035em;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-empty p{
+  max-width:700px;
+  margin:0;
+  color:#667180;
+  font-size:.96rem;
+  line-height:1.7;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features{
+  gap:.55rem;
+  margin-top:1rem;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features span{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
+  padding:.65rem .85rem;
+  color:#344050;
+  background:#fff;
+  border:1px solid #e1e6ed;
+  border-radius:11px;
+  box-shadow:0 3px 8px rgba(18,29,43,.035);
+  font-size:.82rem;
+  font-weight:750;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-features svg{
+  width:17px!important;
+  height:17px!important;
+  min-width:17px!important;
+  min-height:17px!important;
+  max-width:17px!important;
+  max-height:17px!important;
+  color:#ed4a28;
+}
+body.fantasy-mode #fantasy-market .fantasy-market-footnote{
+  max-width:900px;
+  margin:.85rem auto 0;
+  color:#7a8491;
+  font-size:.8rem;
+  line-height:1.6;
+}
+@media(max-width:680px){
+  body.fantasy-mode #fantasy-market-results img,
+  body.fantasy-mode #fantasy-market-results img[class*="logo"],
+  body.fantasy-mode #fantasy-market-results img[class*="crest"],
+  body.fantasy-mode #fantasy-market-results img[class*="club"],
+  body.fantasy-mode #fantasy-market-results img[class*="team"]{
+    width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+    max-width:42px!important;max-height:42px!important;flex-basis:42px!important;
+  }
+  body.fantasy-mode #fantasy-market .fantasy-market-empty{min-height:270px;padding:2rem 1rem}
+  body.fantasy-mode #fantasy-market .fantasy-market-features{display:flex;flex-direction:column;width:100%;max-width:330px}
+  body.fantasy-mode #fantasy-market .fantasy-market-features span{width:100%;box-sizing:border-box}
+}
