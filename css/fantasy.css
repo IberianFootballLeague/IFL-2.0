@@ -869,3 +869,45 @@ body.fantasy-mode #fantasy-market #fantasy-market-results svg{
     width:34px!important;height:34px!important;max-width:34px!important;max-height:34px!important;flex-basis:34px!important;
   }
 }
+
+
+/* Market logo safety net: constrain crests wherever market cards place them, not only inside results. */
+body.fantasy-mode #fantasy-market img,
+body.fantasy-mode #fantasy-market picture,
+body.fantasy-mode #fantasy-market picture img,
+body.fantasy-mode #fantasy-market [class*="logo"],
+body.fantasy-mode #fantasy-market [class*="crest"],
+body.fantasy-mode #fantasy-market [class*="badge"],
+body.fantasy-mode #fantasy-market [class*="emblem"],
+body.fantasy-mode #fantasy-market [data-logo],
+body.fantasy-mode #fantasy-market [data-crest] {
+  box-sizing: border-box !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+  flex: 0 0 40px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background-size: contain !important;
+}
+body.fantasy-mode #fantasy-market img { display: block !important; }
+@media (max-width: 680px) {
+  body.fantasy-mode #fantasy-market img,
+  body.fantasy-mode #fantasy-market picture,
+  body.fantasy-mode #fantasy-market picture img,
+  body.fantasy-mode #fantasy-market [class*="logo"],
+  body.fantasy-mode #fantasy-market [class*="crest"],
+  body.fantasy-mode #fantasy-market [class*="badge"],
+  body.fantasy-mode #fantasy-market [class*="emblem"],
+  body.fantasy-mode #fantasy-market [data-logo],
+  body.fantasy-mode #fantasy-market [data-crest] {
+    width: 34px !important;
+    height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+    flex-basis: 34px !important;
+  }
+}
