@@ -19,7 +19,7 @@
     })();
   </script>
   <link rel="stylesheet" href="css/styles.css?v=53">
-  <link rel="stylesheet" href="css/fantasy.css?v=2">
+  <link rel="stylesheet" href="css/fantasy.css?v=3">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -124,6 +124,7 @@
     <a class="fantasy-nav__brand" href="fantasy.html" aria-label="Inicio de IFL Fantasy"><img src="logo" alt=""><span>IFL <strong>FANTASY</strong></span></a>
     <div class="fantasy-nav__links">
       <a href="#fantasy-roster-title">Mi equipo</a>
+      <a href="#fantasy-market">Mercado</a>
       <a href="#fantasy-formations">Formaciones</a>
       <a href="#fantasy-rules">Reglas</a>
     </div>
@@ -150,6 +151,47 @@
     <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-1.5a7 7 0 0 1 14 0V21"/></svg></span><span class="fantasy-summary-label">Mi equipo</span><strong>4 jugadores</strong><small>Plantilla Fantasy</small></article>
     <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/></svg></span><span class="fantasy-summary-label">Presupuesto</span><strong>Por definir</strong><small>Reglas económicas en planificación</small></article>
     <article class="fantasy-summary-card"><span class="fantasy-summary-icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="fantasy-summary-label">Puntuación</span><strong>Estadísticas reales</strong><small>Según los partidos oficiales IFL</small></article>
+  </section>
+
+
+  <section class="fantasy-section fantasy-market-section" id="fantasy-market" aria-labelledby="fantasy-market-title">
+    <div class="fantasy-market-hero">
+      <div class="fantasy-market-hero__copy">
+        <span class="section-kicker">FANTASY TRANSFERS</span>
+        <h2 id="fantasy-market-title">Mercado Fantasy</h2>
+        <p>Ficha jugadores para construir tu plantilla. Este mercado virtual es independiente del mercado oficial de fichajes de la IFL.</p>
+      </div>
+      <div class="fantasy-market-wallet">
+        <span class="fantasy-market-wallet__label">Tu presupuesto</span>
+        <strong>Por definir</strong>
+        <small>La economía se activará con el sistema Fantasy.</small>
+      </div>
+    </div>
+    <div class="fantasy-market-toolbar">
+      <div class="fantasy-market-tabs" role="group" aria-label="Tipo de operación">
+        <button class="fantasy-market-tab is-active" type="button" data-market-type="all" aria-pressed="true">Todos</button>
+        <button class="fantasy-market-tab" type="button" data-market-type="auction" aria-pressed="false">Subastas · 24 h</button>
+        <button class="fantasy-market-tab" type="button" data-market-type="fixed" aria-pressed="false">Precio fijo</button>
+      </div>
+      <label class="fantasy-market-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+        <input id="fantasy-market-search" type="search" placeholder="Buscar jugador o club" autocomplete="off" aria-label="Buscar jugador o club">
+      </label>
+    </div>
+    <div class="fantasy-market-results" id="fantasy-market-results" aria-live="polite">
+      <div class="fantasy-market-empty">
+        <span class="fantasy-market-empty__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/><path d="M8 16h8"/></svg></span>
+        <span class="section-kicker">MERCADO EN PREPARACIÓN</span>
+        <h3>Próximamente, fichajes Fantasy</h3>
+        <p>El mercado ya tiene su espacio en Fantasy, pero no mostraremos jugadores inventados ni aceptaremos ofertas ficticias. Se habilitará cuando el catálogo oficial de jugadores y el backend de pujas y compras estén conectados.</p>
+        <div class="fantasy-market-features">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Subastas de 24 horas</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v14H3zM7 7V4h10v3"/></svg> Precio fijo</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg> Operaciones verificadas</span>
+        </div>
+      </div>
+    </div>
+    <p class="fantasy-market-footnote">Las pujas, compras, reservas de saldo y pagos al vendedor requieren validación segura en servidor; los controles visuales no simulan transacciones reales.</p>
   </section>
 
   <section class="fantasy-section" id="fantasy-formations" aria-labelledby="fantasy-formations-title">
@@ -202,7 +244,7 @@
     </div>
   </section>
 
-  <section class="fantasy-footer-note"><span class="fantasy-footer-note__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M12 8v4M12 16h.01"/></svg></span><p><strong>Estado del proyecto</strong><br>Esta primera entrega incorpora la página y el selector de formaciones. El mercado Fantasy, los puntos oficiales y el guardado seguro de equipos requieren todavía datos y backend.</p></section>
+  <section class="fantasy-footer-note"><span class="fantasy-footer-note__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="M12 8v4M12 16h.01"/></svg></span><p><strong>Estado del proyecto</strong><br>Esta primera entrega incorpora la página y el selector de formaciones. Los fichajes Fantasy, los puntos oficiales y el guardado seguro de equipos requieren todavía datos y backend.</p></section>
 </main>
 
   <footer class="site-footer">
@@ -377,7 +419,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
-  <script src="js/fantasy.js?v=2" defer></script>
+  <script src="js/fantasy.js?v=3" defer></script>
   
 </body>
 </html>
