@@ -1396,3 +1396,68 @@ body.ifl-fantasy-page .fantasy-pitch-heading h3,body.ifl-fantasy-page .fantasy-r
 body.ifl-fantasy-page .fantasy-pitch-caption,body.ifl-fantasy-page .fantasy-rules-list small,body.ifl-fantasy-page .fantasy-empty-roster p{color:var(--color-muted)!important}
 body.ifl-fantasy-page .fantasy-footer-note{border-radius:14px!important;background:#fff7f4!important;border:1px solid #f4d8ce!important}
 @media(max-width:700px){body.ifl-fantasy-page .fantasy-dashboard__heading{align-items:start;flex-direction:column}body.ifl-fantasy-page .fantasy-dashboard__grid{grid-template-columns:1fr}body.ifl-fantasy-page .fantasy-dashboard-card{min-height:88px;padding:1rem}}
+
+
+/* IFL Fantasy v1.7 — clean pill buttons, controlled logo sizing, branded loading screen */
+body.ifl-fantasy-page .fantasy-dashboard__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+body.ifl-fantasy-page .fantasy-dashboard-card{
+ min-width:0;min-height:145px;padding:20px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:12px;text-align:center;background:#fff;border:1px solid #e4e7ec;border-radius:20px;
+ box-shadow:0 4px 16px rgba(20,31,46,.045);text-decoration:none;overflow:hidden;
+}
+body.ifl-fantasy-page .fantasy-dashboard-card:hover,
+body.ifl-fantasy-page .fantasy-dashboard-card:focus-visible{
+ transform:translateY(-3px);background:#fff;border-color:#ed4a28;box-shadow:0 10px 24px rgba(237,74,40,.10);outline:none
+}
+body.ifl-fantasy-page .fantasy-dashboard-card__icon{
+ display:grid;place-items:center;flex:0 0 54px;width:54px;height:54px;max-width:54px;max-height:54px;
+ border-radius:16px;background:#fff1ec;color:#ed4a28;font-size:1.5rem;line-height:1;font-weight:700;overflow:hidden
+}
+body.ifl-fantasy-page .fantasy-dashboard-card__text{display:grid;gap:5px;justify-items:center;width:100%;min-width:0}
+body.ifl-fantasy-page .fantasy-dashboard-card__text strong{font-family:"Barlow Semi Condensed",sans-serif;font-size:1.2rem;line-height:1.15;font-weight:800;color:#17202a}
+body.ifl-fantasy-page .fantasy-dashboard-card__text small{font-family:inherit;font-size:.82rem;line-height:1.4;color:#667085;max-width:22ch}
+body.ifl-fantasy-page .fantasy-dashboard-card__arrow{font-size:1rem;line-height:1;color:#ed4a28;margin-top:1px}
+body.ifl-fantasy-page .fantasy-dashboard__heading h2{font-family:"Barlow Semi Condensed",sans-serif;font-weight:800}
+body.ifl-fantasy-page .fantasy-dashboard__heading p{font-size:.98rem;line-height:1.55}
+body.ifl-fantasy-page .fantasy-hero__visual{min-height:210px!important}
+body.ifl-fantasy-page .fantasy-hero__visual::before{width:118px!important;height:118px!important}
+body.ifl-fantasy-page .fantasy-hero__visual::after{width:150px!important;height:150px!important}
+body.ifl-fantasy-page .fantasy-hero-emblem{width:96px!important;height:96px!important;padding:10px!important;gap:3px!important}
+body.ifl-fantasy-page .fantasy-hero-emblem img{width:66px!important;height:58px!important;max-width:66px!important;max-height:58px!important;object-fit:contain!important}
+body.ifl-fantasy-page .fantasy-hero-emblem small{font-size:.48rem!important;line-height:1!important}
+body.ifl-fantasy-page .fantasy-market-empty__mark{width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:15px!important}
+body.ifl-fantasy-page .fantasy-market-empty__mark img{width:43px!important;height:43px!important;max-width:43px!important;max-height:43px!important;object-fit:contain!important}
+body.ifl-fantasy-page .fantasy-market-empty{padding:clamp(1.25rem,3vw,2.5rem)!important;gap:.8rem!important}
+body.ifl-fantasy-page .fantasy-market-empty h3{font-family:"Barlow Semi Condensed",sans-serif;font-size:clamp(1.45rem,2vw,1.9rem)!important;line-height:1.15!important;font-weight:800!important}
+body.ifl-fantasy-page .fantasy-market-empty p{max-width:66ch;margin-inline:auto;line-height:1.65!important;font-size:.96rem!important}
+body.ifl-fantasy-page .fantasy-market-features{display:flex;flex-wrap:wrap;justify-content:center;gap:8px!important}
+body.ifl-fantasy-page .fantasy-market-section .fantasy-market-features span{font-size:.82rem!important;font-weight:700;padding:.55rem .8rem!important}
+body.ifl-fantasy-page .fantasy-intro{background:#0c1725!important}
+body.ifl-fantasy-page .fantasy-intro__content{gap:1.2rem!important}
+body.ifl-fantasy-page .fantasy-intro__logo{width:clamp(86px,12vw,132px)!important;height:clamp(86px,12vw,132px)!important;display:grid;place-items:center}
+body.ifl-fantasy-page .fantasy-intro__logo img{display:block;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important}
+body.ifl-fantasy-page .fantasy-intro__word{
+ display:flex!important;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.025em!important;
+ max-width:min(94vw,900px);font-family:"Barlow Semi Condensed",sans-serif!important;
+ font-size:clamp(2rem,7vw,5.8rem)!important;font-weight:800!important;line-height:.95!important;letter-spacing:.035em!important;
+ color:#fff!important;text-shadow:0 5px 24px rgba(237,74,40,.2)
+}
+body.ifl-fantasy-page .fantasy-intro__word span{font-size:inherit!important;color:#fff!important;line-height:1!important}
+body.ifl-fantasy-page .fantasy-intro__word span:nth-child(1),
+body.ifl-fantasy-page .fantasy-intro__word span:nth-child(2),
+body.ifl-fantasy-page .fantasy-intro__word span:nth-child(3){color:#ff7549!important}
+body.ifl-fantasy-page .fantasy-intro__word i{display:block;flex-basis:.25em;width:.25em}
+body.ifl-fantasy-page .fantasy-intro__tagline{font-size:.76rem!important;letter-spacing:.22em!important;font-weight:700!important;color:#c8d2df!important;text-align:center}
+body.ifl-fantasy-page .fantasy-intro__edition{font-size:.72rem!important;font-weight:800!important;letter-spacing:.24em!important;color:#ff7549!important}
+@media(max-width:900px){body.ifl-fantasy-page .fantasy-dashboard__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){
+ body.ifl-fantasy-page .fantasy-dashboard__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ body.ifl-fantasy-page .fantasy-dashboard-card{min-height:132px;padding:15px 9px;border-radius:17px;gap:9px}
+ body.ifl-fantasy-page .fantasy-dashboard-card__text strong{font-size:1.08rem}
+ body.ifl-fantasy-page .fantasy-dashboard-card__text small{font-size:.76rem}
+ body.ifl-fantasy-page .fantasy-hero__visual{min-height:170px!important}
+ body.ifl-fantasy-page .fantasy-hero__visual::before{width:100px!important;height:100px!important}
+ body.ifl-fantasy-page .fantasy-hero__visual::after{width:128px!important;height:128px!important}
+ body.ifl-fantasy-page .fantasy-hero-emblem{width:82px!important;height:82px!important}
+ body.ifl-fantasy-page .fantasy-hero-emblem img{width:56px!important;height:48px!important}
+}
