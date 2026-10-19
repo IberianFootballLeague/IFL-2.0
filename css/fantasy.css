@@ -1159,3 +1159,41 @@ body.fantasy-mode #fantasy-market-results .fantasy-market-empty > .fantasy-marke
   margin: 0 !important;
   overflow: hidden !important;
 }
+
+
+/* Correct selector: fantasy.html uses body.ifl-fantasy-page, not body.fantasy-mode. */
+body.ifl-fantasy-page #fantasy-market-results .fantasy-market-empty {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+body.ifl-fantasy-page #fantasy-market-results .fantasy-market-empty > .fantasy-market-empty__icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  flex: 0 0 56px !important;
+  width: 56px !important;
+  min-width: 56px !important;
+  max-width: 56px !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
+  margin: 0 auto 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  line-height: 1 !important;
+}
+body.ifl-fantasy-page #fantasy-market-results .fantasy-market-empty > .fantasy-market-empty__icon > svg {
+  display: block !important;
+  box-sizing: border-box !important;
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
