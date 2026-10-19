@@ -18,7 +18,8 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=53">\n  <link rel="stylesheet" href="css/profile.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=53">
+  <link rel="stylesheet" href="css/profile.css?v=1">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -188,7 +189,8 @@
         setStadiumBackground(imageUrl) {
           const authScreen = document.getElementById("auth-screen");
           if (!authScreen || typeof imageUrl !== "string" || !(imageUrl.startsWith("https://") || imageUrl.startsWith("http://"))) return;
-          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\\n", "").replaceAll("\\r", "");
+          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\
+", "").replaceAll("\\r", "");
           authScreen.style.setProperty("--auth-stadium-image", 'url("' + safeUrl + '")');
           authScreen.classList.add("has-stadium-background");
         }
@@ -198,7 +200,8 @@
         return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
       }
 
-      function setAuthState(user) {\n        window.dispatchEvent(new CustomEvent("ifl-auth-state", { detail: { user: user || null } }));
+      function setAuthState(user) {
+        window.dispatchEvent(new CustomEvent("ifl-auth-state", { detail: { user: user || null } }));
         document.body.dataset.authenticated = user ? "true" : "false";
         const authScreen = document.getElementById("auth-screen");
         if (authScreen) authScreen.hidden = Boolean(user);
