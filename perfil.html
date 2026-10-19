@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Consulta tu perfil de la Iberian Football League y conecta tu cuenta de Roblox.">
+  <meta name="theme-color" content="#12161d">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Mi perfil · Iberian Football League</title>
+  <script>
+    (() => {
+      try {
+        const session = JSON.parse(localStorage.getItem("ifl-2-discord-session") || "null");
+        if (session?.access_token) document.documentElement.dataset.iflHasSession = "true";
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=53">\n  <link rel="stylesheet" href="css/profile.css?v=1">
+</head>
+<body data-authenticated="booting">
+  <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
+    <div class="auth-screen__stadium" aria-hidden="true"></div>
+    <div class="auth-screen__mark" aria-hidden="true"><img src="logo" alt=""></div>
+    <div class="auth-screen__card">
+      <span class="auth-screen__eyebrow">Iberian Football League</span>
+      <h1 id="auth-screen-title">Iniciar sesión</h1>
+      <p>Accede con tu cuenta de Discord para entrar a la plataforma de la IFL.</p>
+      <button class="auth-screen__button" id="primary-discord-login" type="button">
+        <span class="auth-screen__discord-icon" aria-hidden="true">◉</span>
+        Iniciar sesión con Discord
+      </button>
+    </div>
+  </section>
+
+  <div class="site-shell" id="site-shell">
+  <!-- Navegación inicial de IFL 2.0; las secciones se añadirán progresivamente. -->
+  <header class="site-header">
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Iberian Football League, inicio">
+        <img class="brand-logo" src="logo" alt="Logo de Iberian Football League" width="120" height="72">
+      </a>
+
+      <details class="mobile-menu">
+        <summary aria-label="Abrir menú de navegación">
+          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>Menú</span>
+        </summary>
+        <div class="mobile-menu-panel">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link" href="calendario.html">Calendario</a>
+          <a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link" href="estadios.html">Estadios</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link" href="mercado.html">Mercado</a>
+            </div>
+      </details>
+
+      <div class="desktop-menu">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="calendario.html">Calendario</a>
+        <a class="nav-link" href="clasificacion.html">Clasificación</a>
+            <a class="nav-link" href="estadios.html">Estadios</a>
+            <a class="nav-link" href="buscar.html">Buscar</a>
+            <a class="nav-link" href="mercado.html">Mercado</a>
+            <details class="profile-menu">
+          <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+            <span class="profile-avatar" aria-hidden="true"></span>
+          </summary>
+          <div class="profile-panel" aria-label="Opciones de perfil">
+            <button class="profile-option profile-login-option" type="button"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Iniciar sesión con Discord</span></span></button>
+            <a class="profile-option" href="perfil.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></a>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
+            <a class="profile-option fantasy-menu-option" href="fantasy.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10l2 5a7 7 0 0 1-14 0l2-5Z"/><path d="M5 9H3a3 3 0 0 0 3 4M19 9h2a3 3 0 0 1-3 4M9 8h6"/></svg><span>IFL Fantasy</span></span></a>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
+            <div class="profile-divider" role="separator"></div>
+            <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
+          </div>
+        </details>
+      </div>
+
+      <details class="profile-menu mobile-profile-menu">
+        <summary class="profile-trigger" aria-label="Abrir menú de perfil">
+          <span class="profile-avatar" aria-hidden="true"></span>
+        </summary>
+        <div class="profile-panel" aria-label="Opciones de perfil">
+          <button class="profile-option profile-login-option" type="button"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Iniciar sesión con Discord</span></span></button>
+          <a class="profile-option" href="perfil.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.6-3.5 3.2-5.5 7-5.5s6.4 2 7 5.5"/></svg><span>Mi perfil</span></span></a>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.5 7-9V5l-7-2-7 2v7c0 5.5 7 9 7 9Z"/><path d="m12 7 1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4L12 7Z"/></svg><span>Mi club</span></span></button>
+          <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.6.9l-.3 1.5h-2.4l-.3-1.5a7.8 7.8 0 0 1-1.6-.9l-1.4.5-1.2-2.1 1.1-.9a7 7 0 0 1 0-1.9l-1.1-.9 1.2-2.1 1.4.5a7.8 7.8 0 0 1 1.6-.9l.3-1.5h2.4l.3 1.5a7.8 7.8 0 0 1 1.6.9l1.4-.5 1.2 2.1-1.1.9a7 7 0 0 1-.1 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg><span>Ajustes</span></span></button>
+          <a class="profile-option fantasy-menu-option" href="fantasy.html"><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10l2 5a7 7 0 0 1-14 0l2-5Z"/><path d="M5 9H3a3 3 0 0 0 3 4M19 9h2a3 3 0 0 1-3 4M9 8h6"/></svg><span>IFL Fantasy</span></span></a>
+            <button class="profile-option" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg><span>Cerrar sesión</span></span></button>
+          <div class="profile-divider" role="separator"></div>
+          <button class="profile-option profile-option-admin" type="button" disabled><span class="profile-option-content"><svg class="profile-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg><span>Admin Panel</span></span></button>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main class="profile-page" id="contenido">
+    <section class="profile-page__heading">
+      <span class="section-kicker">CUENTA IFL</span>
+      <h1>Mi perfil</h1>
+      <p>Tu cuenta, tu identidad y tu conexión con Roblox.</p>
+    </section>
+
+    <section class="profile-card" aria-labelledby="profile-card-title">
+      <div class="profile-card__identity">
+        <div class="profile-card__avatar-wrap">
+          <img id="profile-discord-avatar" class="profile-card__avatar" alt="Avatar de Discord" hidden>
+          <span id="profile-discord-fallback" class="profile-card__avatar-fallback" aria-hidden="true">IFL</span>
+        </div>
+        <div class="profile-card__identity-copy">
+          <span class="profile-card__eyebrow">CUENTA DE DISCORD</span>
+          <h2 id="profile-card-title">Cargando perfil…</h2>
+          <p id="profile-discord-id">Comprobando tu sesión</p>
+          <span id="profile-session-status" class="profile-session-status">Comprobando sesión</span>
+        </div>
+      </div>
+      <div class="profile-card__divider"></div>
+      <div class="profile-roblox">
+        <div class="profile-roblox__copy">
+          <span class="profile-card__eyebrow">VINCULACIÓN DE CUENTA</span>
+          <h2>Roblox</h2>
+          <p>Conecta tu cuenta para asociar tu identidad de Roblox a tu perfil de la IFL.</p>
+          <p id="roblox-connect-status" class="roblox-connect-status" role="status" hidden></p>
+        </div>
+        <div class="profile-roblox__action">
+          <div class="profile-roblox__avatar-wrap">
+            <img id="profile-roblox-avatar" alt="Avatar de Roblox" hidden>
+            <span id="profile-roblox-fallback" aria-hidden="true">R</span>
+          </div>
+          <div class="profile-roblox__account">
+            <strong id="profile-roblox-name">Roblox sin conectar</strong>
+            <span id="profile-roblox-description">Tu cuenta todavía no está vinculada.</span>
+          </div>
+          <button id="roblox-connect-button" class="profile-connect-button" type="button">Conectar Roblox</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="community-cta" aria-labelledby="community-title">
+    <div>
+      <span class="community-cta__kicker">COMUNIDAD IFL</span>
+      <h2 id="community-title">Forma parte de la liga</h2>
+      <p>Únete a la comunidad oficial y mantente al día de todas las novedades.</p>
+    </div>
+    <span class="community-cta__button community-cta__button--pending" title="Enlace de invitación oficial pendiente de configurar">Discord oficial · enlace pendiente</span>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer__main">
+      <a class="site-footer__brand" href="index.html" aria-label="Iberian Football League, inicio">
+        <img src="logo" alt="Logo de Iberian Football League">
+        <span>Iberian Football League</span>
+      </a>
+      <nav class="site-footer__links" aria-label="Enlaces del pie de página">
+        <a href="index.html">Inicio</a>
+        <a href="calendario.html">Calendario</a>
+        <a href="clasificacion.html">Clasificación</a>
+      </nav>
+      <div class="site-footer__status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Información oficial IFL</span>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 Iberian Football League</span>
+      <span>IFL · Roblox Football League</span>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    (() => {
+      const SUPABASE_URL = "https://boazhychmpxeuplyxzsi.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_iRhldD-coePRVqcNDCGA_oGIA1u3d";
+      const STORAGE_KEY = "ifl-2-discord-session";
+      const loginOptions = [...document.querySelectorAll(".profile-login-option, #primary-discord-login")];
+      const logoutOptions = [...document.querySelectorAll(".profile-option")].filter((option) => option.textContent.trim() === "Cerrar sesión");
+
+      // Punto de conexión preparado para el futuro selector de estadios del Admin Panel.
+      window.IFLAuth = {
+        setStadiumBackground(imageUrl) {
+          const authScreen = document.getElementById("auth-screen");
+          if (!authScreen || typeof imageUrl !== "string" || !(imageUrl.startsWith("https://") || imageUrl.startsWith("http://"))) return;
+          const safeUrl = imageUrl.replaceAll('"', "").replaceAll("\\n", "").replaceAll("\\r", "");
+          authScreen.style.setProperty("--auth-stadium-image", 'url("' + safeUrl + '")');
+          authScreen.classList.add("has-stadium-background");
+        }
+      };
+
+      function userName(user) {
+        return user?.user_metadata?.full_name || user?.user_metadata?.global_name || user?.user_metadata?.name || "Usuario de Discord";
+      }
+
+      function setAuthState(user) {\n        window.dispatchEvent(new CustomEvent("ifl-auth-state", { detail: { user: user || null } }));
+        document.body.dataset.authenticated = user ? "true" : "false";
+        const authScreen = document.getElementById("auth-screen");
+        if (authScreen) authScreen.hidden = Boolean(user);
+        loginOptions.forEach((option) => {
+          option.textContent = "Iniciar sesión con Discord";
+          option.hidden = Boolean(user);
+          option.disabled = Boolean(user);
+        });
+        logoutOptions.forEach((option) => { option.disabled = !user; });
+
+        const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture || "";
+        document.querySelectorAll(".profile-avatar").forEach((avatar) => {
+          avatar.classList.remove("has-discord-avatar");
+          avatar.style.backgroundImage = "";
+          if (avatarUrl) {
+            try {
+              const parsed = new URL(avatarUrl);
+              if (parsed.protocol === "https:") {
+                avatar.style.backgroundImage = "url(" + JSON.stringify(parsed.href) + ")";
+                avatar.classList.add("has-discord-avatar");
+              }
+            } catch (_) {}
+          }
+        });
+        document.querySelectorAll(".profile-trigger").forEach((trigger) => {
+          trigger.title = user ? "Perfil de Discord" : "Iniciar sesión con Discord";
+        });
+      }
+
+      function saveSession(payload) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      }
+
+      function readSession() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); } catch (_) { return null; }
+      }
+
+      async function loadUser(accessToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/user", {
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + accessToken }
+        });
+        if (!response.ok) throw new Error("Sesión no válida");
+        return response.json();
+      }
+
+      async function refreshSession(refreshToken) {
+        const response = await fetch(SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+          method: "POST",
+          headers: { apikey: SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh_token: refreshToken })
+        });
+        if (!response.ok) throw new Error("No se pudo renovar la sesión");
+        const payload = await response.json();
+        const user = await loadUser(payload.access_token);
+        saveSession({ ...payload, user });
+        return user;
+      }
+
+      async function restoreSession() {
+        const params = new URLSearchParams(window.location.hash.slice(1));
+        const accessToken = params.get("access_token");
+        const refreshToken = params.get("refresh_token");
+        if (accessToken) {
+          // Mostrar la web en cuanto vuelve Discord y validar el token en segundo plano.
+          setAuthState({});
+          history.replaceState({}, document.title, window.location.pathname + window.location.search);
+          try {
+            const user = await loadUser(accessToken);
+            saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+            setAuthState(user);
+            return;
+          } catch (error) {
+            console.warn("[IFL 2.0] No se pudo validar la sesión OAuth:", error);
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+            return;
+          }
+        }
+
+        const stored = readSession();
+        if (!stored?.access_token) return setAuthState(null);
+
+        // La sesión guardada se pinta inmediatamente; la comprobación no bloquea la interfaz.
+        setAuthState(stored.user || {});
+        try {
+          const user = await loadUser(stored.access_token);
+          saveSession({ ...stored, user });
+          setAuthState(user);
+        } catch (_) {
+          try {
+            const user = stored.refresh_token ? await refreshSession(stored.refresh_token) : null;
+            if (!user) throw new Error("No hay token de renovación");
+            setAuthState(user);
+          } catch (__) {
+            localStorage.removeItem(STORAGE_KEY);
+            setAuthState(null);
+          }
+        }
+      }
+
+      function signIn() {
+        const redirectTo = "https://iberianfootballleague.github.io/IFL-2.0/";
+        const url = SUPABASE_URL + "/auth/v1/authorize?provider=discord&redirect_to=" + encodeURIComponent(redirectTo);
+        window.location.assign(url);
+      }
+
+      async function signOut() {
+        const stored = readSession();
+        if (stored?.access_token) {
+          await fetch(SUPABASE_URL + "/auth/v1/logout", {
+            method: "POST",
+            headers: { apikey: SUPABASE_PUBLISHABLE_KEY, Authorization: "Bearer " + stored.access_token }
+          }).catch(() => {});
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        setAuthState(null);
+      }
+
+      loginOptions.forEach((option) => option.addEventListener("click", signIn));
+      logoutOptions.forEach((option) => option.addEventListener("click", signOut));
+      restoreSession();
+    })();
+  </script>
+  <script src="js/ifl-data.js" defer></script>
+  <script src="js/site-content.js" defer></script>
+  <script src="js/profile-page.js?v=1" defer></script>
+</body>
+</html>
