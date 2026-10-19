@@ -106,6 +106,47 @@
   const marketResults = document.getElementById("fantasy-market-results");
   let marketType = "all";
 
+  console.info("[IFL Fantasy] versión 1.1 — corrección del icono del mercado cargada");
+  function fixFantasyMarketEmptyIcon() {
+    if (!marketResults) return;
+    const empty = marketResults.querySelector(".fantasy-market-empty");
+    const icon = empty?.querySelector(".fantasy-market-empty__icon");
+    const svg = icon?.querySelector("svg");
+    if (!icon || !svg) {
+      console.warn("[IFL Fantasy 1.1] No se encontró el icono SVG del mercado");
+      return;
+    }
+    // Estilos inline para evitar que reglas globales conviertan el SVG en un bloque gigante.
+    empty.style.setProperty("display", "flex", "important");
+    empty.style.setProperty("flex-direction", "column", "important");
+    empty.style.setProperty("align-items", "center", "important");
+    icon.style.setProperty("display", "flex", "important");
+    icon.style.setProperty("align-items", "center", "important");
+    icon.style.setProperty("justify-content", "center", "important");
+    icon.style.setProperty("box-sizing", "border-box", "important");
+    icon.style.setProperty("flex", "0 0 56px", "important");
+    icon.style.setProperty("width", "56px", "important");
+    icon.style.setProperty("min-width", "56px", "important");
+    icon.style.setProperty("max-width", "56px", "important");
+    icon.style.setProperty("height", "56px", "important");
+    icon.style.setProperty("min-height", "56px", "important");
+    icon.style.setProperty("max-height", "56px", "important");
+    icon.style.setProperty("margin", "0 auto 12px", "important");
+    icon.style.setProperty("overflow", "hidden", "important");
+    svg.style.setProperty("display", "block", "important");
+    svg.style.setProperty("box-sizing", "border-box", "important");
+    svg.style.setProperty("flex", "0 0 24px", "important");
+    svg.style.setProperty("width", "24px", "important");
+    svg.style.setProperty("min-width", "24px", "important");
+    svg.style.setProperty("max-width", "24px", "important");
+    svg.style.setProperty("height", "24px", "important");
+    svg.style.setProperty("min-height", "24px", "important");
+    svg.style.setProperty("max-height", "24px", "important");
+    console.info("[IFL Fantasy 1.1] Tamaños aplicados:", {
+      icono: Math.round(icon.getBoundingClientRect().width) + "×" + Math.round(icon.getBoundingClientRect().height),
+      svg: Math.round(svg.getBoundingClientRect().width) + "×" + Math.round(svg.getBoundingClientRect().height)
+    });
+  }
   function printFantasyMarketDiagnostics() {
     if (!marketResults) return;
     console.group('[IFL Fantasy] Diagnóstico visual del mercado');
@@ -135,11 +176,13 @@
       const heading = query ? "No hay coincidencias" : marketType === "auction" ? "Subastas próximamente" : marketType === "fixed" ? "Precio fijo próximamente" : "Próximamente, fichajes Fantasy";
       const paragraph = query ? "Prueba con otro nombre de jugador o club." : "El mercado visual está preparado, pero no publicamos jugadores sin datos oficiales ni permitimos transacciones sin el backend seguro.";
       marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="fantasy-market-empty__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/></svg></span><span class="section-kicker">MERCADO FANTASY</span><h3>' + heading + '</h3><p>' + paragraph + '</p><div class="fantasy-market-features"><span>Subastas de 24 horas</span><span>Precio fijo</span><span>Operaciones verificadas</span></div></div>';
+      fixFantasyMarketEmptyIcon();
       printFantasyMarketDiagnostics();
       return;
     }
     // Aún no se renderizan anuncios sin un esquema de mercado oficial validado.
     marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="section-kicker">CATÁLOGO DETECTADO</span><h3>Publicación de ofertas pendiente</h3><p>Hay datos de jugadores, pero las ofertas deben provenir del servicio de mercado Fantasy y no de los datos generales de la competición.</p></div>';
+    fixFantasyMarketEmptyIcon();
     printFantasyMarketDiagnostics();
   }
   marketTabs.forEach((tab) => tab.addEventListener("click", () => { marketType = tab.dataset.marketType; updateFantasyMarket(); }));
