@@ -67,3 +67,35 @@
   authObserver.observe(document.body, { attributes: true, attributeFilter: ["data-authenticated"] });
   chooseFormation("2-2");
 })();
+
+  // Controles visuales del mercado Fantasy. No ejecutan compras ni pujas sin backend.
+  const marketTabs = Array.from(document.querySelectorAll("[data-market-type]"));
+  const marketSearch = document.getElementById("fantasy-market-search");
+  const marketResults = document.getElementById("fantasy-market-results");
+  let marketType = "all";
+  function updateFantasyMarket() {
+    marketTabs.forEach((tab) => {
+      const selected = tab.dataset.marketType === marketType;
+      tab.classList.toggle("is-active", selected);
+      tab.setAttribute("aria-pressed", String(selected));
+    });
+    if (!marketResults) return;
+    const query = (marketSearch?.value || "").trim().toLocaleLowerCase("es");
+    const players = Array.isArray(window.IFL_DATA?.players) ? window.IFL_DATA.players : [];
+    const available = players.filter((player) => {
+      const text = [player.name, player.playerName, player.fullName, player.teamName, player.club, player.position].filter(Boolean).join(" ").toLocaleLowerCase("es");
+      const type = String(player.marketType || player.saleType || "").toLowerCase();
+      return (!query || text.includes(query)) && (marketType === "all" || type === marketType);
+    });
+    if (!available.length) {
+      const heading = query ? "No hay coincidencias" : marketType === "auction" ? "No hay subastas disponibles" : marketType === "fixed" ? "No hay jugadores a precio fijo" : "Próximamente, fichajes Fantasy";
+      const paragraph = query ? "Prueba con otro nombre de jugador o club." : "El mercado visual está preparado, pero no publicamos jugadores sin datos oficiales ni permitimos transacciones sin el backend seguro.";
+      marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="fantasy-market-empty__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v14H3zM7 7V4h10v3M3 12h18"/></svg></span><span class="section-kicker">MERCADO FANTASY</span><h3>' + heading + '</h3><p>' + paragraph + '</p><div class="fantasy-market-features"><span>Subastas de 24 horas</span><span>Precio fijo</span><span>Operaciones verificadas</span></div></div>';
+      return;
+    }
+    // Aún no se renderizan anuncios sin un esquema de mercado oficial validado.
+    marketResults.innerHTML = '<div class="fantasy-market-empty"><span class="section-kicker">CATÁLOGO DETECTADO</span><h3>Publicación de ofertas pendiente</h3><p>Hay datos de jugadores, pero las ofertas deben provenir del servicio de mercado Fantasy y no de los datos generales de la competición.</p></div>';
+  }
+  marketTabs.forEach((tab) => tab.addEventListener("click", () => { marketType = tab.dataset.marketType; updateFantasyMarket(); }));
+  marketSearch?.addEventListener("input", updateFantasyMarket);
+  updateFantasyMarket();
