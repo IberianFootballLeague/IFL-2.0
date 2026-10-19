@@ -5,6 +5,8 @@ window.IFL_DATA = Object.freeze({
   players: [],
   matches: [],
   news: [],
+  // Registros oficiales de palmarés. Campos sugeridos: team, teamName, club, title, competition, season, year, date.
+  honours: [],
   // Publica solo estadios oficiales confirmados. Campos sugeridos: id, name, teamId, teamName, competition, city, capacity, year, surface, dimensions, image, latitude, longitude.
   stadiums: [],
   // La tabla se calcula a partir de partidos finalizados de D1 y D2.
