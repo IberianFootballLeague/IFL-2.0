@@ -401,3 +401,7 @@ body.fantasy-mode .fantasy-market-features span{display:inline-flex!important;fl
  body.fantasy-mode .fantasy-market-features{flex-direction:column!important;align-items:stretch!important}
  body.fantasy-mode .fantasy-market-features span{width:100%!important;box-sizing:border-box!important}
 }
+
+
+/* Safety net: completed intro must never cover the Fantasy page. */
+body.fantasy-mode.fantasy-intro-done #fantasy-intro{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:none!important}
