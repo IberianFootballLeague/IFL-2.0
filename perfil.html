@@ -148,7 +148,7 @@
             <strong>Tu avatar aparecerá aquí</strong>
             <p>Conecta Roblox para cargar tu personaje en 3D.</p>
           </div>
-          <model-viewer id="profile-roblox-model" alt="Avatar 3D de Roblox" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="22deg" interaction-prompt="none" shadow-intensity="0.8" environment-image="neutral" exposure="1" hidden></model-viewer>
+          <div id="profile-roblox-model" class="technical-avatar-model" role="img" aria-label="Avatar 3D de Roblox"></div>
           <img id="profile-roblox-avatar" class="technical-avatar-stage__fallback-image" alt="Avatar de Roblox" hidden>
         </div>
         <p class="technical-card__avatar-tip" id="avatar-3d-tip">Cuando esté cargado, podrás arrastrar el avatar para girarlo.</p>
@@ -339,6 +339,7 @@
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
-  <script src="js/profile-page.js?v=2" defer></script>
+  <script src="js/profile-page.js?v=3" defer></script>
+  <script type="module" src="js/roblox-avatar-3d.js?v=1"></script>
 </body>
 </html>
