@@ -19,7 +19,7 @@
     })();
   </script>
   <link rel="stylesheet" href="css/styles.css?v=53">
-  <link rel="stylesheet" href="css/profile.css?v=1">
+  <link rel="stylesheet" href="css/profile.css?v=2">
 </head>
 <body data-authenticated="booting">
   <section class="auth-screen" id="auth-screen" aria-labelledby="auth-screen-title">
@@ -66,7 +66,7 @@
             <a class="nav-link" href="estadios.html">Estadios</a>
             <a class="nav-link" href="buscar.html">Buscar</a>
             <a class="nav-link" href="mercado.html">Mercado</a>
-undefined            <details class="profile-menu">
+            <details class="profile-menu">
           <summary class="profile-trigger" aria-label="Abrir menú de perfil">
             <span class="profile-avatar" aria-hidden="true"></span>
           </summary>
@@ -104,42 +104,54 @@ undefined            <details class="profile-menu">
   <main class="profile-page" id="contenido">
     <section class="profile-page__heading">
       <span class="section-kicker">CUENTA IFL</span>
-      <h1>Mi perfil</h1>
-      <p>Tu cuenta, tu identidad y tu conexión con Roblox.</p>
+      <h1>Mi ficha técnica</h1>
+      <p>Tu identidad en la IFL, tus estadísticas y tu avatar de Roblox.</p>
     </section>
 
-    <section class="profile-card" aria-labelledby="profile-card-title">
-      <div class="profile-card__identity">
-        <div class="profile-card__avatar-wrap">
-          <img id="profile-discord-avatar" class="profile-card__avatar" alt="Avatar de Discord" hidden>
-          <span id="profile-discord-fallback" class="profile-card__avatar-fallback" aria-hidden="true">IFL</span>
-        </div>
-        <div class="profile-card__identity-copy">
-          <span class="profile-card__eyebrow">CUENTA DE DISCORD</span>
-          <h2 id="profile-card-title">Cargando perfil…</h2>
-          <p id="profile-discord-id">Comprobando tu sesión</p>
-          <span id="profile-session-status" class="profile-session-status">Comprobando sesión</span>
-        </div>
-      </div>
-      <div class="profile-card__divider"></div>
-      <div class="profile-roblox">
-        <div class="profile-roblox__copy">
-          <span class="profile-card__eyebrow">VINCULACIÓN DE CUENTA</span>
-          <h2>Roblox</h2>
-          <p>Conecta tu cuenta para asociar tu identidad de Roblox a tu perfil de la IFL.</p>
-          <p id="roblox-connect-status" class="roblox-connect-status" role="status" hidden></p>
-        </div>
-        <div class="profile-roblox__action">
-          <div class="profile-roblox__avatar-wrap">
-            <img id="profile-roblox-avatar" alt="Avatar de Roblox" hidden>
-            <span id="profile-roblox-fallback" aria-hidden="true">R</span>
+    <section class="technical-card" aria-label="Ficha técnica del jugador">
+      <div class="technical-card__details">
+        <span class="profile-card__eyebrow">FICHA DE JUGADOR</span>
+        <div class="technical-identity">
+          <img id="profile-discord-avatar" class="technical-identity__avatar" alt="Avatar de Discord" hidden>
+          <span id="profile-discord-fallback" class="technical-identity__avatar technical-identity__fallback" aria-hidden="true">IFL</span>
+          <div>
+            <h2 id="profile-card-title">Cargando perfil…</h2>
+            <span class="technical-identity__status" id="profile-session-status">Comprobando sesión</span>
           </div>
-          <div class="profile-roblox__account">
-            <strong id="profile-roblox-name">Roblox sin conectar</strong>
-            <span id="profile-roblox-description">Tu cuenta todavía no está vinculada.</span>
-          </div>
+        </div>
+        <dl class="technical-account-list">
+          <div><dt>Usuario de Discord</dt><dd id="profile-discord-name">Cargando…</dd></div>
+          <div id="profile-roblox-row" hidden><dt>Usuario de Roblox</dt><dd id="profile-roblox-name">Sin conectar</dd></div>
+        </dl>
+        <div class="technical-connect-prompt" id="technical-connect-prompt" hidden>
+          <span class="technical-connect-prompt__mark" aria-hidden="true">R</span>
+          <div><strong>Conecta tu perfil de Roblox</strong><p>Conecta tu cuenta para poder ver tu avatar en 3D y vincular tu identidad de Roblox.</p></div>
           <button id="roblox-connect-button" class="profile-connect-button" type="button">Conectar Roblox</button>
         </div>
+        <div class="technical-stats" aria-label="Estadísticas de competición">
+          <div><span>Goles</span><strong id="stat-goals">—</strong></div>
+          <div><span>Asistencias</span><strong id="stat-assists">—</strong></div>
+          <div><span>Tarjetas amarillas</span><strong id="stat-yellow-cards">—</strong></div>
+          <div><span>Tarjetas rojas</span><strong id="stat-red-cards">—</strong></div>
+          <div><span>MVPs</span><strong id="stat-mvps">—</strong></div>
+          <div><span>Trofeos</span><strong id="stat-trophies">—</strong></div>
+        </div>
+        <p class="technical-stats-note">Las estadísticas se mostrarán cuando estén conectadas a los registros oficiales de partidos de la IFL.</p>
+        <p id="roblox-connect-status" class="roblox-connect-status" role="status" hidden></p>
+      </div>
+
+      <div class="technical-card__avatar-panel">
+        <div class="technical-card__avatar-heading"><span class="profile-card__eyebrow">AVATAR DE ROBLOX</span><span id="avatar-3d-badge">SIN CONECTAR</span></div>
+        <div class="technical-avatar-stage" id="technical-avatar-stage">
+          <div class="technical-avatar-stage__placeholder" id="avatar-3d-placeholder">
+            <span class="technical-avatar-stage__icon" aria-hidden="true">R</span>
+            <strong>Tu avatar aparecerá aquí</strong>
+            <p>Conecta Roblox para cargar tu personaje en 3D.</p>
+          </div>
+          <model-viewer id="profile-roblox-model" alt="Avatar 3D de Roblox" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="22deg" interaction-prompt="none" shadow-intensity="0.8" environment-image="neutral" exposure="1" hidden></model-viewer>
+          <img id="profile-roblox-avatar" class="technical-avatar-stage__fallback-image" alt="Avatar de Roblox" hidden>
+        </div>
+        <p class="technical-card__avatar-tip" id="avatar-3d-tip">Cuando esté cargado, podrás arrastrar el avatar para girarlo.</p>
       </div>
     </section>
   </main>
@@ -327,6 +339,6 @@ undefined            <details class="profile-menu">
   </script>
   <script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
-  <script src="js/profile-page.js?v=1" defer></script>
+  <script src="js/profile-page.js?v=2" defer></script>
 </body>
 </html>
