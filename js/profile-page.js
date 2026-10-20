@@ -69,13 +69,8 @@
     try {
       // El endpoint 3D de Roblox es experimental; si el modelo no se puede cargar,
       // mantenemos la miniatura de alta calidad como alternativa.
-      const response = await fetch("https://thumbnails.roblox.com/v1/users/avatar-3d?userId=" + encodeURIComponent(userId) + "&useGltf=true");
-      if (!response.ok) throw new Error("El servicio 3D de Roblox no está disponible.");
-      const data = await response.json();
-      if (!data.imageUrl) throw new Error("Roblox no ha devuelto el modelo 3D.");
-      const model = $("profile-roblox-model");
-      model.src = data.imageUrl;
-      model.hidden = false;
+      $("profile-roblox-model").hidden = false;
+      window.dispatchEvent(new CustomEvent("ifl-roblox-avatar-load", { detail: { userId: String(userId) } }));
       $("profile-roblox-avatar").hidden = true;
       $("avatar-3d-tip").textContent = "Arrastra el avatar para girarlo y usa la rueda del ratón para acercar o alejar.";
     } catch (error) {
