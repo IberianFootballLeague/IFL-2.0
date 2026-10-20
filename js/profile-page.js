@@ -56,7 +56,18 @@
     if (profile.picture && /^https:\/\//i.test(profile.picture)) {
       avatar.src = profile.picture;
       avatar.hidden = false;
-    } else avatar.hidden = true;
+    } else {
+      avatar.hidden = true;
+      fetch("https://thumbnails.roblox.com/v1/users/avatar?userIds=" + encodeURIComponent(profile.id || profile.userId) + "&size=420x420&format=Png&isCircular=false")
+        .then((response) => response.ok ? response.json() : Promise.reject(new Error("Miniatura no disponible")))
+        .then((data) => {
+          const imageUrl = data.data?.[0]?.imageUrl;
+          if (imageUrl && /^https:\/\//i.test(imageUrl)) {
+            avatar.src = imageUrl;
+            avatar.hidden = false;
+          }
+        }).catch(() => {});
+    }
     $("roblox-connect-button").textContent = "Roblox conectado";
     loadAvatarModel(profile);
   }
