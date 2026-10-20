@@ -130,6 +130,12 @@ if (host) {
   }
   window.addEventListener("ifl-roblox-avatar-load", (event) => {
     const id = event.detail?.userId;
-    if (id && /^\d+$/.test(id)) load(id);
+    if (id && /^\\d+$/.test(id)) load(id);
   });
+  // Recupera también un perfil ya vinculado si el módulo termina de cargar después del script principal.
+  try {
+    const saved = JSON.parse(localStorage.getItem("ifl-2-roblox-profile") || "null");
+    const savedId = String(saved?.id || saved?.userId || "");
+    if (savedId && /^\\d+$/.test(savedId)) load(savedId);
+  } catch (_) {}
 }
