@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12161d"><meta name="description" content="Personaliza tu experiencia en la web de Iberian Football League.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="stylesheet" href="css/styles.css?v=54"><link rel="stylesheet" href="css/mi-club.css?v=2">
+<title>Ajustes · Iberian Football League</title>
+</head>
+<body><div class="site-shell">
+<header class="site-header"><nav class="main-nav" aria-label="Navegación principal">
+<a class="brand" href="index.html" aria-label="IFL Inicio"><img class="brand-logo" src="logo" alt="Logo IFL" width="120" height="72"></a>
+<details class="mobile-menu"><summary aria-label="Abrir menú"><span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span><span>Menú</span></summary><div class="mobile-menu-panel"><a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a><a class="nav-link" href="estadios.html">Estadios</a><a class="nav-link" href="buscar.html">Buscar</a><a class="nav-link" href="mercado.html">Mercado</a></div></details>
+<div class="desktop-menu"><a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="calendario.html">Calendario</a><a class="nav-link" href="clasificacion.html">Clasificación</a><a class="nav-link" href="estadios.html">Estadios</a><a class="nav-link" href="buscar.html">Buscar</a><a class="nav-link" href="mercado.html">Mercado</a>
+<details class="profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil">
+<a class="profile-option" href="perfil.html"><span class="profile-option-content"><span>Mi perfil</span></span></a><a class="profile-option" href="miclub.html"><span class="profile-option-content"><span>Mi club</span></span></a><a class="profile-option" href="ajustes.html"><span class="profile-option-content"><span>Ajustes</span></span></a><a class="profile-option" href="fantasy.html"><span class="profile-option-content"><span>IFL Fantasy</span></span></a></div></details></div>
+<details class="profile-menu mobile-profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil"><a class="profile-option" href="perfil.html"><span class="profile-option-content"><span>Mi perfil</span></span></a><a class="profile-option" href="miclub.html"><span class="profile-option-content"><span>Mi club</span></span></a><a class="profile-option" href="ajustes.html"><span class="profile-option-content"><span>Ajustes</span></span></a><a class="profile-option" href="fantasy.html"><span class="profile-option-content"><span>IFL Fantasy</span></span></a></div></details>
+</nav></header>
+<main class="settings-page"><div class="settings-heading"><span class="club-eyebrow">IFL · PERSONALIZACIÓN</span><h1>Ajustes</h1><p>Adapta la web a tu gusto. Las preferencias se guardan en este navegador.</p></div>
+<section class="settings-card"><div class="settings-row"><div><h2>Color de la web</h2><p>Cambia el color de acento de botones y detalles.</p></div><label class="settings-color"><span class="sr-only">Color de acento</span><input id="pref-accent" type="color" value="#ed4a28"></label></div>
+<div class="settings-row"><div><h2>Texto más grande</h2><p>Aumenta un poco el tamaño del texto en la web.</p></div><label class="settings-switch"><input id="pref-large-text" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-row"><div><h2>Diseño compacto</h2><p>Reduce algunos espacios para mostrar más contenido en pantalla.</p></div><label class="settings-switch"><input id="pref-compact" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-row"><div><h2>Reducir animaciones</h2><p>Desactiva las animaciones y transiciones decorativas.</p></div><label class="settings-switch"><input id="pref-motion" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-actions"><button class="club-edit-cancel" id="pref-reset" type="button">Restablecer</button><span id="pref-status" role="status">Cambios aplicados automáticamente.</span></div>
+</section><p class="settings-footnote">Estos ajustes afectan solo a este navegador y dispositivo; no cambian los datos de tu cuenta ni los de otros usuarios.</p></main>
+<footer class="site-footer"><div class="site-footer__bottom"><span>© 2026 Iberian Football League</span><a href="index.html">Volver al inicio</a></div></footer>
+</div><script src="js/site-preferences.js?v=1" defer></script><script>
+(() => {
+const key = "ifl-site-preferences";
+const defaults = { accent: "#ed4a28", largeText: false, compact: false, reduceMotion: false };
+const accent = document.getElementById("pref-accent"), large = document.getElementById("pref-large-text"), compact = document.getElementById("pref-compact"), motion = document.getElementById("pref-motion"), status = document.getElementById("pref-status");
+let prefs = { ...defaults };
+try { prefs = { ...prefs, ...JSON.parse(localStorage.getItem(key) || "{}") }; } catch (_) {}
+function apply() {
+if (!/^#[0-9a-f]{6}$/i.test(prefs.accent || "")) prefs.accent = defaults.accent;
+document.documentElement.style.setProperty("--color-brand", prefs.accent);
+document.documentElement.classList.toggle("ifl-large-text", !!prefs.largeText);
+document.documentElement.classList.toggle("ifl-compact", !!prefs.compact);
+document.documentElement.classList.toggle("ifl-reduce-motion", !!prefs.reduceMotion);
+accent.value = prefs.accent; large.checked = !!prefs.largeText; compact.checked = !!prefs.compact; motion.checked = !!prefs.reduceMotion;
+try { localStorage.setItem(key, JSON.stringify(prefs)); status.textContent = "Ajustes guardados en este navegador."; } catch (_) { status.textContent = "No se pudieron guardar los ajustes del navegador."; }
+}
+accent.addEventListener("input", () => { prefs.accent = accent.value; apply(); });
+large.addEventListener("change", () => { prefs.largeText = large.checked; apply(); });
+compact.addEventListener("change", () => { prefs.compact = compact.checked; apply(); });
+motion.addEventListener("change", () => { prefs.reduceMotion = motion.checked; apply(); });
+document.getElementById("pref-reset").addEventListener("click", () => { prefs = { ...defaults }; apply(); });
+apply();
+})();
+</script></body></html>
