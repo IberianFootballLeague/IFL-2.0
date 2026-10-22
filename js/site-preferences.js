@@ -10,7 +10,25 @@
     link.innerHTML = item.innerHTML;
     item.replaceWith(link);
   });
-  const menus = [...document.querySelectorAll("details.profile-menu, details.mobile-menu")];
+
+  // Mantener la foto de Discord visible también en páginas sin el módulo de autenticación completo.
+  try {
+    const session = JSON.parse(localStorage.getItem("ifl-2-discord-session") || "null");
+    const user = session?.user || session?.profile || {};
+    const meta = user.user_metadata || user.raw_user_meta_data || {};
+    let avatarUrl = meta.avatar_url || meta.picture || user.avatar_url || "";
+    if (!avatarUrl && user.id && user.avatar && /^[0-9a-f]+$/i.test(String(user.avatar))) {
+      avatarUrl = "https://cdn.discordapp.com/avatars/" + encodeURIComponent(user.id) + "/" + encodeURIComponent(user.avatar) + ".png?size=128";
+    }
+    if (typeof avatarUrl === "string" && /^https:\/\//i.test(avatarUrl)) {
+      document.querySelectorAll(".profile-avatar").forEach((avatar) => {
+        avatar.style.backgroundImage = 'url("' + avatarUrl.replace(/["\\\\]/g, "") + '")';
+        avatar.classList.add("has-discord-avatar");
+        avatar.setAttribute("aria-label", "Foto de perfil de Discord");
+      });
+    }
+  } catch (_) {}
+\n  const menus = [...document.querySelectorAll("details.profile-menu, details.mobile-menu")];
   document.addEventListener("pointerdown", (event) => {
     menus.forEach((menu) => { if (menu.open && !menu.contains(event.target)) menu.open = false; });
   });
