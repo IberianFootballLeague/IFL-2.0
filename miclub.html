@@ -18,8 +18,8 @@
       } catch (_) {}
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=53">
-  <link rel="stylesheet" href="css/mi-club.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=54">
+  <link rel="stylesheet" href="css/mi-club.css?v=3">
 </head>
 <body>
   <div class="site-shell" id="site-shell">
@@ -277,78 +277,10 @@
       restoreSession();
     })();
   </script>
-  <script>
-    (() => {
-      const storageKey = "ifl-club-profile-c1";
-      const defaults = { foundation: "", president: "", coach: "", competition: "IFL D1", stadium: "", budget: 0, primaryColor: "#05080e", secondaryColor: "#ffffff" };
-      const form = document.getElementById("club-editor-form");
-      const editor = document.getElementById("club-editor");
-      const toggle = document.getElementById("club-edit-toggle");
-      const cancel = document.getElementById("club-edit-cancel");
-      if (!form || !editor || !toggle) return;
-      let values = { ...defaults };
-      try { values = { ...values, ...(JSON.parse(localStorage.getItem(storageKey) || "{}")) }; } catch (_) {}
-      const fields = ["foundation", "president", "coach", "competition", "stadium", "budget", "primaryColor", "secondaryColor"];
-      function validColor(value, fallback) { return /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback; }
-      function render() {
-        ["foundation", "president", "coach", "competition", "stadium"].forEach((key) => {
-          const output = document.querySelector('[data-club-value="' + key + '"]');
-          if (output) output.textContent = key === "stadium" ? (values.stadium || "Información del estadio pendiente.") : (values[key] || "—");
-        });
-        const budget = Math.max(0, Number(values.budget) || 0);
-        document.getElementById("club-budget-value").textContent = budget.toLocaleString("es-ES");
-        document.getElementById("club-budget-caption").textContent = budget.toLocaleString("es-ES") + " €";
-        const primary = validColor(values.primaryColor, defaults.primaryColor);
-        const secondary = validColor(values.secondaryColor, defaults.secondaryColor);
-        document.querySelector('[data-club-swatch="primary"]').style.background = primary;
-        document.querySelector('[data-club-swatch="secondary"]').style.background = secondary;
-        document.getElementById("club-colors-label").textContent = primary.toUpperCase() + " · " + secondary.toUpperCase();
-        const crest = document.querySelector(".club-identity__crest svg");
-        crest.querySelector("path").setAttribute("fill", primary);
-        crest.querySelector("path:nth-child(2)").setAttribute("stroke", secondary);
-        crest.querySelector("text").setAttribute("fill", secondary);
-        crest.querySelector("circle").setAttribute("fill", secondary);
-      }
-      function fillForm() {
-        fields.forEach((key) => { const input = form.elements.namedItem(key); if (input) input.value = values[key] ?? defaults[key]; });
-        form.elements.primaryColorText.value = validColor(values.primaryColor, defaults.primaryColor);
-        form.elements.secondaryColorText.value = validColor(values.secondaryColor, defaults.secondaryColor);
-      }
-      function openEditor(open) {
-        editor.hidden = !open;
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.textContent = open ? "Cerrar editor" : "Editar ficha";
-        if (open) { fillForm(); editor.scrollIntoView({ behavior: "smooth", block: "start" }); }
-      }
-      [["primaryColor","primaryColorText"],["secondaryColor","secondaryColorText"]].forEach(([colorKey,textKey]) => {
-        form.elements[colorKey].addEventListener("input", () => { form.elements[textKey].value = form.elements[colorKey].value; });
-        form.elements[textKey].addEventListener("change", () => {
-          if (/^#[0-9a-f]{6}$/i.test(form.elements[textKey].value)) form.elements[colorKey].value = form.elements[textKey].value;
-        });
-      });
-      toggle.addEventListener("click", () => openEditor(editor.hidden));
-      cancel.addEventListener("click", () => openEditor(false));
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        fields.forEach((key) => { values[key] = key === "budget" ? Math.max(0, Number(form.elements[key].value) || 0) : form.elements[key].value.trim(); });
-        values.primaryColor = validColor(form.elements.primaryColorText.value, defaults.primaryColor);
-        values.secondaryColor = validColor(form.elements.secondaryColorText.value, defaults.secondaryColor);
-        try {
-          localStorage.setItem(storageKey, JSON.stringify(values));
-          render();
-          openEditor(false);
-          document.getElementById("club-editor-note").textContent = "Cambios guardados en este navegador.";
-        } catch (_) {
-          document.getElementById("club-editor-note").textContent = "No se pudieron guardar los cambios en este navegador.";
-        }
-      });
-      render();
-    })();
-  </script>
-
-  <script src="js/ifl-data.js" defer></script>
+<script src="js/ifl-data.js" defer></script>
   <script src="js/site-content.js" defer></script>
   
   
+  <script src="js/site-preferences.js?v=1" defer></script>
 </body>
 </html>
