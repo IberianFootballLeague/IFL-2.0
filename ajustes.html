@@ -15,19 +15,21 @@
 <a class="profile-option" href="perfil.html"><span class="profile-option-content"><span>Mi perfil</span></span></a><a class="profile-option" href="miclub.html"><span class="profile-option-content"><span>Mi club</span></span></a><a class="profile-option" href="ajustes.html"><span class="profile-option-content"><span>Ajustes</span></span></a><a class="profile-option" href="fantasy.html"><span class="profile-option-content"><span>IFL Fantasy</span></span></a></div></details></div>
 <details class="profile-menu mobile-profile-menu"><summary class="profile-trigger" aria-label="Abrir menú de perfil"><span class="profile-avatar" aria-hidden="true"></span></summary><div class="profile-panel" aria-label="Opciones de perfil"><a class="profile-option" href="perfil.html"><span class="profile-option-content"><span>Mi perfil</span></span></a><a class="profile-option" href="miclub.html"><span class="profile-option-content"><span>Mi club</span></span></a><a class="profile-option" href="ajustes.html"><span class="profile-option-content"><span>Ajustes</span></span></a><a class="profile-option" href="fantasy.html"><span class="profile-option-content"><span>IFL Fantasy</span></span></a></div></details>
 </nav></header>
-<main class="settings-page"><div class="settings-heading"><span class="club-eyebrow">IFL · PERSONALIZACIÓN</span><h1>Ajustes</h1><p>Adapta la web a tu gusto. Las preferencias se guardan en este navegador.</p></div>
-<section class="settings-card"><div class="settings-row"><div><h2>Color de la web</h2><p>Cambia el color de acento de botones y detalles.</p></div><label class="settings-color"><span class="sr-only">Color de acento</span><input id="pref-accent" type="color" value="#ed4a28"></label></div>
+<main class="settings-page"><section class="settings-hero"><div class="settings-hero__copy"><span class="club-eyebrow">IFL · PERSONALIZACIÓN</span><h1>Ajustes</h1><p>Haz que IFL se adapte a ti. Personaliza la apariencia y la comodidad de navegación.</p><span class="settings-hero__note"><span class="settings-live-dot"></span> Preferencias guardadas en este dispositivo</span></div><div class="settings-hero__art" aria-hidden="true"><svg viewBox="0 0 160 160" fill="none"><circle cx="80" cy="80" r="65" stroke="currentColor" stroke-opacity=".16" stroke-width="1.5"/><circle cx="80" cy="80" r="49" stroke="currentColor" stroke-opacity=".25" stroke-width="1.5"/><path d="M80 24 120 47v46l-40 23-40-23V47L80 24Z" stroke="currentColor" stroke-width="3"/><path d="m80 24 0 46m40-23-40 23-40-23m40 23v46" stroke="currentColor" stroke-width="2"/><circle cx="80" cy="70" r="9" fill="var(--color-brand)"/></svg></div></section>
+<div class="settings-section-label"><span>01</span><div><h2>Apariencia</h2><p>Personaliza el aspecto general de la web.</p></div></div><section class="settings-card"><div class="settings-row"><div><h2>Color de la web</h2><p>Cambia el color de acento de botones y detalles.</p></div><label class="settings-color"><span class="sr-only">Color de acento</span><input id="pref-accent" type="color" value="#ed4a28"></label></div>
 <div class="settings-row"><div><h2>Texto más grande</h2><p>Aumenta un poco el tamaño del texto en la web.</p></div><label class="settings-switch"><input id="pref-large-text" type="checkbox"><span>Activar</span></label></div>
 <div class="settings-row"><div><h2>Diseño compacto</h2><p>Reduce algunos espacios para mostrar más contenido en pantalla.</p></div><label class="settings-switch"><input id="pref-compact" type="checkbox"><span>Activar</span></label></div>
-<div class="settings-row"><div><h2>Reducir animaciones</h2><p>Desactiva las animaciones y transiciones decorativas.</p></div><label class="settings-switch"><input id="pref-motion" type="checkbox"><span>Activar</span></label></div>
-<div class="settings-actions"><button class="club-edit-cancel" id="pref-reset" type="button">Restablecer</button><span id="pref-status" role="status">Cambios aplicados automáticamente.</span></div>
-</section><p class="settings-footnote">Estos ajustes afectan solo a este navegador y dispositivo; no cambian los datos de tu cuenta ni los de otros usuarios.</p></main>
+<div class="settings-row"><div><h2>Reducir animaciones</h2><p>Desactiva las animaciones y transiciones decorativas para una navegación más tranquila.</p></div><label class="settings-switch"><input id="pref-motion" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-row"><div><h2>Alto contraste</h2><p>Refuerza los bordes y el contraste de textos y tarjetas.</p></div><label class="settings-switch"><input id="pref-contrast" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-row"><div><h2>Enlaces subrayados</h2><p>Haz que los enlaces sean más fáciles de identificar.</p></div><label class="settings-switch"><input id="pref-underlines" type="checkbox"><span>Activar</span></label></div>
+<div class="settings-actions"><button class="settings-reset" id="pref-reset" type="button"><span aria-hidden="true">↺</span> Restablecer ajustes</button><span id="pref-status" role="status">Los cambios se aplican automáticamente.</span></div>
+</section><section class="settings-info-strip"><span class="settings-info-icon" aria-hidden="true">i</span><div><strong>Solo para ti</strong><p>Estos ajustes se guardan en este navegador y dispositivo. No modifican los datos de tu cuenta ni afectan a otros usuarios.</p></div></section></main>
 <footer class="site-footer"><div class="site-footer__bottom"><span>© 2026 Iberian Football League</span><a href="index.html">Volver al inicio</a></div></footer>
 </div><script src="js/site-preferences.js?v=1" defer></script><script>
 (() => {
 const key = "ifl-site-preferences";
-const defaults = { accent: "#ed4a28", largeText: false, compact: false, reduceMotion: false };
-const accent = document.getElementById("pref-accent"), large = document.getElementById("pref-large-text"), compact = document.getElementById("pref-compact"), motion = document.getElementById("pref-motion"), status = document.getElementById("pref-status");
+const defaults = { accent: "#ed4a28", largeText: false, compact: false, reduceMotion: false, highContrast: false, underlineLinks: false };
+const accent = document.getElementById("pref-accent"), large = document.getElementById("pref-large-text"), compact = document.getElementById("pref-compact"), motion = document.getElementById("pref-motion"), contrast = document.getElementById("pref-contrast"), underlines = document.getElementById("pref-underlines"), status = document.getElementById("pref-status");
 let prefs = { ...defaults };
 try { prefs = { ...prefs, ...JSON.parse(localStorage.getItem(key) || "{}") }; } catch (_) {}
 function apply() {
@@ -36,13 +38,17 @@ document.documentElement.style.setProperty("--color-brand", prefs.accent);
 document.documentElement.classList.toggle("ifl-large-text", !!prefs.largeText);
 document.documentElement.classList.toggle("ifl-compact", !!prefs.compact);
 document.documentElement.classList.toggle("ifl-reduce-motion", !!prefs.reduceMotion);
-accent.value = prefs.accent; large.checked = !!prefs.largeText; compact.checked = !!prefs.compact; motion.checked = !!prefs.reduceMotion;
+document.documentElement.classList.toggle("ifl-high-contrast", !!prefs.highContrast);
+document.documentElement.classList.toggle("ifl-underline-links", !!prefs.underlineLinks);
+accent.value = prefs.accent; large.checked = !!prefs.largeText; compact.checked = !!prefs.compact; motion.checked = !!prefs.reduceMotion; contrast.checked = !!prefs.highContrast; underlines.checked = !!prefs.underlineLinks;
 try { localStorage.setItem(key, JSON.stringify(prefs)); status.textContent = "Ajustes guardados en este navegador."; } catch (_) { status.textContent = "No se pudieron guardar los ajustes del navegador."; }
 }
 accent.addEventListener("input", () => { prefs.accent = accent.value; apply(); });
 large.addEventListener("change", () => { prefs.largeText = large.checked; apply(); });
 compact.addEventListener("change", () => { prefs.compact = compact.checked; apply(); });
 motion.addEventListener("change", () => { prefs.reduceMotion = motion.checked; apply(); });
+contrast.addEventListener("change", () => { prefs.highContrast = contrast.checked; apply(); });
+underlines.addEventListener("change", () => { prefs.underlineLinks = underlines.checked; apply(); });
 document.getElementById("pref-reset").addEventListener("click", () => { prefs = { ...defaults }; apply(); });
 apply();
 })();
