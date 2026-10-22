@@ -39,7 +39,7 @@
     }
   }
   function fill() {
-    ["foundation","president","coach","competition","stadium","budget"].forEach(key => { if (get(key)) get(key).value = values[key] ?? defaults[key]; });
+    ["foundation","coach"].forEach(key => { if (get(key)) get(key).value = values[key] ?? defaults[key]; });
     [["primaryColor","#05080e"],["secondaryColor","#ffffff"]].forEach(([key,fallback]) => {
       if (get(key)) get(key).value = colorOK(values[key], fallback);
       const text = get(key + "Text"); if (text) text.value = colorOK(values[key], fallback);
@@ -62,8 +62,7 @@
   if (cancel) cancel.addEventListener("click", () => open(false));
   form.addEventListener("submit", event => {
     event.preventDefault();
-    ["foundation","president","coach","competition","stadium"].forEach(key => { values[key] = (get(key)?.value || "").trim(); });
-    values.budget = String(Math.max(0, Number(get("budget")?.value) || 0));
+    ["foundation","coach"].forEach(key => { values[key] = (get(key)?.value || "").trim(); });
     values.primaryColor = colorOK(get("primaryColorText")?.value || get("primaryColor")?.value, defaults.primaryColor);
     values.secondaryColor = colorOK(get("secondaryColorText")?.value || get("secondaryColor")?.value, defaults.secondaryColor);
     try {
