@@ -1829,3 +1829,48 @@ body.ifl-fantasy-page .fantasy-intro__edition{font-size:.72rem!important;font-we
   .ifl-fantasy-page .fantasy-market-hero { gap:1rem; }
   .ifl-fantasy-page .fantasy-pitch { min-height:330px; }
 }
+
+
+/* Fantasy refresh: jerarquia visual, tarjetas y estados vacíos */
+.ifl-fantasy-page .fantasy-page{max-width:1320px}
+.ifl-fantasy-page .fantasy-hero{min-height:340px;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 65px rgba(8,13,18,.16)}
+.ifl-fantasy-page .fantasy-hero__copy{position:relative;z-index:2}
+.ifl-fantasy-page .fantasy-hero h1{max-width:700px;font-size:clamp(3rem,6.5vw,5.4rem);letter-spacing:-.055em}
+.ifl-fantasy-page .fantasy-hero h1 span{color:var(--fantasy-lime,#c8f169)}
+.ifl-fantasy-page .fantasy-hero .section-intro{line-height:1.65}
+.ifl-fantasy-page .fantasy-primary-link{border-radius:12px;box-shadow:0 9px 22px rgba(0,0,0,.16);transition:transform .18s ease,background .18s ease}
+.ifl-fantasy-page .fantasy-primary-link:hover{transform:translateY(-2px)}
+.ifl-fantasy-page .fantasy-summary-grid{gap:14px;margin-top:18px}
+.ifl-fantasy-page .fantasy-summary-card{position:relative;overflow:hidden;border-radius:18px;border:1px solid #e5e9ed;box-shadow:0 8px 24px rgba(16,24,32,.045);transition:transform .18s ease,box-shadow .18s ease}
+.ifl-fantasy-page .fantasy-summary-card:hover{transform:translateY(-2px);box-shadow:0 13px 28px rgba(16,24,32,.08)}
+.ifl-fantasy-page .fantasy-summary-icon{border-radius:13px}
+.ifl-fantasy-page .fantasy-dashboard{margin-top:38px}
+.ifl-fantasy-page .fantasy-dashboard__heading{margin-bottom:17px}
+.ifl-fantasy-page .fantasy-dashboard__grid{gap:13px}
+.ifl-fantasy-page .fantasy-dashboard-card{min-height:105px;padding:19px;border:1px solid rgba(255,255,255,.09);border-radius:17px;background:linear-gradient(145deg,#17212a,#111820);box-shadow:0 8px 22px rgba(12,18,24,.07);transition:transform .18s ease,border-color .18s ease}
+.ifl-fantasy-page .fantasy-dashboard-card:hover{transform:translateY(-3px);border-color:rgba(200,241,105,.4)}
+.ifl-fantasy-page .fantasy-dashboard-card__icon{display:grid;place-items:center;width:43px;height:43px;border-radius:12px;background:rgba(200,241,105,.1);color:var(--fantasy-lime,#c8f169);font-size:1.4rem}
+.ifl-fantasy-page .fantasy-dashboard-card__arrow{color:var(--fantasy-lime,#c8f169)}
+.ifl-fantasy-page .fantasy-market-section{margin-top:42px;padding:clamp(1rem,2.5vw,1.6rem);background:#f0f3f5;border:1px solid #e0e5e9;border-radius:22px}
+.ifl-fantasy-page .fantasy-market-hero{gap:18px;padding:clamp(1.25rem,3vw,2rem);border-radius:18px;background:radial-gradient(ellipse at 85% 15%,rgba(200,241,105,.1),transparent 38%),linear-gradient(125deg,#111820,#1b2731)}
+.ifl-fantasy-page .fantasy-market-hero__copy h2{font-size:clamp(1.7rem,3.5vw,2.45rem);letter-spacing:-.035em}
+.ifl-fantasy-page .fantasy-market-hero__copy p{max-width:620px;color:#bdc7d0;line-height:1.6}
+.ifl-fantasy-page .fantasy-market-wallet{min-width:190px;padding:17px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:15px}
+.ifl-fantasy-page .fantasy-market-wallet strong{font-size:1.45rem}
+.ifl-fantasy-page .fantasy-market-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:17px 0}
+.ifl-fantasy-page .fantasy-market-tabs{display:flex;flex-wrap:wrap;gap:7px;padding:5px;background:#e2e7eb;border-radius:12px}
+.ifl-fantasy-page .fantasy-market-tab{min-height:40px;padding:9px 14px;border:1px solid transparent;border-radius:9px;background:transparent;color:#495665;font:inherit;font-weight:800;cursor:pointer}
+.ifl-fantasy-page .fantasy-market-tab.is-active{background:#fff;color:#17202a;box-shadow:0 2px 7px rgba(10,18,26,.08)}
+.ifl-fantasy-page .fantasy-market-search{display:flex;align-items:center;gap:9px;min-width:min(100%,280px);padding:0 12px;background:#fff;border:1px solid #dbe1e6;border-radius:11px}
+.ifl-fantasy-page .fantasy-market-search input{width:100%;min-height:44px;border:0;outline:0;background:transparent;color:#17202a;font:inherit}
+.ifl-fantasy-page .fantasy-market-empty{display:grid;justify-items:center;gap:10px;max-width:760px;margin:0 auto;padding:clamp(2rem,5vw,3.5rem) 1.25rem;text-align:center;background:linear-gradient(180deg,#fff,#f8fafb);border:1px dashed #cbd4dc;border-radius:18px}
+.ifl-fantasy-page .fantasy-market-empty__mark{display:grid;place-items:center;width:64px;height:64px;margin-bottom:4px;padding:12px;border-radius:17px;background:#17212a;box-shadow:0 8px 20px rgba(14,22,30,.15)}
+.ifl-fantasy-page .fantasy-market-empty__mark img{width:100%;height:100%;object-fit:contain}
+.ifl-fantasy-page .fantasy-market-empty h3{margin:0;font-size:clamp(1.3rem,3vw,1.8rem);letter-spacing:-.025em}
+.ifl-fantasy-page .fantasy-market-empty p{max-width:570px;margin:0;color:#65717e;line-height:1.65}
+.ifl-fantasy-page .fantasy-market-features{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:6px}
+.ifl-fantasy-page .fantasy-market-features>span{padding:8px 10px;border:1px solid #e1e6eb;border-radius:999px;background:#fff;color:#465363;font-size:.8rem;font-weight:750}
+.ifl-fantasy-page .fantasy-pitch-panel,.ifl-fantasy-page .fantasy-rules-panel{box-shadow:0 10px 28px rgba(8,13,18,.08)}
+.ifl-fantasy-page .fantasy-footer-note{line-height:1.6}
+.ifl-fantasy-page .profile-avatar.has-discord-avatar{background-size:cover;background-position:center;border-radius:50%}
+@media(max-width:760px){.ifl-fantasy-page .fantasy-market-toolbar{align-items:stretch;flex-direction:column}.ifl-fantasy-page .fantasy-market-search{min-width:0}.ifl-fantasy-page .fantasy-market-wallet{min-width:0}.ifl-fantasy-page .fantasy-market-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.ifl-fantasy-page .fantasy-market-tab{padding:8px 5px;font-size:.78rem}}
