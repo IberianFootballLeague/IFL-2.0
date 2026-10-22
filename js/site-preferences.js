@@ -23,6 +23,8 @@
   try {
     const prefs = JSON.parse(localStorage.getItem("ifl-site-preferences") || "{}");
     if (prefs.reduceMotion) document.documentElement.classList.add("ifl-reduce-motion");
+    if (prefs.highContrast) document.documentElement.classList.add("ifl-high-contrast");
+    if (prefs.underlineLinks) document.documentElement.classList.add("ifl-underline-links");
     if (prefs.compact) document.documentElement.classList.add("ifl-compact");
     if (prefs.largeText) document.documentElement.classList.add("ifl-large-text");
     if (prefs.accent && /^#[0-9a-f]{6}$/i.test(prefs.accent)) document.documentElement.style.setProperty("--color-brand", prefs.accent);
